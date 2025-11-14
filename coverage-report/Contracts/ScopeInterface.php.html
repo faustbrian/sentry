@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Code Coverage for /usr/src/myapp/src/Contracts/ScopeInterface.php</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="../_css/octicons.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/usr/src/myapp/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Contracts</a></li>
+         <li class="breadcrumb-item active">ScopeInterface.php</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="table-responsive">
+    <table class="table table-bordered">
+     <thead>
+      <tr>
+       <td>&nbsp;</td>
+       <td colspan="10"><div align="center"><strong>Code Coverage</strong></div></td>
+      </tr>
+      <tr>
+       <td>&nbsp;</td>
+       <td colspan="3"><div align="center"><strong>Lines</strong></div></td>
+       <td colspan="4"><div align="center"><strong>Functions and Methods</strong></div></td>
+       <td colspan="3"><div align="center"><strong>Classes and Traits</strong></div></td>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="">Total</td>
+       <td class=" big"></td>
+       <td class=" small"><div align="right">n/a</div></td>
+       <td class=" small"><div align="right">0&nbsp;/&nbsp;0</div></td>
+       <td class=" big"></td>
+       <td class=" small"><div align="right">n/a</div></td>
+       <td class=" small"><div align="right">0&nbsp;/&nbsp;0</div></td>
+       <td class=" small"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></td>
+       <td class=" big"></td>
+       <td class=" small"><div align="right">n/a</div></td>
+       <td class=" small"><div align="right">0&nbsp;/&nbsp;0</div></td>
+      </tr>
+
+
+     </tbody>
+    </table>
+   </div>
+<table id="code" class="table table-borderless table-condensed">
+<tbody>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="1" href="#1">1</a></td><td class="col-11 codeLine"><span class="default">&lt;?php&nbsp;</span><span class="keyword">declare</span><span class="keyword">(</span><span class="default">strict_types</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="2" href="#2">2</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="3" href="#3">3</a></td><td class="col-11 codeLine"><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="4" href="#4">4</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;Copyright&nbsp;(C)&nbsp;Brian&nbsp;Faust</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="5" href="#5">5</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="6" href="#6">6</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;For&nbsp;the&nbsp;full&nbsp;copyright&nbsp;and&nbsp;license&nbsp;information,&nbsp;please&nbsp;view&nbsp;the&nbsp;LICENSE</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="7" href="#7">7</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;file&nbsp;that&nbsp;was&nbsp;distributed&nbsp;with&nbsp;this&nbsp;source&nbsp;code.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="8" href="#8">8</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="9" href="#9">9</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="10" href="#10">10</a></td><td class="col-11 codeLine"><span class="keyword">namespace</span><span class="default">&nbsp;</span><span class="default">Cline\Warden\Contracts</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="11" href="#11">11</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="12" href="#12">12</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">Illuminate\Database\Eloquent\Builder</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="13" href="#13">13</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">Illuminate\Database\Eloquent\Model</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="14" href="#14">14</a></td><td class="col-11 codeLine"><span class="keyword">use</span><span class="default">&nbsp;</span><span class="default">Illuminate\Database\Eloquent\Relations\BelongsToMany</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="15" href="#15">15</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="16" href="#16">16</a></td><td class="col-11 codeLine"><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="17" href="#17">17</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;Defines&nbsp;the&nbsp;contract&nbsp;for&nbsp;multi-tenancy&nbsp;scoping&nbsp;in&nbsp;authorization.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="18" href="#18">18</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="19" href="#19">19</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;Enables&nbsp;authorization&nbsp;data&nbsp;(abilities,&nbsp;roles,&nbsp;permissions)&nbsp;to&nbsp;be&nbsp;scoped</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="20" href="#20">20</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;to&nbsp;specific&nbsp;tenants&nbsp;or&nbsp;contexts.&nbsp;All&nbsp;queries&nbsp;and&nbsp;relationships&nbsp;are</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="21" href="#21">21</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;automatically&nbsp;filtered&nbsp;to&nbsp;the&nbsp;current&nbsp;scope,&nbsp;ensuring&nbsp;data&nbsp;isolation</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="22" href="#22">22</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;between&nbsp;tenants&nbsp;in&nbsp;multi-tenant&nbsp;applications.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="23" href="#23">23</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="24" href="#24">24</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*&nbsp;@author&nbsp;Brian&nbsp;Faust&nbsp;&lt;brian@cline.sh&gt;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="25" href="#25">25</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="26" href="#26">26</a></td><td class="col-11 codeLine"><span class="keyword">interface</span><span class="default">&nbsp;</span><span class="default">ScopeInterface</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="27" href="#27">27</a></td><td class="col-11 codeLine"><span class="keyword">{</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="28" href="#28">28</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="29" href="#29">29</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Namespace&nbsp;cache&nbsp;keys&nbsp;with&nbsp;the&nbsp;current&nbsp;scope&nbsp;identifier.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="30" href="#30">30</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="31" href="#31">31</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Ensures&nbsp;cache&nbsp;entries&nbsp;are&nbsp;isolated&nbsp;between&nbsp;scopes&nbsp;by&nbsp;appending&nbsp;the</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="32" href="#32">32</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;tenant/scope&nbsp;identifier&nbsp;to&nbsp;cache&nbsp;keys.&nbsp;Prevents&nbsp;cache&nbsp;collisions</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="33" href="#33">33</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;when&nbsp;the&nbsp;same&nbsp;ability&nbsp;IDs&nbsp;exist&nbsp;across&nbsp;multiple&nbsp;tenants.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="34" href="#34">34</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="35" href="#35">35</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;string&nbsp;$key&nbsp;The&nbsp;base&nbsp;cache&nbsp;key</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="36" href="#36">36</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;string&nbsp;The&nbsp;namespaced&nbsp;cache&nbsp;key&nbsp;with&nbsp;scope&nbsp;identifier</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="37" href="#37">37</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="38" href="#38">38</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">appendToCacheKey</span><span class="keyword">(</span><span class="default">string</span><span class="default">&nbsp;</span><span class="default">$key</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">string</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="39" href="#39">39</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="40" href="#40">40</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="41" href="#41">41</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Apply&nbsp;scope&nbsp;constraints&nbsp;to&nbsp;a&nbsp;model&nbsp;instance.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="42" href="#42">42</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="43" href="#43">43</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Sets&nbsp;the&nbsp;scope&nbsp;attribute&nbsp;on&nbsp;the&nbsp;model,&nbsp;ensuring&nbsp;it&nbsp;belongs&nbsp;to&nbsp;the</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="44" href="#44">44</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;current&nbsp;tenant.&nbsp;Typically&nbsp;called&nbsp;when&nbsp;creating&nbsp;new&nbsp;authorization</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="45" href="#45">45</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;records&nbsp;to&nbsp;automatically&nbsp;associate&nbsp;them&nbsp;with&nbsp;the&nbsp;active&nbsp;scope.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="46" href="#46">46</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="47" href="#47">47</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;Model&nbsp;$model&nbsp;The&nbsp;model&nbsp;to&nbsp;scope</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="48" href="#48">48</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;Model&nbsp;The&nbsp;scoped&nbsp;model&nbsp;instance</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="49" href="#49">49</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="50" href="#50">50</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">applyToModel</span><span class="keyword">(</span><span class="default">Model</span><span class="default">&nbsp;</span><span class="default">$model</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">Model</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="51" href="#51">51</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="52" href="#52">52</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="53" href="#53">53</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Apply&nbsp;scope&nbsp;constraints&nbsp;to&nbsp;a&nbsp;query&nbsp;builder.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="54" href="#54">54</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="55" href="#55">55</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Adds&nbsp;WHERE&nbsp;clauses&nbsp;to&nbsp;limit&nbsp;query&nbsp;results&nbsp;to&nbsp;the&nbsp;current&nbsp;scope.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="56" href="#56">56</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Used&nbsp;by&nbsp;the&nbsp;authorization&nbsp;system&nbsp;to&nbsp;automatically&nbsp;filter&nbsp;abilities,</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="57" href="#57">57</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;roles,&nbsp;and&nbsp;permissions&nbsp;to&nbsp;the&nbsp;active&nbsp;tenant.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="58" href="#58">58</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="59" href="#59">59</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;Builder&lt;Model&gt;|\Illuminate\Database\Query\Builder&nbsp;$query&nbsp;The&nbsp;query&nbsp;to&nbsp;scope</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="60" href="#60">60</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;null|string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$table&nbsp;Optional&nbsp;table&nbsp;name&nbsp;for&nbsp;multi-table&nbsp;queries</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="61" href="#61">61</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;Builder&lt;Model&gt;|\Illuminate\Database\Query\Builder&nbsp;The&nbsp;scoped&nbsp;query</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="62" href="#62">62</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="63" href="#63">63</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">applyToModelQuery</span><span class="keyword">(</span><span class="default">Builder</span><span class="keyword">|</span><span class="default">\Illuminate\Database\Query\Builder</span><span class="default">&nbsp;</span><span class="default">$query</span><span class="keyword">,</span><span class="default">&nbsp;</span><span class="keyword">?</span><span class="default">string</span><span class="default">&nbsp;</span><span class="default">$table</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">null</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">Builder</span><span class="keyword">|</span><span class="default">\Illuminate\Database\Query\Builder</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="64" href="#64">64</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="65" href="#65">65</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="66" href="#66">66</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Apply&nbsp;scope&nbsp;constraints&nbsp;to&nbsp;a&nbsp;relationship&nbsp;query.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="67" href="#67">67</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="68" href="#68">68</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Filters&nbsp;relationship&nbsp;queries&nbsp;to&nbsp;the&nbsp;current&nbsp;scope.&nbsp;Used&nbsp;when&nbsp;loading</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="69" href="#69">69</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;related&nbsp;authorization&nbsp;data&nbsp;to&nbsp;ensure&nbsp;only&nbsp;records&nbsp;from&nbsp;the&nbsp;current</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="70" href="#70">70</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;tenant&nbsp;are&nbsp;included.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="71" href="#71">71</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="72" href="#72">72</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;Builder&lt;Model&gt;|\Illuminate\Database\Query\Builder&nbsp;$query&nbsp;The&nbsp;relationship&nbsp;query&nbsp;to&nbsp;scope</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="73" href="#73">73</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$table&nbsp;The&nbsp;table&nbsp;name&nbsp;for&nbsp;the&nbsp;relationship</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="74" href="#74">74</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;Builder&lt;Model&gt;|\Illuminate\Database\Query\Builder&nbsp;The&nbsp;scoped&nbsp;query</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="75" href="#75">75</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="76" href="#76">76</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">applyToRelationQuery</span><span class="keyword">(</span><span class="default">Builder</span><span class="keyword">|</span><span class="default">\Illuminate\Database\Query\Builder</span><span class="default">&nbsp;</span><span class="default">$query</span><span class="keyword">,</span><span class="default">&nbsp;</span><span class="default">string</span><span class="default">&nbsp;</span><span class="default">$table</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">Builder</span><span class="keyword">|</span><span class="default">\Illuminate\Database\Query\Builder</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="77" href="#77">77</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="78" href="#78">78</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="79" href="#79">79</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Apply&nbsp;scope&nbsp;constraints&nbsp;to&nbsp;a&nbsp;many-to-many&nbsp;relationship.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="80" href="#80">80</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="81" href="#81">81</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Configures&nbsp;pivot&nbsp;table&nbsp;queries&nbsp;and&nbsp;inserts&nbsp;to&nbsp;include&nbsp;the&nbsp;scope</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="82" href="#82">82</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;identifier.&nbsp;Ensures&nbsp;permission&nbsp;assignments&nbsp;and&nbsp;role&nbsp;memberships</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="83" href="#83">83</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;are&nbsp;scoped&nbsp;to&nbsp;the&nbsp;current&nbsp;tenant.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="84" href="#84">84</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="85" href="#85">85</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;BelongsToMany&lt;Model,&nbsp;Model&gt;&nbsp;$relation&nbsp;The&nbsp;relationship&nbsp;to&nbsp;scope</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="86" href="#86">86</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;BelongsToMany&lt;Model,&nbsp;Model&gt;&nbsp;The&nbsp;scoped&nbsp;relationship&nbsp;instance</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="87" href="#87">87</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="88" href="#88">88</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">applyToRelation</span><span class="keyword">(</span><span class="default">BelongsToMany</span><span class="default">&nbsp;</span><span class="default">$relation</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">BelongsToMany</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="89" href="#89">89</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="90" href="#90">90</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="91" href="#91">91</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Retrieve&nbsp;the&nbsp;current&nbsp;scope&nbsp;identifier&nbsp;value.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="92" href="#92">92</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="93" href="#93">93</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;the&nbsp;active&nbsp;tenant/scope&nbsp;ID&nbsp;that's&nbsp;being&nbsp;used&nbsp;to&nbsp;filter</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="94" href="#94">94</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;all&nbsp;authorization&nbsp;queries.&nbsp;May&nbsp;be&nbsp;an&nbsp;integer,&nbsp;string,&nbsp;or&nbsp;other</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="95" href="#95">95</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;identifier&nbsp;depending&nbsp;on&nbsp;the&nbsp;scope&nbsp;implementation.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="96" href="#96">96</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="97" href="#97">97</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;mixed&nbsp;The&nbsp;current&nbsp;scope&nbsp;identifier&nbsp;(e.g.,&nbsp;tenant&nbsp;ID)</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="98" href="#98">98</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="99" href="#99">99</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">get</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">mixed</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="100" href="#100">100</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="101" href="#101">101</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="102" href="#102">102</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Get&nbsp;additional&nbsp;pivot&nbsp;attributes&nbsp;for&nbsp;relationship&nbsp;attachments.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="103" href="#103">103</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="104" href="#104">104</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;the&nbsp;scope&nbsp;identifier&nbsp;and&nbsp;any&nbsp;other&nbsp;attributes&nbsp;that&nbsp;should</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="105" href="#105">105</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;be&nbsp;automatically&nbsp;included&nbsp;when&nbsp;attaching&nbsp;authorization&nbsp;records&nbsp;to</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="106" href="#106">106</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;relationships&nbsp;(e.g.,&nbsp;when&nbsp;granting&nbsp;abilities&nbsp;or&nbsp;assigning&nbsp;roles).</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="107" href="#107">107</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="108" href="#108">108</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;null|Model|string&nbsp;&nbsp;&nbsp;&nbsp;$authority&nbsp;Optional&nbsp;authority&nbsp;identifier&nbsp;for&nbsp;additional&nbsp;context</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="109" href="#109">109</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;array&lt;string,&nbsp;mixed&gt;&nbsp;Associative&nbsp;array&nbsp;of&nbsp;pivot&nbsp;attributes</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="110" href="#110">110</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="111" href="#111">111</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">getAttachAttributes</span><span class="keyword">(</span><span class="default">Model</span><span class="keyword">|</span><span class="default">string</span><span class="keyword">|</span><span class="default">null</span><span class="default">&nbsp;</span><span class="default">$authority</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">null</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="keyword">array</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="112" href="#112">112</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="113" href="#113">113</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="114" href="#114">114</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Execute&nbsp;a&nbsp;callback&nbsp;with&nbsp;a&nbsp;temporary&nbsp;scope&nbsp;override.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="115" href="#115">115</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="116" href="#116">116</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Temporarily&nbsp;changes&nbsp;the&nbsp;active&nbsp;scope&nbsp;for&nbsp;the&nbsp;duration&nbsp;of&nbsp;the&nbsp;callback,</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="117" href="#117">117</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;then&nbsp;restores&nbsp;the&nbsp;original&nbsp;scope.&nbsp;Useful&nbsp;for&nbsp;administrative&nbsp;operations</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="118" href="#118">118</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;that&nbsp;need&nbsp;to&nbsp;access&nbsp;or&nbsp;modify&nbsp;data&nbsp;across&nbsp;multiple&nbsp;tenants.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="119" href="#119">119</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="120" href="#120">120</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;mixed&nbsp;&nbsp;&nbsp;&nbsp;$scope&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;temporary&nbsp;scope&nbsp;identifier&nbsp;to&nbsp;use</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="121" href="#121">121</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;callable&nbsp;$callback&nbsp;The&nbsp;callback&nbsp;to&nbsp;execute&nbsp;with&nbsp;the&nbsp;temporary&nbsp;scope</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="122" href="#122">122</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;mixed&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;callback's&nbsp;return&nbsp;value</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="123" href="#123">123</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="124" href="#124">124</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">onceTo</span><span class="keyword">(</span><span class="default">$scope</span><span class="keyword">,</span><span class="default">&nbsp;</span><span class="keyword">callable</span><span class="default">&nbsp;</span><span class="default">$callback</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">mixed</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="125" href="#125">125</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="126" href="#126">126</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="127" href="#127">127</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Disable&nbsp;scoping&nbsp;entirely.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="128" href="#128">128</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="129" href="#129">129</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Removes&nbsp;the&nbsp;active&nbsp;scope,&nbsp;causing&nbsp;subsequent&nbsp;queries&nbsp;to&nbsp;return</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="130" href="#130">130</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;unfiltered&nbsp;results.&nbsp;Use&nbsp;with&nbsp;caution&nbsp;in&nbsp;multi-tenant&nbsp;environments</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="131" href="#131">131</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;as&nbsp;this&nbsp;allows&nbsp;cross-tenant&nbsp;data&nbsp;access.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="132" href="#132">132</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="133" href="#133">133</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;$this&nbsp;Returns&nbsp;$this&nbsp;for&nbsp;method&nbsp;chaining</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="134" href="#134">134</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="135" href="#135">135</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">remove</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="keyword">static</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="136" href="#136">136</a></td><td class="col-11 codeLine"></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="137" href="#137">137</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="138" href="#138">138</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Execute&nbsp;a&nbsp;callback&nbsp;without&nbsp;scope&nbsp;constraints.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="139" href="#139">139</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="140" href="#140">140</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Temporarily&nbsp;disables&nbsp;scoping&nbsp;for&nbsp;the&nbsp;duration&nbsp;of&nbsp;the&nbsp;callback,&nbsp;then</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="141" href="#141">141</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;restores&nbsp;it.&nbsp;Enables&nbsp;queries&nbsp;across&nbsp;all&nbsp;scopes/tenants&nbsp;when&nbsp;needed</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="142" href="#142">142</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;system-level&nbsp;operations&nbsp;or&nbsp;reporting.</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="143" href="#143">143</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="144" href="#144">144</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;&nbsp;callable&nbsp;$callback&nbsp;The&nbsp;callback&nbsp;to&nbsp;execute&nbsp;without&nbsp;scoping</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="145" href="#145">145</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;mixed&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;callback's&nbsp;return&nbsp;value</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="146" href="#146">146</a></td><td class="col-11 codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="147" href="#147">147</a></td><td class="col-11 codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">removeOnce</span><span class="keyword">(</span><span class="keyword">callable</span><span class="default">&nbsp;</span><span class="default">$callback</span><span class="keyword">)</span><span class="keyword">:</span><span class="default">&nbsp;</span><span class="default">mixed</span><span class="keyword">;</span></td></tr>
+    <tr class=" d-flex"><td  class="col-1 text-end"><a id="148" href="#148">148</a></td><td class="col-11 codeLine"><span class="keyword">}</span></td></tr>
+
+</tbody>
+</table>
+
+
+   <footer>
+    <hr/>
+    <h4>Legend</h4>
+    <p><span class="legend covered-by-small-tests">Covered by small (and larger) tests</span><span class="legend covered-by-medium-tests">Covered by medium (and large) tests</span><span class="legend covered-by-large-tests">Covered by large tests (and tests of unknown size)</span><span class="legend not-covered">Not covered</span><span class="legend not-coverable">Not coverable</span></p>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.4.0</a> using <a href="https://www.php.net/" target="_top">PHP 8.4.14</a> and <a href="https://phpunit.de/">PHPUnit 12.4.1</a> at Fri Nov 14 14:54:06 UTC 2025.</small>
+    </p>
+    <a title="Back to the top" id="toplink" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 11L6 5l-6 6h12z"/></svg>
+    </a>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js?v=12.4.0" type="text/javascript"></script>
+  <script src="../_js/bootstrap.bundle.min.js?v=12.4.0" type="text/javascript"></script>
+  <script src="../_js/file.js?v=12.4.0" type="text/javascript"></script>
+ </body>
+</html>

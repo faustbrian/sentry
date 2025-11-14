@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /usr/src/myapp/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="_css/billboard.min.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/usr/src/myapp/src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#37">Cline\Warden\Database\Concerns\IsRole</a></td><td class="text-right">47%</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#42">Cline\Warden\Database\Concerns\IsAbility</a></td><td class="text-right">74%</td></tr>
+       <tr><td><a href="Conductors/Concerns/ConductsAbilities.php.html#31">Cline\Warden\Conductors\Concerns\ConductsAbilities</a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#33">Cline\Warden\Constraints\Group</a></td><td class="text-right">89%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#37">Cline\Warden\Database\Concerns\IsRole</a></td><td class="text-right">47.1%</td><td class="text-right">16</td><td class="text-right">53</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#42">Cline\Warden\Database\Concerns\IsAbility</a></td><td class="text-right">74.6%</td><td class="text-right">29</td><td class="text-right">42</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#33">Cline\Warden\Constraints\Group</a></td><td class="text-right">89.6%</td><td class="text-right">24</td><td class="text-right">24</td></tr>
+       <tr><td><a href="Conductors/Concerns/ConductsAbilities.php.html#31">Cline\Warden\Conductors\Concerns\ConductsAbilities</a></td><td class="text-right">86.7%</td><td class="text-right">12</td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Clipboard/CachedClipboard.php.html#398"><abbr title="Cline\Warden\Clipboard\CachedClipboard::refreshAllIteratively">refreshAllIteratively</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#187"><abbr title="Cline\Warden\Database\Concerns\IsAbility::roles">roles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#211"><abbr title="Cline\Warden\Database\Concerns\IsAbility::users">users</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#239"><abbr title="Cline\Warden\Database\Concerns\IsAbility::subject">subject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#253"><abbr title="Cline\Warden\Database\Concerns\IsAbility::context">context</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsAbility.php.html#335"><abbr title="Cline\Warden\Database\Concerns\IsAbility::getSlugAttribute">getSlugAttribute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#79"><abbr title="Cline\Warden\Database\Concerns\IsRole::users">users</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#108"><abbr title="Cline\Warden\Database\Concerns\IsRole::assignTo">assignTo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#177"><abbr title="Cline\Warden\Database\Concerns\IsRole::getRoleNames">getRoleNames</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#220"><abbr title="Cline\Warden\Database\Concerns\IsRole::getNamesByKey">getNamesByKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#242"><abbr title="Cline\Warden\Database\Concerns\IsRole::retractFrom">retractFrom</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#322"><abbr title="Cline\Warden\Database\Concerns\IsRole::createAssignRecords">createAssignRecords</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Conductors/Concerns/ConductsAbilities.php.html#58"><abbr title="Cline\Warden\Conductors\Concerns\ConductsAbilities::toManage">toManage</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="Clipboard/CachedClipboard.php.html#215"><abbr title="Cline\Warden\Clipboard\CachedClipboard::refresh">refresh</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#222"><abbr title="Cline\Warden\Constraints\Group::equals">equals</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Database/Models.php.html#362"><abbr title="Cline\Warden\Database\Models::user">user</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Database/Scope/Scope.php.html#118"><abbr title="Cline\Warden\Database\Scope\Scope::appendToCacheKey">appendToCacheKey</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Support/Helpers.php.html#196"><abbr title="Cline\Warden\Support\Helpers::isIndexedArray">isIndexedArray</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Support/Helpers.php.html#266"><abbr title="Cline\Warden\Support\Helpers::mapAuthorityByClass">mapAuthorityByClass</abbr></a></td><td class="text-right">77%</td></tr>
+       <tr><td><a href="Conductors/RemovesRoles.php.html#74"><abbr title="Cline\Warden\Conductors\RemovesRoles::from">from</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Conductors/SyncsRolesAndAbilities.php.html#118"><abbr title="Cline\Warden\Conductors\SyncsRolesAndAbilities::detach">detach</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Support/Helpers.php.html#67"><abbr title="Cline\Warden\Support\Helpers::extractModelAndKeys">extractModelAndKeys</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Constraints/Constraint.php.html#153"><abbr title="Cline\Warden\Constraints\Constraint::logicalOperator">logicalOperator</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#175"><abbr title="Cline\Warden\Constraints\Group::logicalOperator">logicalOperator</abbr></a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#150"><abbr title="Cline\Warden\Constraints\Group::check">check</abbr></a></td><td class="text-right">87%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Clipboard/CachedClipboard.php.html#398"><abbr title="Cline\Warden\Clipboard\CachedClipboard::refreshAllIteratively">refreshAllIteratively</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#150"><abbr title="Cline\Warden\Constraints\Group::check">check</abbr></a></td><td class="text-right">87.5%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#222"><abbr title="Cline\Warden\Constraints\Group::equals">equals</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">6</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Support/Helpers.php.html#67"><abbr title="Cline\Warden\Support\Helpers::extractModelAndKeys">extractModelAndKeys</abbr></a></td><td class="text-right">81.2%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Database/Concerns/IsRole.php.html#220"><abbr title="Cline\Warden\Database\Concerns\IsRole::getNamesByKey">getNamesByKey</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Conductors/RemovesRoles.php.html#74"><abbr title="Cline\Warden\Conductors\RemovesRoles::from">from</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Conductors/Concerns/ConductsAbilities.php.html#58"><abbr title="Cline\Warden\Conductors\Concerns\ConductsAbilities::toManage">toManage</abbr></a></td><td class="text-right">50.0%</td><td class="text-right">3</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Clipboard/CachedClipboard.php.html#215"><abbr title="Cline\Warden\Clipboard\CachedClipboard::refresh">refresh</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Constraints/Constraint.php.html#153"><abbr title="Cline\Warden\Constraints\Constraint::logicalOperator">logicalOperator</abbr></a></td><td class="text-right">85.7%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Constraints/Group.php.html#175"><abbr title="Cline\Warden\Constraints\Group::logicalOperator">logicalOperator</abbr></a></td><td class="text-right">85.7%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Database/Scope/Scope.php.html#118"><abbr title="Cline\Warden\Database\Scope\Scope::appendToCacheKey">appendToCacheKey</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Support/Helpers.php.html#266"><abbr title="Cline\Warden\Support\Helpers::mapAuthorityByClass">mapAuthorityByClass</abbr></a></td><td class="text-right">77.8%</td><td class="text-right">3</td><td class="text-right">3</td></tr>
+       <tr><td><a href="Conductors/SyncsRolesAndAbilities.php.html#118"><abbr title="Cline\Warden\Conductors\SyncsRolesAndAbilities::detach">detach</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Database/Models.php.html#362"><abbr title="Cline\Warden\Database\Models::user">user</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+       <tr><td><a href="Support/Helpers.php.html#196"><abbr title="Cline\Warden\Support\Helpers::isIndexedArray">isIndexedArray</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.4.0</a> using <a href="https://www.php.net/" target="_top">PHP 8.4.14</a> and <a href="https://phpunit.de/">PHPUnit 12.4.1</a> at Fri Nov 14 14:54:06 UTC 2025.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/billboard.pkgd.min.js?v=12.4.0" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[47.05882352941176,16,"Database\/Concerns\/IsRole.php.html#37","Cline\\Warden\\Database\\Concerns\\IsRole","53.99"],[74.64788732394366,29,"Database\/Concerns\/IsAbility.php.html#42","Cline\\Warden\\Database\\Concerns\\IsAbility","42.70"],[86.66666666666667,12,"Conductors\/Concerns\/ConductsAbilities.php.html#31","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities","12.34"],[89.58333333333334,24,"Constraints\/Group.php.html#33","Cline\\Warden\\Constraints\\Group","24.65"],[90.1639344262295,30,"Support\/Helpers.php.html#37","Cline\\Warden\\Support\\Helpers","30.86"],[93.13725490196079,40,"Clipboard\/CachedClipboard.php.html#41","Cline\\Warden\\Clipboard\\CachedClipboard","40.52"],[96.875,16,"Clipboard\/AbstractClipboard.php.html#40","Cline\\Warden\\Clipboard\\AbstractClipboard","16"],[97.61904761904762,14,"Conductors\/RemovesRoles.php.html#37","Cline\\Warden\\Conductors\\RemovesRoles","14"],[97.72727272727273,27,"Database\/Scope\/Scope.php.html#32","Cline\\Warden\\Database\\Scope\\Scope","27"],[97.77777777777777,21,"Constraints\/Constraint.php.html#31","Cline\\Warden\\Constraints\\Constraint","21"],[98,17,"Console\/CleanCommand.php.html#35","Cline\\Warden\\Console\\CleanCommand","17"],[98.14814814814815,14,"Conductors\/SyncsRolesAndAbilities.php.html#37","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities","14"],[98.66666666666667,35,"Database\/Models.php.html#40","Cline\\Warden\\Database\\Models","35"],[100,9,"Clipboard\/Clipboard.php.html#30","Cline\\Warden\\Clipboard\\Clipboard","9"],[100,12,"Conductors\/AssignsRoles.php.html#32","Cline\\Warden\\Conductors\\AssignsRoles","12"],[100,6,"Conductors\/ChecksRoles.php.html#27","Cline\\Warden\\Conductors\\ChecksRoles","6"],[100,2,"Conductors\/ForbidsAbilities.php.html#25","Cline\\Warden\\Conductors\\ForbidsAbilities","2"],[100,2,"Conductors\/GivesAbilities.php.html#24","Cline\\Warden\\Conductors\\GivesAbilities","2"],[100,4,"Conductors\/Lazy\/ConductsAbilities.php.html#28","Cline\\Warden\\Conductors\\Lazy\\ConductsAbilities","4"],[100,3,"Conductors\/Lazy\/HandlesOwnership.php.html#30","Cline\\Warden\\Conductors\\Lazy\\HandlesOwnership","3"],[100,1,"Conductors\/RemovesAbilities.php.html#24","Cline\\Warden\\Conductors\\RemovesAbilities","1"],[100,1,"Conductors\/UnforbidsAbilities.php.html#25","Cline\\Warden\\Conductors\\UnforbidsAbilities","1"],[100,12,"Constraints\/Builder.php.html#27","Cline\\Warden\\Constraints\\Builder","12"],[100,9,"Constraints\/ColumnConstraint.php.html#28","Cline\\Warden\\Constraints\\ColumnConstraint","9"],[100,7,"Constraints\/ValueConstraint.php.html#27","Cline\\Warden\\Constraints\\ValueConstraint","7"],[100,1,"Database\/Ability.php.html#34","Cline\\Warden\\Database\\Ability","1"],[100,6,"Database\/Queries\/Abilities.php.html#30","Cline\\Warden\\Database\\Queries\\Abilities","6"],[100,12,"Database\/Queries\/AbilitiesForModel.php.html#32","Cline\\Warden\\Database\\Queries\\AbilitiesForModel","12"],[100,4,"Database\/Queries\/Roles.php.html#31","Cline\\Warden\\Database\\Queries\\Roles","4"],[100,1,"Database\/Role.php.html#36","Cline\\Warden\\Database\\Role","1"],[100,2,"Database\/Scope\/TenantScope.php.html#27","Cline\\Warden\\Database\\Scope\\TenantScope","2"],[100,39,"Database\/Titles\/AbilityTitle.php.html#30","Cline\\Warden\\Database\\Titles\\AbilityTitle","39"],[100,1,"Database\/Titles\/RoleTitle.php.html#22","Cline\\Warden\\Database\\Titles\\RoleTitle","1"],[100,3,"Database\/Titles\/Title.php.html#29","Cline\\Warden\\Database\\Titles\\Title","3"],[100,0,"Enums\/MorphType.php.html#21","Cline\\Warden\\Enums\\MorphType","0"],[100,0,"Enums\/PrimaryKeyType.php.html#21","Cline\\Warden\\Enums\\PrimaryKeyType","0"],[100,1,"Exceptions\/InvalidConfigurationException.php.html#24","Cline\\Warden\\Exceptions\\InvalidConfigurationException","1"],[100,1,"Exceptions\/MorphKeyViolationException.php.html#27","Cline\\Warden\\Exceptions\\MorphKeyViolationException","1"],[100,1,"Facades\/Warden.php.html#78","Cline\\Warden\\Facades\\Warden","1"],[100,17,"Factory.php.html#29","Cline\\Warden\\Factory","17"],[100,22,"Guard.php.html#35","Cline\\Warden\\Guard","22"],[100,48,"Warden.php.html#56","Cline\\Warden\\Warden","48"],[100,26,"WardenServiceProvider.php.html#42","Cline\\Warden\\WardenServiceProvider","26"],[100,16,"Conductors\/Concerns\/AssociatesAbilities.php.html#29","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities","16"],[100,13,"Conductors\/Concerns\/DisassociatesAbilities.php.html#30","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities","13"],[100,22,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#38","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities","22"],[100,3,"Database\/Concerns\/Authorizable.php.html#26","Cline\\Warden\\Database\\Concerns\\Authorizable","3"],[100,13,"Database\/Concerns\/HasAbilities.php.html#37","Cline\\Warden\\Database\\Concerns\\HasAbilities","13"],[100,14,"Database\/Concerns\/HasRoles.php.html#40","Cline\\Warden\\Database\\Concerns\\HasRoles","14"],[100,0,"Database\/HasRolesAndAbilities.php.html#30","Cline\\Warden\\Database\\HasRolesAndAbilities","0"]]</script>
+  <script type="application/json" id="complexity_method">[[0,3,"Clipboard\/CachedClipboard.php.html#398","Cline\\Warden\\Clipboard\\CachedClipboard::refreshAllIteratively","12"],[0,1,"Database\/Concerns\/IsAbility.php.html#187","Cline\\Warden\\Database\\Concerns\\IsAbility::roles","2"],[0,1,"Database\/Concerns\/IsAbility.php.html#211","Cline\\Warden\\Database\\Concerns\\IsAbility::users","2"],[0,1,"Database\/Concerns\/IsAbility.php.html#239","Cline\\Warden\\Database\\Concerns\\IsAbility::subject","2"],[0,1,"Database\/Concerns\/IsAbility.php.html#253","Cline\\Warden\\Database\\Concerns\\IsAbility::context","2"],[0,1,"Database\/Concerns\/IsAbility.php.html#335","Cline\\Warden\\Database\\Concerns\\IsAbility::getSlugAttribute","2"],[0,1,"Database\/Concerns\/IsRole.php.html#79","Cline\\Warden\\Database\\Concerns\\IsRole::users","2"],[0,1,"Database\/Concerns\/IsRole.php.html#108","Cline\\Warden\\Database\\Concerns\\IsRole::assignTo","2"],[0,1,"Database\/Concerns\/IsRole.php.html#177","Cline\\Warden\\Database\\Concerns\\IsRole::getRoleNames","2"],[0,2,"Database\/Concerns\/IsRole.php.html#220","Cline\\Warden\\Database\\Concerns\\IsRole::getNamesByKey","6"],[0,1,"Database\/Concerns\/IsRole.php.html#242","Cline\\Warden\\Database\\Concerns\\IsRole::retractFrom","2"],[0,1,"Database\/Concerns\/IsRole.php.html#322","Cline\\Warden\\Database\\Concerns\\IsRole::createAssignRecords","2"],[50,3,"Conductors\/Concerns\/ConductsAbilities.php.html#58","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities::toManage","4.12"],[66.66666666666666,3,"Clipboard\/CachedClipboard.php.html#215","Cline\\Warden\\Clipboard\\CachedClipboard::refresh","3.33"],[66.66666666666666,6,"Constraints\/Group.php.html#222","Cline\\Warden\\Constraints\\Group::equals","7.33"],[66.66666666666666,2,"Database\/Models.php.html#362","Cline\\Warden\\Database\\Models::user","2.15"],[66.66666666666666,3,"Database\/Scope\/Scope.php.html#118","Cline\\Warden\\Database\\Scope\\Scope::appendToCacheKey","3.33"],[66.66666666666666,2,"Support\/Helpers.php.html#196","Cline\\Warden\\Support\\Helpers::isIndexedArray","2.15"],[77.77777777777779,3,"Support\/Helpers.php.html#266","Cline\\Warden\\Support\\Helpers::mapAuthorityByClass","3.10"],[80,4,"Conductors\/RemovesRoles.php.html#74","Cline\\Warden\\Conductors\\RemovesRoles::from","4.13"],[80,2,"Conductors\/SyncsRolesAndAbilities.php.html#118","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::detach","2.03"],[81.25,7,"Support\/Helpers.php.html#67","Cline\\Warden\\Support\\Helpers::extractModelAndKeys","7.32"],[85.71428571428571,3,"Constraints\/Constraint.php.html#153","Cline\\Warden\\Constraints\\Constraint::logicalOperator","3.03"],[85.71428571428571,3,"Constraints\/Group.php.html#175","Cline\\Warden\\Constraints\\Group::logicalOperator","3.03"],[87.5,7,"Constraints\/Group.php.html#150","Cline\\Warden\\Constraints\\Group::check","7.10"],[90,3,"Console\/CleanCommand.php.html#139","Cline\\Warden\\Console\\CleanCommand::deleteOrphanedAbilities","3.01"],[92.3076923076923,6,"Clipboard\/AbstractClipboard.php.html#184","Cline\\Warden\\Clipboard\\AbstractClipboard::countMatchingRoles","6.02"],[93.33333333333333,2,"Clipboard\/CachedClipboard.php.html#108","Cline\\Warden\\Clipboard\\CachedClipboard::checkGetId","2.00"],[100,1,"Clipboard\/AbstractClipboard.php.html#54","Cline\\Warden\\Clipboard\\AbstractClipboard::check","1"],[100,3,"Clipboard\/AbstractClipboard.php.html#71","Cline\\Warden\\Clipboard\\AbstractClipboard::checkRole","3"],[100,1,"Clipboard\/AbstractClipboard.php.html#95","Cline\\Warden\\Clipboard\\AbstractClipboard::getRolesLookup","1"],[100,1,"Clipboard\/AbstractClipboard.php.html#119","Cline\\Warden\\Clipboard\\AbstractClipboard::getRoles","1"],[100,1,"Clipboard\/AbstractClipboard.php.html#135","Cline\\Warden\\Clipboard\\AbstractClipboard::getAbilities","1"],[100,1,"Clipboard\/AbstractClipboard.php.html#149","Cline\\Warden\\Clipboard\\AbstractClipboard::getForbiddenAbilities","1"],[100,2,"Clipboard\/AbstractClipboard.php.html#165","Cline\\Warden\\Clipboard\\AbstractClipboard::isOwnedBy","2"],[100,1,"Clipboard\/CachedClipboard.php.html#58","Cline\\Warden\\Clipboard\\CachedClipboard::__construct","1"],[100,3,"Clipboard\/CachedClipboard.php.html#73","Cline\\Warden\\Clipboard\\CachedClipboard::setCache","3"],[100,1,"Clipboard\/CachedClipboard.php.html#91","Cline\\Warden\\Clipboard\\CachedClipboard::getCache","1"],[100,2,"Clipboard\/CachedClipboard.php.html#149","Cline\\Warden\\Clipboard\\CachedClipboard::getAbilities","2"],[100,1,"Clipboard\/CachedClipboard.php.html#178","Cline\\Warden\\Clipboard\\CachedClipboard::getFreshAbilities","1"],[100,2,"Clipboard\/CachedClipboard.php.html#192","Cline\\Warden\\Clipboard\\CachedClipboard::getRolesLookup","2"],[100,1,"Clipboard\/CachedClipboard.php.html#239","Cline\\Warden\\Clipboard\\CachedClipboard::refreshFor","1"],[100,3,"Clipboard\/CachedClipboard.php.html#261","Cline\\Warden\\Clipboard\\CachedClipboard::findMatchingAbility","3"],[100,3,"Clipboard\/CachedClipboard.php.html#294","Cline\\Warden\\Clipboard\\CachedClipboard::getMatchedAbilityId","3"],[100,2,"Clipboard\/CachedClipboard.php.html#316","Cline\\Warden\\Clipboard\\CachedClipboard::compileAbilityIdentifiers","2"],[100,6,"Clipboard\/CachedClipboard.php.html#339","Cline\\Warden\\Clipboard\\CachedClipboard::compileModelAbilityIdentifiers","6"],[100,2,"Clipboard\/CachedClipboard.php.html#381","Cline\\Warden\\Clipboard\\CachedClipboard::sear","2"],[100,2,"Clipboard\/CachedClipboard.php.html#421","Cline\\Warden\\Clipboard\\CachedClipboard::getCacheKey","2"],[100,1,"Clipboard\/CachedClipboard.php.html#440","Cline\\Warden\\Clipboard\\CachedClipboard::tag","1"],[100,1,"Clipboard\/CachedClipboard.php.html#455","Cline\\Warden\\Clipboard\\CachedClipboard::deserializeAbilities","1"],[100,1,"Clipboard\/CachedClipboard.php.html#470","Cline\\Warden\\Clipboard\\CachedClipboard::serializeAbilities","1"],[100,3,"Clipboard\/Clipboard.php.html#44","Cline\\Warden\\Clipboard\\Clipboard::checkGetId","3"],[100,1,"Clipboard\/Clipboard.php.html#75","Cline\\Warden\\Clipboard\\Clipboard::isForbidden","1"],[100,1,"Clipboard\/Clipboard.php.html#96","Cline\\Warden\\Clipboard\\Clipboard::getAllowingAbility","1"],[100,3,"Clipboard\/Clipboard.php.html#120","Cline\\Warden\\Clipboard\\Clipboard::getHasAbilityQuery","3"],[100,1,"Clipboard\/Clipboard.php.html#153","Cline\\Warden\\Clipboard\\Clipboard::constrainToSimpleAbility","1"],[100,1,"Conductors\/AssignsRoles.php.html#54","Cline\\Warden\\Conductors\\AssignsRoles::__construct","1"],[100,1,"Conductors\/AssignsRoles.php.html#67","Cline\\Warden\\Conductors\\AssignsRoles::within","1"],[100,3,"Conductors\/AssignsRoles.php.html#84","Cline\\Warden\\Conductors\\AssignsRoles::to","3"],[100,1,"Conductors\/AssignsRoles.php.html#111","Cline\\Warden\\Conductors\\AssignsRoles::assignRoles","1"],[100,1,"Conductors\/AssignsRoles.php.html#138","Cline\\Warden\\Conductors\\AssignsRoles::getExistingAttachRecords","1"],[100,2,"Conductors\/AssignsRoles.php.html#163","Cline\\Warden\\Conductors\\AssignsRoles::buildAttachRecords","2"],[100,1,"Conductors\/AssignsRoles.php.html#195","Cline\\Warden\\Conductors\\AssignsRoles::createMissingAssignRecords","1"],[100,1,"Conductors\/AssignsRoles.php.html#220","Cline\\Warden\\Conductors\\AssignsRoles::getAttachRecordHash","1"],[100,1,"Conductors\/AssignsRoles.php.html#231","Cline\\Warden\\Conductors\\AssignsRoles::newPivotTableQuery","1"],[100,1,"Conductors\/ChecksRoles.php.html#40","Cline\\Warden\\Conductors\\ChecksRoles::__construct","1"],[100,1,"Conductors\/ChecksRoles.php.html#55","Cline\\Warden\\Conductors\\ChecksRoles::a","1"],[100,1,"Conductors\/ChecksRoles.php.html#70","Cline\\Warden\\Conductors\\ChecksRoles::notA","1"],[100,1,"Conductors\/ChecksRoles.php.html#85","Cline\\Warden\\Conductors\\ChecksRoles::an","1"],[100,1,"Conductors\/ChecksRoles.php.html#100","Cline\\Warden\\Conductors\\ChecksRoles::notAn","1"],[100,1,"Conductors\/ChecksRoles.php.html#115","Cline\\Warden\\Conductors\\ChecksRoles::all","1"],[100,1,"Conductors\/ForbidsAbilities.php.html#54","Cline\\Warden\\Conductors\\ForbidsAbilities::__construct","1"],[100,1,"Conductors\/ForbidsAbilities.php.html#64","Cline\\Warden\\Conductors\\ForbidsAbilities::within","1"],[100,1,"Conductors\/GivesAbilities.php.html#57","Cline\\Warden\\Conductors\\GivesAbilities::__construct","1"],[100,1,"Conductors\/GivesAbilities.php.html#75","Cline\\Warden\\Conductors\\GivesAbilities::within","1"],[100,1,"Conductors\/Lazy\/ConductsAbilities.php.html#59","Cline\\Warden\\Conductors\\Lazy\\ConductsAbilities::__construct","1"],[100,2,"Conductors\/Lazy\/ConductsAbilities.php.html#71","Cline\\Warden\\Conductors\\Lazy\\ConductsAbilities::__destruct","2"],[100,1,"Conductors\/Lazy\/ConductsAbilities.php.html#91","Cline\\Warden\\Conductors\\Lazy\\ConductsAbilities::everything","1"],[100,1,"Conductors\/Lazy\/HandlesOwnership.php.html#56","Cline\\Warden\\Conductors\\Lazy\\HandlesOwnership::__construct","1"],[100,1,"Conductors\/Lazy\/HandlesOwnership.php.html#69","Cline\\Warden\\Conductors\\Lazy\\HandlesOwnership::__destruct","1"],[100,1,"Conductors\/Lazy\/HandlesOwnership.php.html#91","Cline\\Warden\\Conductors\\Lazy\\HandlesOwnership::to","1"],[100,1,"Conductors\/RemovesAbilities.php.html#48","Cline\\Warden\\Conductors\\RemovesAbilities::__construct","1"],[100,1,"Conductors\/RemovesRoles.php.html#57","Cline\\Warden\\Conductors\\RemovesRoles::__construct","1"],[100,3,"Conductors\/RemovesRoles.php.html#96","Cline\\Warden\\Conductors\\RemovesRoles::getRoleIds","3"],[100,1,"Conductors\/RemovesRoles.php.html#130","Cline\\Warden\\Conductors\\RemovesRoles::getRoleIdsFromNames","1"],[100,3,"Conductors\/RemovesRoles.php.html#152","Cline\\Warden\\Conductors\\RemovesRoles::retractRoles","3"],[100,1,"Conductors\/RemovesRoles.php.html#185","Cline\\Warden\\Conductors\\RemovesRoles::getDetachQueryConstraint","1"],[100,1,"Conductors\/RemovesRoles.php.html#201","Cline\\Warden\\Conductors\\RemovesRoles::newPivotTableQuery","1"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#48","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::__construct","1"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#62","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::roles","1"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#89","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::abilities","1"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#103","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::forbiddenAbilities","1"],[100,3,"Conductors\/SyncsRolesAndAbilities.php.html#140","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::syncAbilities","3"],[100,2,"Conductors\/SyncsRolesAndAbilities.php.html#179","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::getAuthority","2"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#201","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::sync","1"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#229","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::newPivotQuery","1"],[100,1,"Conductors\/SyncsRolesAndAbilities.php.html#255","Cline\\Warden\\Conductors\\SyncsRolesAndAbilities::pluck","1"],[100,1,"Conductors\/UnforbidsAbilities.php.html#47","Cline\\Warden\\Conductors\\UnforbidsAbilities::__construct","1"],[100,3,"Console\/CleanCommand.php.html#59","Cline\\Warden\\Console\\CleanCommand::handle","3"],[100,3,"Console\/CleanCommand.php.html#81","Cline\\Warden\\Console\\CleanCommand::getComputedOptions","3"],[100,2,"Console\/CleanCommand.php.html#102","Cline\\Warden\\Console\\CleanCommand::deleteUnassignedAbilities","2"],[100,1,"Console\/CleanCommand.php.html#123","Cline\\Warden\\Console\\CleanCommand::getUnassignedAbilitiesQuery","1"],[100,1,"Console\/CleanCommand.php.html#168","Cline\\Warden\\Console\\CleanCommand::scopeQueryToWhereModelIsMissing","1"],[100,1,"Console\/CleanCommand.php.html#191","Cline\\Warden\\Console\\CleanCommand::getEntityTypes","1"],[100,1,"Console\/CleanCommand.php.html#209","Cline\\Warden\\Console\\CleanCommand::getBaseOrphanedQuery","1"],[100,1,"Console\/CleanCommand.php.html#223","Cline\\Warden\\Console\\CleanCommand::abilitiesTable","1"],[100,1,"Console\/CleanCommand.php.html#238","Cline\\Warden\\Console\\CleanCommand::makeModel","1"],[100,1,"Constraints\/Builder.php.html#42","Cline\\Warden\\Constraints\\Builder::__construct","1"],[100,1,"Constraints\/Builder.php.html#55","Cline\\Warden\\Constraints\\Builder::make","1"],[100,2,"Constraints\/Builder.php.html#73","Cline\\Warden\\Constraints\\Builder::where","2"],[100,2,"Constraints\/Builder.php.html#96","Cline\\Warden\\Constraints\\Builder::orWhere","2"],[100,1,"Constraints\/Builder.php.html#118","Cline\\Warden\\Constraints\\Builder::whereColumn","1"],[100,1,"Constraints\/Builder.php.html#136","Cline\\Warden\\Constraints\\Builder::orWhereColumn","1"],[100,2,"Constraints\/Builder.php.html#151","Cline\\Warden\\Constraints\\Builder::build","2"],[100,1,"Constraints\/Builder.php.html#173","Cline\\Warden\\Constraints\\Builder::whereNested","1"],[100,1,"Constraints\/Builder.php.html#192","Cline\\Warden\\Constraints\\Builder::addConstraint","1"],[100,1,"Constraints\/ColumnConstraint.php.html#38","Cline\\Warden\\Constraints\\ColumnConstraint::__construct","1"],[100,5,"Constraints\/ColumnConstraint.php.html#55","Cline\\Warden\\Constraints\\ColumnConstraint::fromData","5"],[100,2,"Constraints\/ColumnConstraint.php.html#84","Cline\\Warden\\Constraints\\ColumnConstraint::check","2"],[100,1,"Constraints\/ColumnConstraint.php.html#102","Cline\\Warden\\Constraints\\ColumnConstraint::data","1"],[100,1,"Constraints\/Constraint.php.html#62","Cline\\Warden\\Constraints\\Constraint::where","1"],[100,1,"Constraints\/Constraint.php.html#84","Cline\\Warden\\Constraints\\Constraint::orWhere","1"],[100,1,"Constraints\/Constraint.php.html#112","Cline\\Warden\\Constraints\\Constraint::whereColumn","1"],[100,1,"Constraints\/Constraint.php.html#136","Cline\\Warden\\Constraints\\Constraint::orWhereColumn","1"],[100,1,"Constraints\/Constraint.php.html#175","Cline\\Warden\\Constraints\\Constraint::isAnd","1"],[100,1,"Constraints\/Constraint.php.html#185","Cline\\Warden\\Constraints\\Constraint::isOr","1"],[100,2,"Constraints\/Constraint.php.html#199","Cline\\Warden\\Constraints\\Constraint::equals","2"],[100,0,"Constraints\/Constraint.php.html#215","Cline\\Warden\\Constraints\\Constraint::check","0"],[100,2,"Constraints\/Constraint.php.html#232","Cline\\Warden\\Constraints\\Constraint::prepareOperatorAndValue","2"],[100,8,"Constraints\/Constraint.php.html#259","Cline\\Warden\\Constraints\\Constraint::compare","8"],[100,1,"Constraints\/Group.php.html#60","Cline\\Warden\\Constraints\\Group::__construct","1"],[100,1,"Constraints\/Group.php.html#73","Cline\\Warden\\Constraints\\Group::withAnd","1"],[100,1,"Constraints\/Group.php.html#86","Cline\\Warden\\Constraints\\Group::withOr","1"],[100,1,"Constraints\/Group.php.html#104","Cline\\Warden\\Constraints\\Group::fromData","1"],[100,1,"Constraints\/Group.php.html#131","Cline\\Warden\\Constraints\\Group::add","1"],[100,1,"Constraints\/Group.php.html#197","Cline\\Warden\\Constraints\\Group::isAnd","1"],[100,1,"Constraints\/Group.php.html#207","Cline\\Warden\\Constraints\\Group::isOr","1"],[100,1,"Constraints\/Group.php.html#252","Cline\\Warden\\Constraints\\Group::data","1"],[100,1,"Constraints\/ValueConstraint.php.html#46","Cline\\Warden\\Constraints\\ValueConstraint::__construct","1"],[100,4,"Constraints\/ValueConstraint.php.html#58","Cline\\Warden\\Constraints\\ValueConstraint::fromData","4"],[100,1,"Constraints\/ValueConstraint.php.html#86","Cline\\Warden\\Constraints\\ValueConstraint::check","1"],[100,1,"Constraints\/ValueConstraint.php.html#96","Cline\\Warden\\Constraints\\ValueConstraint::data","1"],[100,1,"Database\/Ability.php.html#74","Cline\\Warden\\Database\\Ability::__construct","1"],[100,1,"Database\/Models.php.html#117","Cline\\Warden\\Database\\Models::setAbilitiesModel","1"],[100,1,"Database\/Models.php.html#133","Cline\\Warden\\Database\\Models::setRolesModel","1"],[100,1,"Database\/Models.php.html#149","Cline\\Warden\\Database\\Models::setUsersModel","1"],[100,1,"Database\/Models.php.html#165","Cline\\Warden\\Database\\Models::setTables","1"],[100,2,"Database\/Models.php.html#182","Cline\\Warden\\Database\\Models::table","2"],[100,3,"Database\/Models.php.html#201","Cline\\Warden\\Database\\Models::scope","3"],[100,2,"Database\/Models.php.html#224","Cline\\Warden\\Database\\Models::classname","2"],[100,2,"Database\/Models.php.html#242","Cline\\Warden\\Database\\Models::updateMorphMap","2"],[100,3,"Database\/Models.php.html#277","Cline\\Warden\\Database\\Models::ownedVia","3"],[100,4,"Database\/Models.php.html#301","Cline\\Warden\\Database\\Models::isOwnedBy","4"],[100,1,"Database\/Models.php.html#328","Cline\\Warden\\Database\\Models::ability","1"],[100,1,"Database\/Models.php.html#345","Cline\\Warden\\Database\\Models::role","1"],[100,1,"Database\/Models.php.html#381","Cline\\Warden\\Database\\Models::query","1"],[100,1,"Database\/Models.php.html#409","Cline\\Warden\\Database\\Models::morphKeyMap","1"],[100,1,"Database\/Models.php.html#437","Cline\\Warden\\Database\\Models::enforceMorphKeyMap","1"],[100,1,"Database\/Models.php.html#450","Cline\\Warden\\Database\\Models::requireKeyMap","1"],[100,2,"Database\/Models.php.html#480","Cline\\Warden\\Database\\Models::getModelKey","2"],[100,1,"Database\/Models.php.html#500","Cline\\Warden\\Database\\Models::reset","1"],[100,3,"Database\/Models.php.html#521","Cline\\Warden\\Database\\Models::isOwnedVia","3"],[100,1,"Database\/Models.php.html#543","Cline\\Warden\\Database\\Models::make","1"],[100,1,"Database\/Queries\/Abilities.php.html#43","Cline\\Warden\\Database\\Queries\\Abilities::forAuthority","1"],[100,1,"Database\/Queries\/Abilities.php.html#66","Cline\\Warden\\Database\\Queries\\Abilities::forbiddenForAuthority","1"],[100,1,"Database\/Queries\/Abilities.php.html#82","Cline\\Warden\\Database\\Queries\\Abilities::getRoleConstraint","1"],[100,1,"Database\/Queries\/Abilities.php.html#114","Cline\\Warden\\Database\\Queries\\Abilities::getAuthorityRoleConstraint","1"],[100,1,"Database\/Queries\/Abilities.php.html#143","Cline\\Warden\\Database\\Queries\\Abilities::getAuthorityConstraint","1"],[100,1,"Database\/Queries\/Abilities.php.html#172","Cline\\Warden\\Database\\Queries\\Abilities::getEveryoneConstraint","1"],[100,1,"Database\/Queries\/AbilitiesForModel.php.html#48","Cline\\Warden\\Database\\Queries\\AbilitiesForModel::__construct","1"],[100,3,"Database\/Queries\/AbilitiesForModel.php.html#64","Cline\\Warden\\Database\\Queries\\AbilitiesForModel::constrain","3"],[100,1,"Database\/Queries\/AbilitiesForModel.php.html#86","Cline\\Warden\\Database\\Queries\\AbilitiesForModel::constrainByWildcard","1"],[100,2,"Database\/Queries\/AbilitiesForModel.php.html#103","Cline\\Warden\\Database\\Queries\\AbilitiesForModel::constrainByModel","2"],[100,1,"Database\/Queries\/AbilitiesForModel.php.html#127","Cline\\Warden\\Database\\Queries\\AbilitiesForModel::modelAbilityConstraint","1"],[100,4,"Database\/Queries\/AbilitiesForModel.php.html#147","Cline\\Warden\\Database\\Queries\\AbilitiesForModel::abilitySubqueryConstraint","4"],[100,1,"Database\/Queries\/Roles.php.html#45","Cline\\Warden\\Database\\Queries\\Roles::constrainWhereIs","1"],[100,1,"Database\/Queries\/Roles.php.html#64","Cline\\Warden\\Database\\Queries\\Roles::constrainWhereIsAll","1"],[100,1,"Database\/Queries\/Roles.php.html#83","Cline\\Warden\\Database\\Queries\\Roles::constrainWhereIsNot","1"],[100,1,"Database\/Queries\/Roles.php.html#104","Cline\\Warden\\Database\\Queries\\Roles::constrainWhereAssignedTo","1"],[100,1,"Database\/Role.php.html#73","Cline\\Warden\\Database\\Role::__construct","1"],[100,1,"Database\/Scope\/Scope.php.html#68","Cline\\Warden\\Database\\Scope\\Scope::to","1"],[100,1,"Database\/Scope\/Scope.php.html#85","Cline\\Warden\\Database\\Scope\\Scope::onlyRelations","1"],[100,1,"Database\/Scope\/Scope.php.html#101","Cline\\Warden\\Database\\Scope\\Scope::dontScopeRoleAbilities","1"],[100,3,"Database\/Scope\/Scope.php.html#136","Cline\\Warden\\Database\\Scope\\Scope::applyToModel","3"],[100,4,"Database\/Scope\/Scope.php.html#158","Cline\\Warden\\Database\\Scope\\Scope::applyToModelQuery","4"],[100,1,"Database\/Scope\/Scope.php.html#183","Cline\\Warden\\Database\\Scope\\Scope::applyToRelationQuery","1"],[100,1,"Database\/Scope\/Scope.php.html#200","Cline\\Warden\\Database\\Scope\\Scope::applyToRelation","1"],[100,1,"Database\/Scope\/Scope.php.html#218","Cline\\Warden\\Database\\Scope\\Scope::get","1"],[100,5,"Database\/Scope\/Scope.php.html#233","Cline\\Warden\\Database\\Scope\\Scope::getAttachAttributes","5"],[100,1,"Database\/Scope\/Scope.php.html#259","Cline\\Warden\\Database\\Scope\\Scope::onceTo","1"],[100,1,"Database\/Scope\/Scope.php.html#280","Cline\\Warden\\Database\\Scope\\Scope::remove","1"],[100,1,"Database\/Scope\/Scope.php.html#296","Cline\\Warden\\Database\\Scope\\Scope::removeOnce","1"],[100,2,"Database\/Scope\/Scope.php.html#314","Cline\\Warden\\Database\\Scope\\Scope::applyToQuery","2"],[100,1,"Database\/Scope\/Scope.php.html#334","Cline\\Warden\\Database\\Scope\\Scope::isRoleClass","1"],[100,1,"Database\/Scope\/TenantScope.php.html#37","Cline\\Warden\\Database\\Scope\\TenantScope::register","1"],[100,1,"Database\/Scope\/TenantScope.php.html#54","Cline\\Warden\\Database\\Scope\\TenantScope::apply","1"],[100,9,"Database\/Titles\/AbilityTitle.php.html#44","Cline\\Warden\\Database\\Titles\\AbilityTitle::__construct","9"],[100,2,"Database\/Titles\/AbilityTitle.php.html#77","Cline\\Warden\\Database\\Titles\\AbilityTitle::isWildcardAbility","2"],[100,2,"Database\/Titles\/AbilityTitle.php.html#94","Cline\\Warden\\Database\\Titles\\AbilityTitle::isRestrictedWildcardAbility","2"],[100,1,"Database\/Titles\/AbilityTitle.php.html#108","Cline\\Warden\\Database\\Titles\\AbilityTitle::isSimpleAbility","1"],[100,3,"Database\/Titles\/AbilityTitle.php.html#125","Cline\\Warden\\Database\\Titles\\AbilityTitle::isRestrictedOwnershipAbility","3"],[100,4,"Database\/Titles\/AbilityTitle.php.html#142","Cline\\Warden\\Database\\Titles\\AbilityTitle::isGeneralManagementAbility","4"],[100,4,"Database\/Titles\/AbilityTitle.php.html#159","Cline\\Warden\\Database\\Titles\\AbilityTitle::isBlanketModelAbility","4"],[100,3,"Database\/Titles\/AbilityTitle.php.html#179","Cline\\Warden\\Database\\Titles\\AbilityTitle::isSpecificModelAbility","3"],[100,3,"Database\/Titles\/AbilityTitle.php.html#195","Cline\\Warden\\Database\\Titles\\AbilityTitle::isGlobalActionAbility","3"],[100,2,"Database\/Titles\/AbilityTitle.php.html#214","Cline\\Warden\\Database\\Titles\\AbilityTitle::getWildcardAbilityTitle","2"],[100,1,"Database\/Titles\/AbilityTitle.php.html#236","Cline\\Warden\\Database\\Titles\\AbilityTitle::getBlanketModelAbilityTitle","1"],[100,2,"Database\/Titles\/AbilityTitle.php.html#255","Cline\\Warden\\Database\\Titles\\AbilityTitle::getSpecificModelAbilityTitle","2"],[100,1,"Database\/Titles\/AbilityTitle.php.html#271","Cline\\Warden\\Database\\Titles\\AbilityTitle::getPluralName","1"],[100,1,"Database\/Titles\/AbilityTitle.php.html#285","Cline\\Warden\\Database\\Titles\\AbilityTitle::basename","1"],[100,1,"Database\/Titles\/AbilityTitle.php.html#296","Cline\\Warden\\Database\\Titles\\AbilityTitle::pluralize","1"],[100,1,"Database\/Titles\/RoleTitle.php.html#32","Cline\\Warden\\Database\\Titles\\RoleTitle::__construct","1"],[100,1,"Database\/Titles\/Title.php.html#47","Cline\\Warden\\Database\\Titles\\Title::from","1"],[100,1,"Database\/Titles\/Title.php.html#58","Cline\\Warden\\Database\\Titles\\Title::toString","1"],[100,1,"Database\/Titles\/Title.php.html#79","Cline\\Warden\\Database\\Titles\\Title::humanize","1"],[100,1,"Exceptions\/InvalidConfigurationException.php.html#36","Cline\\Warden\\Exceptions\\InvalidConfigurationException::conflictingMorphKeyMaps","1"],[100,1,"Exceptions\/MorphKeyViolationException.php.html#37","Cline\\Warden\\Exceptions\\MorphKeyViolationException::__construct","1"],[100,1,"Facades\/Warden.php.html#88","Cline\\Warden\\Facades\\Warden::getFacadeAccessor","1"],[100,1,"Factory.php.html#65","Cline\\Warden\\Factory::__construct","1"],[100,3,"Factory.php.html#78","Cline\\Warden\\Factory::create","3"],[100,1,"Factory.php.html#102","Cline\\Warden\\Factory::withCache","1"],[100,1,"Factory.php.html#118","Cline\\Warden\\Factory::withClipboard","1"],[100,1,"Factory.php.html#131","Cline\\Warden\\Factory::withGate","1"],[100,1,"Factory.php.html#144","Cline\\Warden\\Factory::withUser","1"],[100,1,"Factory.php.html#160","Cline\\Warden\\Factory::registerClipboardAtContainer","1"],[100,1,"Factory.php.html#176","Cline\\Warden\\Factory::registerAtGate","1"],[100,1,"Factory.php.html#188","Cline\\Warden\\Factory::getGuard","1"],[100,2,"Factory.php.html#201","Cline\\Warden\\Factory::getClipboard","2"],[100,2,"Factory.php.html#214","Cline\\Warden\\Factory::getCacheStore","2"],[100,2,"Factory.php.html#227","Cline\\Warden\\Factory::getGate","2"],[100,1,"Guard.php.html#58","Cline\\Warden\\Guard::__construct","1"],[100,1,"Guard.php.html#67","Cline\\Warden\\Guard::getClipboard","1"],[100,1,"Guard.php.html#81","Cline\\Warden\\Guard::setClipboard","1"],[100,1,"Guard.php.html#93","Cline\\Warden\\Guard::usesCachedClipboard","1"],[100,2,"Guard.php.html#110","Cline\\Warden\\Guard::slot","2"],[100,1,"Guard.php.html#133","Cline\\Warden\\Guard::registerAt","1"],[100,6,"Guard.php.html#164","Cline\\Warden\\Guard::runBeforeCallback","6"],[100,7,"Guard.php.html#196","Cline\\Warden\\Guard::runAfterCallback","7"],[100,2,"Guard.php.html#231","Cline\\Warden\\Guard::checkAtClipboard","2"],[100,1,"Support\/Helpers.php.html#50","Cline\\Warden\\Support\\Helpers::ensureValidLogicalOperator","1"],[100,3,"Support\/Helpers.php.html#116","Cline\\Warden\\Support\\Helpers::fillMissingKeys","3"],[100,4,"Support\/Helpers.php.html#141","Cline\\Warden\\Support\\Helpers::groupModelsAndIdentifiersByType","4"],[100,2,"Support\/Helpers.php.html#174","Cline\\Warden\\Support\\Helpers::isAssociativeArray","2"],[100,2,"Support\/Helpers.php.html#219","Cline\\Warden\\Support\\Helpers::isSoftDeleting","2"],[100,3,"Support\/Helpers.php.html#242","Cline\\Warden\\Support\\Helpers::toArray","3"],[100,3,"Support\/Helpers.php.html#298","Cline\\Warden\\Support\\Helpers::partition","3"],[100,1,"Warden.php.html#72","Cline\\Warden\\Warden::__construct","1"],[100,1,"Warden.php.html#85","Cline\\Warden\\Warden::create","1"],[100,1,"Warden.php.html#99","Cline\\Warden\\Warden::make","1"],[100,1,"Warden.php.html#110","Cline\\Warden\\Warden::allow","1"],[100,1,"Warden.php.html#120","Cline\\Warden\\Warden::allowEveryone","1"],[100,1,"Warden.php.html#131","Cline\\Warden\\Warden::disallow","1"],[100,1,"Warden.php.html#141","Cline\\Warden\\Warden::disallowEveryone","1"],[100,1,"Warden.php.html#155","Cline\\Warden\\Warden::forbid","1"],[100,1,"Warden.php.html#165","Cline\\Warden\\Warden::forbidEveryone","1"],[100,1,"Warden.php.html#176","Cline\\Warden\\Warden::unforbid","1"],[100,1,"Warden.php.html#186","Cline\\Warden\\Warden::unforbidEveryone","1"],[100,1,"Warden.php.html#197","Cline\\Warden\\Warden::assign","1"],[100,1,"Warden.php.html#208","Cline\\Warden\\Warden::retract","1"],[100,1,"Warden.php.html#222","Cline\\Warden\\Warden::sync","1"],[100,1,"Warden.php.html#233","Cline\\Warden\\Warden::is","1"],[100,1,"Warden.php.html#243","Cline\\Warden\\Warden::getClipboard","1"],[100,1,"Warden.php.html#257","Cline\\Warden\\Warden::setClipboard","1"],[100,1,"Warden.php.html#272","Cline\\Warden\\Warden::registerClipboardAtContainer","1"],[100,3,"Warden.php.html#290","Cline\\Warden\\Warden::cache","3"],[100,1,"Warden.php.html#317","Cline\\Warden\\Warden::dontCache","1"],[100,2,"Warden.php.html#330","Cline\\Warden\\Warden::refresh","2"],[100,2,"Warden.php.html#347","Cline\\Warden\\Warden::refreshFor","2"],[100,1,"Warden.php.html#364","Cline\\Warden\\Warden::setGate","1"],[100,1,"Warden.php.html#376","Cline\\Warden\\Warden::getGate","1"],[100,1,"Warden.php.html#388","Cline\\Warden\\Warden::gate","1"],[100,1,"Warden.php.html#400","Cline\\Warden\\Warden::usesCachedClipboard","1"],[100,1,"Warden.php.html#415","Cline\\Warden\\Warden::define","1"],[100,1,"Warden.php.html#432","Cline\\Warden\\Warden::authorize","1"],[100,1,"Warden.php.html#444","Cline\\Warden\\Warden::can","1"],[100,1,"Warden.php.html#456","Cline\\Warden\\Warden::canAny","1"],[100,1,"Warden.php.html#468","Cline\\Warden\\Warden::cannot","1"],[100,1,"Warden.php.html#480","Cline\\Warden\\Warden::allows","1"],[100,1,"Warden.php.html#493","Cline\\Warden\\Warden::denies","1"],[100,1,"Warden.php.html#505","Cline\\Warden\\Warden::role","1"],[100,1,"Warden.php.html#516","Cline\\Warden\\Warden::ability","1"],[100,2,"Warden.php.html#531","Cline\\Warden\\Warden::runBeforePolicies","2"],[100,1,"Warden.php.html#548","Cline\\Warden\\Warden::ownedVia","1"],[100,1,"Warden.php.html#561","Cline\\Warden\\Warden::useAbilityModel","1"],[100,1,"Warden.php.html#577","Cline\\Warden\\Warden::useRoleModel","1"],[100,1,"Warden.php.html#593","Cline\\Warden\\Warden::useUserModel","1"],[100,1,"Warden.php.html#609","Cline\\Warden\\Warden::tables","1"],[100,1,"Warden.php.html#622","Cline\\Warden\\Warden::scope","1"],[100,1,"Warden.php.html#634","Cline\\Warden\\Warden::resolve","1"],[100,1,"WardenServiceProvider.php.html#50","Cline\\Warden\\WardenServiceProvider::register","1"],[100,2,"WardenServiceProvider.php.html#63","Cline\\Warden\\WardenServiceProvider::boot","2"],[100,1,"WardenServiceProvider.php.html#83","Cline\\Warden\\WardenServiceProvider::registerBouncer","1"],[100,1,"WardenServiceProvider.php.html#105","Cline\\Warden\\WardenServiceProvider::registerCommands","1"],[100,1,"WardenServiceProvider.php.html#116","Cline\\Warden\\WardenServiceProvider::registerMorphs","1"],[100,1,"WardenServiceProvider.php.html#127","Cline\\Warden\\WardenServiceProvider::publishMiddleware","1"],[100,2,"WardenServiceProvider.php.html#142","Cline\\Warden\\WardenServiceProvider::publishMigrations","2"],[100,2,"WardenServiceProvider.php.html#163","Cline\\Warden\\WardenServiceProvider::setUserModel","2"],[100,7,"WardenServiceProvider.php.html#182","Cline\\Warden\\WardenServiceProvider::getUserModel","7"],[100,7,"WardenServiceProvider.php.html#218","Cline\\Warden\\WardenServiceProvider::configureMorphKeyMaps","7"],[100,1,"WardenServiceProvider.php.html#257","Cline\\Warden\\WardenServiceProvider::registerAtGate","1"],[100,2,"Conductors\/Concerns\/AssociatesAbilities.php.html#46","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::to","2"],[100,3,"Conductors\/Concerns\/AssociatesAbilities.php.html#67","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::getAuthority","3"],[100,2,"Conductors\/Concerns\/AssociatesAbilities.php.html#91","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::getAssociatedAbilityIds","2"],[100,1,"Conductors\/Concerns\/AssociatesAbilities.php.html#123","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::getAbilityIdsAssociatedWithEveryone","1"],[100,2,"Conductors\/Concerns\/AssociatesAbilities.php.html#147","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::associateAbilities","2"],[100,3,"Conductors\/Concerns\/AssociatesAbilities.php.html#167","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::associateAbilitiesToAuthority","3"],[100,3,"Conductors\/Concerns\/AssociatesAbilities.php.html#191","Cline\\Warden\\Conductors\\Concerns\\AssociatesAbilities::associateAbilitiesToEveryone","3"],[100,1,"Conductors\/Concerns\/ConductsAbilities.php.html#43","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities::everything","1"],[100,1,"Conductors\/Concerns\/ConductsAbilities.php.html#80","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities::toOwn","1"],[100,1,"Conductors\/Concerns\/ConductsAbilities.php.html#95","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities::toOwnEverything","1"],[100,5,"Conductors\/Concerns\/ConductsAbilities.php.html#110","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities::shouldConductLazy","5"],[100,1,"Conductors\/Concerns\/ConductsAbilities.php.html#139","Cline\\Warden\\Conductors\\Concerns\\ConductsAbilities::conductLazy","1"],[100,3,"Conductors\/Concerns\/DisassociatesAbilities.php.html#47","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::to","3"],[100,2,"Conductors\/Concerns\/DisassociatesAbilities.php.html#69","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::disassociateAbilities","2"],[100,1,"Conductors\/Concerns\/DisassociatesAbilities.php.html#87","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::disassociateAuthority","1"],[100,1,"Conductors\/Concerns\/DisassociatesAbilities.php.html#105","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::getAbilitiesPivotQuery","1"],[100,1,"Conductors\/Concerns\/DisassociatesAbilities.php.html#132","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::disassociateEveryone","1"],[100,3,"Conductors\/Concerns\/DisassociatesAbilities.php.html#155","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::getAuthority","3"],[100,2,"Conductors\/Concerns\/DisassociatesAbilities.php.html#177","Cline\\Warden\\Conductors\\Concerns\\DisassociatesAbilities::constraints","2"],[100,5,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#52","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::getAbilityIds","5"],[100,1,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#90","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::getAbilityIdsFromMap","1"],[100,1,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#110","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::getAbilityIdsFromArray","1"],[100,3,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#139","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::getModelAbilityKeys","3"],[100,2,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#160","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::getModelAbility","2"],[100,2,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#180","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::findAbility","2"],[100,1,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#205","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::createAbility","1"],[100,3,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#225","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::getEntityInstance","3"],[100,3,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#256","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::abilitiesByName","3"],[100,1,"Conductors\/Concerns\/FindsAndCreatesAbilities.php.html#285","Cline\\Warden\\Conductors\\Concerns\\FindsAndCreatesAbilities::createMissingAbilities","1"],[100,1,"Database\/Concerns\/Authorizable.php.html#48","Cline\\Warden\\Database\\Concerns\\Authorizable::can","1"],[100,1,"Database\/Concerns\/Authorizable.php.html#66","Cline\\Warden\\Database\\Concerns\\Authorizable::cant","1"],[100,1,"Database\/Concerns\/Authorizable.php.html#81","Cline\\Warden\\Database\\Concerns\\Authorizable::cannot","1"],[100,2,"Database\/Concerns\/HasAbilities.php.html#46","Cline\\Warden\\Database\\Concerns\\HasAbilities::bootHasAbilities","2"],[100,1,"Database\/Concerns\/HasAbilities.php.html#67","Cline\\Warden\\Database\\Concerns\\HasAbilities::abilities","1"],[100,1,"Database\/Concerns\/HasAbilities.php.html#91","Cline\\Warden\\Database\\Concerns\\HasAbilities::getAbilities","1"],[100,1,"Database\/Concerns\/HasAbilities.php.html#107","Cline\\Warden\\Database\\Concerns\\HasAbilities::getForbiddenAbilities","1"],[100,2,"Database\/Concerns\/HasAbilities.php.html#133","Cline\\Warden\\Database\\Concerns\\HasAbilities::allow","2"],[100,2,"Database\/Concerns\/HasAbilities.php.html#155","Cline\\Warden\\Database\\Concerns\\HasAbilities::disallow","2"],[100,2,"Database\/Concerns\/HasAbilities.php.html#185","Cline\\Warden\\Database\\Concerns\\HasAbilities::forbid","2"],[100,2,"Database\/Concerns\/HasAbilities.php.html#207","Cline\\Warden\\Database\\Concerns\\HasAbilities::unforbid","2"],[100,2,"Database\/Concerns\/HasRoles.php.html#49","Cline\\Warden\\Database\\Concerns\\HasRoles::bootHasRoles","2"],[100,1,"Database\/Concerns\/HasRoles.php.html#66","Cline\\Warden\\Database\\Concerns\\HasRoles::roles","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#86","Cline\\Warden\\Database\\Concerns\\HasRoles::getRoles","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#103","Cline\\Warden\\Database\\Concerns\\HasRoles::assign","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#119","Cline\\Warden\\Database\\Concerns\\HasRoles::retract","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#136","Cline\\Warden\\Database\\Concerns\\HasRoles::isAn","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#152","Cline\\Warden\\Database\\Concerns\\HasRoles::isA","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#166","Cline\\Warden\\Database\\Concerns\\HasRoles::isNotAn","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#182","Cline\\Warden\\Database\\Concerns\\HasRoles::isNotA","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#196","Cline\\Warden\\Database\\Concerns\\HasRoles::isAll","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#212","Cline\\Warden\\Database\\Concerns\\HasRoles::scopeWhereIs","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#226","Cline\\Warden\\Database\\Concerns\\HasRoles::scopeWhereIsAll","1"],[100,1,"Database\/Concerns\/HasRoles.php.html#240","Cline\\Warden\\Database\\Concerns\\HasRoles::scopeWhereIsNot","1"],[100,2,"Database\/Concerns\/IsAbility.php.html#51","Cline\\Warden\\Database\\Concerns\\IsAbility::bootIsAbility","2"],[100,1,"Database\/Concerns\/IsAbility.php.html#78","Cline\\Warden\\Database\\Concerns\\IsAbility::createForModel","1"],[100,5,"Database\/Concerns\/IsAbility.php.html#99","Cline\\Warden\\Database\\Concerns\\IsAbility::makeForModel","5"],[100,1,"Database\/Concerns\/IsAbility.php.html#131","Cline\\Warden\\Database\\Concerns\\IsAbility::hasConstraints","1"],[100,2,"Database\/Concerns\/IsAbility.php.html#146","Cline\\Warden\\Database\\Concerns\\IsAbility::getConstraints","2"],[100,1,"Database\/Concerns\/IsAbility.php.html#168","Cline\\Warden\\Database\\Concerns\\IsAbility::setConstraints","1"],[100,2,"Database\/Concerns\/IsAbility.php.html#267","Cline\\Warden\\Database\\Concerns\\IsAbility::getOptionsAttribute","2"],[100,1,"Database\/Concerns\/IsAbility.php.html#288","Cline\\Warden\\Database\\Concerns\\IsAbility::setOptionsAttribute","1"],[100,4,"Database\/Concerns\/IsAbility.php.html#302","Cline\\Warden\\Database\\Concerns\\IsAbility::getIdentifierAttribute","4"],[100,3,"Database\/Concerns\/IsAbility.php.html#351","Cline\\Warden\\Database\\Concerns\\IsAbility::scopeByName","3"],[100,1,"Database\/Concerns\/IsAbility.php.html#371","Cline\\Warden\\Database\\Concerns\\IsAbility::scopeSimpleAbility","1"],[100,1,"Database\/Concerns\/IsAbility.php.html#387","Cline\\Warden\\Database\\Concerns\\IsAbility::scopeForModel","1"],[100,2,"Database\/Concerns\/IsRole.php.html#48","Cline\\Warden\\Database\\Concerns\\IsRole::bootIsRole","2"],[100,1,"Database\/Concerns\/IsRole.php.html#131","Cline\\Warden\\Database\\Concerns\\IsRole::findOrCreateRoles","1"],[100,1,"Database\/Concerns\/IsRole.php.html#154","Cline\\Warden\\Database\\Concerns\\IsRole::getRoleKeys","1"],[100,2,"Database\/Concerns\/IsRole.php.html#199","Cline\\Warden\\Database\\Concerns\\IsRole::getKeysByName","2"],[100,1,"Database\/Concerns\/IsRole.php.html#272","Cline\\Warden\\Database\\Concerns\\IsRole::scopeWhereAssignedTo","1"],[100,2,"Database\/Concerns\/IsRole.php.html#288","Cline\\Warden\\Database\\Concerns\\IsRole::findOrCreateRolesByName","2"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [0,0,0,0,0,1,0,0,1,2,9,37])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [12,0,0,0,0,0,1,5,1,6,3,343])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>
