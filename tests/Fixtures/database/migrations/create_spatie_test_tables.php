@@ -55,7 +55,14 @@ return new class() extends Migration
 
         if (!Schema::hasTable('organizations')) {
             Schema::create('organizations', function ($table): void {
-                $table->ulid('ulid')->primary();
+                $keyType = config('warden.primary_key_type', 'id');
+
+                match ($keyType) {
+                    'ulid' => $table->ulid('ulid')->primary(),
+                    'uuid' => $table->uuid('uuid')->primary(),
+                    default => $table->id(),
+                };
+
                 $table->string('name');
                 $table->timestamps();
             });

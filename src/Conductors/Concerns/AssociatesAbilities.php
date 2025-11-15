@@ -10,6 +10,7 @@
 namespace Cline\Warden\Conductors\Concerns;
 
 use Cline\Warden\Database\Models;
+use Cline\Warden\Database\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -187,7 +188,7 @@ trait AssociatesAbilities
      * Associate these abilities with everyone globally.
      *
      * Creates permission records with null actor_id to grant abilities to all
-     * users. Includes scope attributes for multi-tenancy isolation.
+     * users. Uses Eloquent model creation for proper event handling and ID generation.
      *
      * @param array<int, int> $ids Ability IDs to associate globally
      */
@@ -203,8 +204,11 @@ trait AssociatesAbilities
             $attributes['context_type'] = $this->context->getMorphClass();
         }
 
-        $records = array_map(fn (int $id): array => ['ability_id' => $id] + $attributes, $ids);
-
-        Models::query('permissions')->insert($records);
+        foreach ($ids as $id) {
+            Permission::query()->firstOrCreate(
+                ['ability_id' => $id, 'actor_id' => null, 'actor_type' => null] + $attributes,
+                ['ability_id' => $id] + $attributes
+            );
+        }
     }
 }

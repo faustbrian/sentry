@@ -14,9 +14,7 @@ use Cline\Warden\Database\Models;
 use Cline\Warden\Database\Role;
 use Cline\Warden\Support\Helpers;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
-use stdClass;
 
 use function array_map;
 use function assert;
@@ -119,9 +117,8 @@ final class AssignsRoles
     /**
      * Assign the given roles to the given authorities of a specific type.
      *
-     * Creates pivot table entries linking roles to authorities. Uses cross-join
-     * to generate all role-authority combinations, then filters out existing
-     * assignments to avoid duplicate entries.
+     * Uses Eloquent's sync/attach methods to create relationships, letting
+     * Eloquent handle pivot record creation, events, and primary key generation.
      *
      * @param Collection<int, Role>  $roles          Collection of role models to assign
      * @param int|string             $authorityClass The authority model class name
@@ -130,116 +127,35 @@ final class AssignsRoles
     private function assignRoles(Collection $roles, int|string $authorityClass, Collection $authorityIds): void
     {
         /** @var Collection<int, int> */
-        $roleIds = $roles->map(fn (Role $model): mixed => $model->getKey());
+        $roleIds = $roles->pluck('id');
 
-        /** @var Model $authority */
-        $authority = new $authorityClass();
-        $morphType = $authority->getMorphClass();
+        foreach ($authorityIds as $authorityId) {
+            $query = $authorityClass::query();
 
-        $records = $this->buildAttachRecords($roleIds, $morphType, $authorityIds);
+            // Include soft-deleted models if the model uses SoftDeletes
+            if (method_exists($authorityClass, 'bootSoftDeletes')) {
+                $query->withTrashed();
+            }
 
-        $existing = $this->getExistingAttachRecords($roleIds, $morphType, $authorityIds);
+            /** @var Model $authority */
+            $authority = $query->find($authorityId);
 
-        $this->createMissingAssignRecords($records, $existing);
-    }
+            if (!$authority) {
+                continue;
+            }
 
-    /**
-     * Get the pivot table records for the roles already assigned.
-     *
-     * Queries existing role assignments to prevent duplicate pivot entries.
-     * Applies scope constraints to ensure multi-tenancy isolation when configured.
-     *
-     * @param  Collection<int, int>      $roleIds      Collection of role IDs to check
-     * @param  string                    $morphType    The morph type of the authority class
-     * @param  Collection<int, mixed>    $authorityIds Collection of authority IDs to check
-     * @return Collection<int, stdClass> Existing pivot table records matching the criteria
-     */
-    private function getExistingAttachRecords(Collection $roleIds, string $morphType, Collection $authorityIds): Collection
-    {
-        $query = $this->newPivotTableQuery()
-            ->whereIn('role_id', $roleIds->all())
-            ->whereIn('actor_id', $authorityIds->all())
-            ->where('actor_type', $morphType);
+            $pivotData = Models::scope()->getAttachAttributes();
 
-        /** @phpstan-ignore-next-line Expression type may be string */
-        Models::scope()->applyToRelationQuery($query, $query->from);
+            if ($this->context instanceof Model) {
+                $pivotData['context_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
+                $pivotData['context_type'] = $this->context->getMorphClass();
+            }
 
-        return new Collection($query->get());
-    }
-
-    /**
-     * Build the raw attach records for the assigned roles pivot table.
-     *
-     * Creates a Cartesian product of role IDs and authority IDs to generate all
-     * possible assignment combinations. Includes scope attributes for multi-tenancy
-     * support when applicable.
-     *
-     * @param  Collection<int, int>                  $roleIds      Collection of role IDs to assign
-     * @param  string                                $morphType    The morph type of the authority class
-     * @param  Collection<int, mixed>                $authorityIds Collection of authority IDs to receive roles
-     * @return Collection<int, array<string, mixed>> Collection of pivot record arrays ready for insertion
-     */
-    private function buildAttachRecords(Collection $roleIds, string $morphType, Collection $authorityIds): Collection
-    {
-        /** @var Collection<int, array<string, mixed>> */
-        return $roleIds
-            ->crossJoin($authorityIds)
-            /** @phpstan-ignore-next-line */
-            ->mapSpread(function (int $roleId, mixed $authorityId) use ($morphType): array {
-                $attributes = Models::scope()->getAttachAttributes() + [
-                    'role_id' => $roleId,
-                    'actor_id' => $authorityId,
-                    'actor_type' => $morphType,
-                ];
-
-                if ($this->context instanceof Model) {
-                    $attributes['context_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-                    $attributes['context_type'] = $this->context->getMorphClass();
-                }
-
-                return $attributes;
-            });
-    }
-
-    /**
-     * Save the non-existing attach records to the database.
-     *
-     * Filters out records that already exist by comparing hashed keys, then
-     * bulk inserts only the new assignments. This prevents duplicate key errors
-     * and ensures idempotent role assignment operations.
-     *
-     * @param Collection<int, array<string, mixed>> $records  All potential assignment records to insert
-     * @param Collection<int, stdClass>             $existing Existing assignment records from the database
-     */
-    private function createMissingAssignRecords(Collection $records, Collection $existing): void
-    {
-        /** @var Collection<string, mixed> $existing */
-        $existing = $existing->keyBy(function (stdClass $record): string {
-            /** @var array<string, mixed> $recordArray */
-            $recordArray = (array) $record;
-
-            return $this->getAttachRecordHash($recordArray);
-        });
-
-        $records = $records->reject(fn (array $record) => $existing->has($this->getAttachRecordHash($record)));
-
-        $this->newPivotTableQuery()->insert($records->all());
-    }
-
-    /**
-     * Get a unique string identifying the given attach record.
-     *
-     * Concatenates role ID, entity ID, and entity type to create a composite key
-     * for deduplicating assignments. This hash enables efficient lookup of existing
-     * assignments without additional database queries.
-     *
-     * @param  array<string, mixed> $record The pivot record containing role_id, actor_id, and actor_type
-     * @return string               Composite hash uniquely identifying the assignment
-     */
-    private function getAttachRecordHash(array $record): string
-    {
-        /** @phpstan-ignore-next-line Array keys guaranteed by buildAttachRecords */
-        return $record['role_id'].$record['actor_id'].$record['actor_type'];
+            /** @phpstan-ignore-next-line Dynamic relationship */
+            $authority->roles()->syncWithoutDetaching(
+                $roleIds->mapWithKeys(fn ($roleId) => [$roleId => $pivotData])->all()
+            );
+        }
     }
 
     /**
@@ -275,15 +191,5 @@ final class AssignsRoles
         }
 
         return $result;
-    }
-
-    /**
-     * Get a query builder instance for the assigned roles pivot table.
-     *
-     * @return Builder Query builder for the assigned_roles pivot table
-     */
-    private function newPivotTableQuery(): Builder
-    {
-        return Models::query('assigned_roles');
     }
 }

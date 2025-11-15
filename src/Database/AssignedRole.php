@@ -42,6 +42,13 @@ final class AssignedRole extends MorphPivot
     public $incrementing = true;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Create a new AssignedRole pivot instance.
      *
      * Dynamically sets the table name from the Models registry.

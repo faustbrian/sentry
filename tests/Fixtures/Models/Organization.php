@@ -25,18 +25,23 @@ final class Organization extends Model
     use Authorizable;
     use HasRolesAndAbilities;
 
-    public $incrementing = false;
-
     protected $guarded = [];
 
-    protected $primaryKey = 'ulid';
-
-    protected $keyType = 'string';
-
-    #[Override()]
-    public function getKeyName()
+    public function __construct(array $attributes = [])
     {
-        return 'ulid';
+        parent::__construct($attributes);
+
+        $keyType = config('warden.primary_key_type', 'id');
+
+        if ($keyType === 'id') {
+            $this->incrementing = true;
+            $this->primaryKey = 'id';
+            $this->keyType = 'int';
+        } else {
+            $this->incrementing = false;
+            $this->primaryKey = $keyType;
+            $this->keyType = 'string';
+        }
     }
 
     #[Override()]
@@ -45,8 +50,13 @@ final class Organization extends Model
         parent::boot();
 
         self::creating(function ($model): void {
-            if (!$model->ulid) {
-                $model->ulid = (string) Str::ulid();
+            $keyType = config('warden.primary_key_type', 'id');
+            $keyName = $model->getKeyName();
+
+            if ($keyType === 'ulid' && !$model->{$keyName}) {
+                $model->{$keyName} = (string) Str::ulid();
+            } elseif ($keyType === 'uuid' && !$model->{$keyName}) {
+                $model->{$keyName} = (string) Str::uuid();
             }
         });
     }

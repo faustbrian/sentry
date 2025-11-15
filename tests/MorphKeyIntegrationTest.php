@@ -17,10 +17,13 @@ use Tests\Fixtures\Models\User;
 beforeEach(function (): void {
     Models::reset();
     Models::setUsersModel(User::class);
+
+    // Use configured primary key type for all models
+    $keyType = config('warden.primary_key_type', 'id');
     Models::morphKeyMap([
-        User::class => 'id',
-        Organization::class => 'ulid',
-        Account::class => 'id',
+        User::class => $keyType,
+        Organization::class => $keyType,
+        Account::class => $keyType,
     ]);
 });
 
@@ -47,7 +50,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->first();
 
             expect($permission)->not->toBeNull();
-            expect($permission->actor_id)->toEqual($org->ulid);
+            expect($permission->actor_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for actor id when assigning roles', function (): void {
@@ -67,7 +70,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->first();
 
             expect($assignment)->not->toBeNull();
-            expect($assignment->actor_id)->toEqual($org->ulid);
+            expect($assignment->actor_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for actor id with multiple authority types', function (): void {
@@ -96,7 +99,7 @@ describe('MorphKeyIntegration', function (): void {
             expect($userAssignment)->not->toBeNull();
             expect($userAssignment->actor_id)->toEqual($user->id);
             expect($orgAssignment)->not->toBeNull();
-            expect($orgAssignment->actor_id)->toEqual($org->ulid);
+            expect($orgAssignment->actor_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for context id when assigning abilities', function (): void {
@@ -118,7 +121,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->first();
 
             expect($permission)->not->toBeNull();
-            expect($permission->context_id)->toEqual($org->ulid);
+            expect($permission->context_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for context id when assigning roles', function (): void {
@@ -140,7 +143,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->first();
 
             expect($assignment)->not->toBeNull();
-            expect($assignment->context_id)->toEqual($org->ulid);
+            expect($assignment->context_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for context id when allowing everyone', function (): void {
@@ -162,7 +165,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->first();
 
             expect($permission)->not->toBeNull();
-            expect($permission->context_id)->toEqual($org->ulid);
+            expect($permission->context_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for subject id when creating abilities', function (): void {
@@ -175,8 +178,9 @@ describe('MorphKeyIntegration', function (): void {
             ]);
 
             // Assert
+            $expectedKeyName = config('warden.primary_key_type', 'id');
             expect($ability->subject_type)->toEqual($org->getMorphClass());
-            expect(Models::getModelKey($org))->toBe('ulid');
+            expect(Models::getModelKey($org))->toBe($expectedKeyName);
         });
 
         test('uses correct key for subject id when creating model specific abilities', function (): void {
@@ -194,10 +198,11 @@ describe('MorphKeyIntegration', function (): void {
                 ->where('subject_type', $org->getMorphClass())
                 ->first();
 
+            $expectedKeyName = config('warden.primary_key_type', 'id');
             expect($ability)->toBeInstanceOf(Ability::class);
             $keyName = Models::getModelKey($org);
-            expect($keyName)->toBe('ulid');
-            expect($org->getAttribute($keyName))->toEqual($org->ulid);
+            expect($keyName)->toBe($expectedKeyName);
+            expect($org->getAttribute($keyName))->toEqual($org->getKey());
         });
 
         test('queries abilities correctly with custom subject id', function (): void {
@@ -231,7 +236,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->table('permissions')
                 ->where('ability_id', $ability->id)
                 ->where('actor_type', $org->getMorphClass())
-                ->where('actor_id', $org->ulid)
+                ->where('actor_id', $org->getKey())
                 ->first();
 
             expect($permission)->toBeNull();
@@ -253,7 +258,7 @@ describe('MorphKeyIntegration', function (): void {
                 ->table('assigned_roles')
                 ->where('role_id', $role->id)
                 ->where('actor_type', $org->getMorphClass())
-                ->where('actor_id', $org->ulid)
+                ->where('actor_id', $org->getKey())
                 ->first();
 
             expect($assignment)->toBeNull();
@@ -288,8 +293,8 @@ describe('MorphKeyIntegration', function (): void {
             expect($orgAssignments)->toHaveCount(2);
             expect($userAssignments->pluck('actor_id')->toArray())->toContain($user1->id);
             expect($userAssignments->pluck('actor_id')->toArray())->toContain($user2->id);
-            expect($orgAssignments->pluck('actor_id')->toArray())->toContain($org1->ulid);
-            expect($orgAssignments->pluck('actor_id')->toArray())->toContain($org2->ulid);
+            expect($orgAssignments->pluck('actor_id')->toArray())->toContain($org1->getKey());
+            expect($orgAssignments->pluck('actor_id')->toArray())->toContain($org2->getKey());
         });
     });
 });

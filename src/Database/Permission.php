@@ -45,6 +45,13 @@ final class Permission extends MorphPivot
     public $incrementing = true;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Create a new Permission pivot instance.
      *
      * Dynamically sets the table name from the Models registry.
