@@ -60,18 +60,6 @@ final class Role extends Model
     protected $fillable = ['name', 'title', 'guard_name'];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * Ensures the ID is always returned as an integer when accessed,
-     * regardless of the underlying database driver's type handling.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'id' => 'int',
-    ];
-
-    /**
      * Create a new Role model instance.
      *
      * Dynamically sets the table name from the Models registry to support

@@ -53,15 +53,9 @@ final class Ability extends Model
     /**
      * The attributes that should be cast to native types.
      *
-     * Ensures proper type conversion when reading from and writing to
-     * the database. The only_owned flag controls whether the ability
-     * is restricted to entities owned by the authority.
-     *
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'int',
-        'subject_id' => 'int',
         'only_owned' => 'boolean',
     ];
 
