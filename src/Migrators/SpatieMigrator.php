@@ -9,10 +9,9 @@
 
 namespace Cline\Warden\Migrators;
 
-use Cline\Warden\Conductors\AssignsRoles;
-use Cline\Warden\Conductors\GivesAbilities;
 use Cline\Warden\Contracts\MigratorInterface;
 use Cline\Warden\Database\Models;
+use Cline\Warden\Facades\Warden;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
@@ -109,7 +108,7 @@ final readonly class SpatieMigrator implements MigratorInterface
             }
 
             /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            new AssignsRoles($spatieRole->name, $spatieRole->guard_name)->to($user);
+            Warden::guard($spatieRole->guard_name)->assign($spatieRole->name)->to($user);
 
             /** @phpstan-ignore-next-line property.nonObject,property.notFound (stdClass/Model properties from DB query) */
             Log::channel($this->logChannel)->debug(sprintf("Assigned role '%s' to user: %s", $spatieRole->name, $user->email ?? $user->getKey()));
@@ -149,7 +148,7 @@ final readonly class SpatieMigrator implements MigratorInterface
             assert(is_string($permission->guard_name) && is_string($permission->name));
 
             /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            new GivesAbilities($user, $permission->guard_name)->to($permission->name);
+            Warden::guard($permission->guard_name)->allow($user)->to($permission->name);
 
             /** @phpstan-ignore-next-line property.nonObject,property.notFound (stdClass/Model properties from DB query) */
             Log::channel($this->logChannel)->debug(sprintf("Granted permission '%s' to user: %s", $permission->name, $user->email ?? $user->getKey()));
@@ -190,8 +189,15 @@ final readonly class SpatieMigrator implements MigratorInterface
             /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
             $roleModel = Models::role()->where('name', $role->name)->where('guard_name', $role->guard_name)->first();
 
+            if ($roleModel === null) {
+                /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
+                Log::channel($this->logChannel)->debug('Warden role not found: '.$role->name);
+
+                continue;
+            }
+
             /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            new GivesAbilities($roleModel, $permission->guard_name)->to($permission->name);
+            Warden::guard($permission->guard_name)->allow($roleModel)->to($permission->name);
 
             /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
             Log::channel($this->logChannel)->debug(sprintf("Granted permission '%s' to role: %s", $permission->name, $role->name));
