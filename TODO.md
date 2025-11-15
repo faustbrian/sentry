@@ -77,6 +77,11 @@ $authority = $query->where(Models::getModelKeyFromClass($authorityClass), $autho
 5. **src/Database/ModelRegistry.php:317** - Ownership check now uses keymap value instead of getKey()
 6. **src/Support/Helpers.php:85,92** - extractModelAndKeys() now uses keymap values instead of getKey()
    - Affects: Role::assignTo(), Role::retractFrom()
+7. **src/Database/Queries/Abilities.php:120-126** - getAuthorityRoleConstraint() now uses keymap column/values
+8. **src/Database/Queries/Abilities.php:150-157** - getAuthorityConstraint() now uses keymap column/values
+9. **src/Conductors/Concerns/DisassociatesAbilities.php:113** - getAbilitiesPivotQuery() now uses keymap value
+10. **src/Conductors/SyncsRolesAndAbilities.php:264** - newPivotQuery() now uses keymap value
+11. **src/Database/Queries/Roles.php:112-113,117,120** - constrainWhereAssignedTo() now uses keymap column
 
 ### Pattern
 **Wrong:**

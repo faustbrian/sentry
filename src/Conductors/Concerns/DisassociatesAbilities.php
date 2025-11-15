@@ -110,7 +110,7 @@ trait DisassociatesAbilities
 
         $query = $relation
             ->newPivotStatement()
-            ->where($relation->getQualifiedForeignPivotKeyName(), $model->getKey())
+            ->where($relation->getQualifiedForeignPivotKeyName(), $model->getAttribute(Models::getModelKey($model)))
             ->where('actor_type', $model->getMorphClass())
             ->whereIn($relation->getQualifiedRelatedPivotKeyName(), $ids);
 

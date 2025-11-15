@@ -109,7 +109,8 @@ final class Roles
 
         $query->whereExists(function (\Illuminate\Database\Query\Builder $query) use ($modelInstance, $keys): void {
             $table = $modelInstance->getTable();
-            $key = sprintf('%s.%s', $table, $modelInstance->getKeyName());
+            $keyColumn = Models::getModelKey($modelInstance);
+            $key = sprintf('%s.%s', $table, $keyColumn);
             $pivot = Models::table('assigned_roles');
             $roles = Models::table('roles');
 

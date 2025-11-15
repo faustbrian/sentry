@@ -117,12 +117,13 @@ final class Abilities
             $pivot = Models::table('assigned_roles');
             $roles = Models::table('roles');
             $table = $authority->getTable();
+            $keyColumn = Models::getModelKey($authority);
 
             $query->from($table)
-                ->join($pivot, sprintf('%s.%s', $table, $authority->getKeyName()), '=', $pivot.'.actor_id')
+                ->join($pivot, sprintf('%s.%s', $table, $keyColumn), '=', $pivot.'.actor_id')
                 ->whereColumn($pivot.'.role_id', $roles.'.id')
                 ->where($pivot.'.actor_type', $authority->getMorphClass())
-                ->where(sprintf('%s.%s', $table, $authority->getKeyName()), $authority->getKey());
+                ->where(sprintf('%s.%s', $table, $keyColumn), $authority->getAttribute($keyColumn));
 
             Models::scope()->applyToModelQuery($query, $roles);
             Models::scope()->applyToRelationQuery($query, $pivot);
@@ -146,13 +147,14 @@ final class Abilities
             $permissions = Models::table('permissions');
             $abilities = Models::table('abilities');
             $table = $authority->getTable();
+            $keyColumn = Models::getModelKey($authority);
 
             $query->from($table)
-                ->join($permissions, sprintf('%s.%s', $table, $authority->getKeyName()), '=', $permissions.'.actor_id')
+                ->join($permissions, sprintf('%s.%s', $table, $keyColumn), '=', $permissions.'.actor_id')
                 ->whereColumn($permissions.'.ability_id', $abilities.'.id')
                 ->where($permissions.'.forbidden', !$allowed)
                 ->where($permissions.'.actor_type', $authority->getMorphClass())
-                ->where(sprintf('%s.%s', $table, $authority->getKeyName()), $authority->getKey());
+                ->where(sprintf('%s.%s', $table, $keyColumn), $authority->getAttribute($keyColumn));
 
             Models::scope()->applyToModelQuery($query, $abilities);
             Models::scope()->applyToRelationQuery($query, $permissions);

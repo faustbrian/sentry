@@ -256,12 +256,14 @@ final class SyncsRolesAndAbilities
      */
     private function newPivotQuery(BelongsToMany $relation): \Illuminate\Database\Eloquent\Builder|Builder
     {
+        $parent = $relation->getParent();
+
         $query = $relation
             ->newPivotStatement()
             ->where('actor_type', $this->getAuthority()->getMorphClass())
             ->where(
                 $relation->getForeignPivotKeyName(),
-                $relation->getParent()->getKey(),
+                $parent->getAttribute(Models::getModelKey($parent)),
             );
 
         return Models::scope()->applyToRelationQuery(
