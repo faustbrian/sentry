@@ -56,8 +56,6 @@ final readonly class SpatieMigrator implements MigratorInterface
         $roles = DB::table($this->getTableName('roles'))->get();
 
         foreach ($roles as $role) {
-            assert(is_string($role->name) && is_string($role->guard_name));
-
             Models::role()->firstOrCreate(
                 ['name' => $role->name, 'guard_name' => $role->guard_name],
                 ['title' => $role->name, 'guard_name' => $role->guard_name],
@@ -76,42 +74,24 @@ final readonly class SpatieMigrator implements MigratorInterface
             ->get();
 
         foreach ($assignments as $assignment) {
-            assert(is_int($assignment->model_id) && is_int($assignment->role_id));
-
             $user = $this->findUser($assignment->model_id);
 
-            if (!$user instanceof Model) {
+            if (!$user) {
                 Log::channel($this->logChannel)->debug('User not found: '.$assignment->model_id);
 
                 continue;
             }
 
-            $spatieRole = DB::table($this->getTableName('roles'))->find($assignment->role_id);
+            $role = DB::table($this->getTableName('roles'))->find($assignment->role_id);
 
-            if ($spatieRole === null) {
+            if (!$role) {
                 Log::channel($this->logChannel)->debug('Role not found: '.$assignment->role_id);
 
                 continue;
             }
 
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            assert(is_string($spatieRole->name) && is_string($spatieRole->guard_name));
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            $wardenRole = Models::role()->where('name', $spatieRole->name)->where('guard_name', $spatieRole->guard_name)->first();
-
-            if ($wardenRole === null) {
-                /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-                Log::channel($this->logChannel)->debug('Warden role not found: '.$spatieRole->name);
-
-                continue;
-            }
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            Warden::guard($spatieRole->guard_name)->assign($spatieRole->name)->to($user);
-
-            /** @phpstan-ignore-next-line property.nonObject,property.notFound (stdClass/Model properties from DB query) */
-            Log::channel($this->logChannel)->debug(sprintf("Assigned role '%s' to user: %s", $spatieRole->name, $user->email ?? $user->getKey()));
+            Warden::guard($role->guard_name)->assign($role->name)->to($user);
+            Log::channel($this->logChannel)->debug(sprintf("Assigned role '%s' to user: %s", $role->name, $user->email ?? $user->getKey()));
         }
     }
 
@@ -124,33 +104,23 @@ final readonly class SpatieMigrator implements MigratorInterface
             ->get();
 
         foreach ($assignments as $assignment) {
-            assert(is_int($assignment->model_id) && is_int($assignment->permission_id));
-
             $user = $this->findUser($assignment->model_id);
 
-            if (!$user instanceof Model) {
-                // @codeCoverageIgnoreStart
+            if (!$user) {
                 Log::channel($this->logChannel)->debug('User not found: '.$assignment->model_id);
 
                 continue;
-                // @codeCoverageIgnoreEnd
             }
 
             $permission = DB::table($this->getTableName('permissions'))->find($assignment->permission_id);
 
-            if ($permission === null) {
+            if (!$permission) {
                 Log::channel($this->logChannel)->debug('Permission not found: '.$assignment->permission_id);
 
                 continue;
             }
 
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            assert(is_string($permission->guard_name) && is_string($permission->name));
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
             Warden::guard($permission->guard_name)->allow($user)->to($permission->name);
-
-            /** @phpstan-ignore-next-line property.nonObject,property.notFound (stdClass/Model properties from DB query) */
             Log::channel($this->logChannel)->debug(sprintf("Granted permission '%s' to user: %s", $permission->name, $user->email ?? $user->getKey()));
         }
     }
@@ -162,11 +132,9 @@ final readonly class SpatieMigrator implements MigratorInterface
         $assignments = DB::table($this->getTableName('role_has_permissions'))->get();
 
         foreach ($assignments as $assignment) {
-            assert(is_int($assignment->role_id) && is_int($assignment->permission_id));
-
             $role = DB::table($this->getTableName('roles'))->find($assignment->role_id);
 
-            if ($role === null) {
+            if (!$role) {
                 Log::channel($this->logChannel)->debug('Role not found: '.$assignment->role_id);
 
                 continue;
@@ -174,32 +142,13 @@ final readonly class SpatieMigrator implements MigratorInterface
 
             $permission = DB::table($this->getTableName('permissions'))->find($assignment->permission_id);
 
-            if ($permission === null) {
+            if (!$permission) {
                 Log::channel($this->logChannel)->debug('Permission not found: '.$assignment->permission_id);
 
                 continue;
             }
 
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            assert(is_string($role->name) && is_string($role->guard_name));
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            assert(is_string($permission->guard_name) && is_string($permission->name));
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            $roleModel = Models::role()->where('name', $role->name)->where('guard_name', $role->guard_name)->first();
-
-            if ($roleModel === null) {
-                /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-                Log::channel($this->logChannel)->debug('Warden role not found: '.$role->name);
-
-                continue;
-            }
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
-            Warden::guard($permission->guard_name)->allow($roleModel)->to($permission->name);
-
-            /** @phpstan-ignore-next-line property.nonObject (stdClass from DB query) */
+            Warden::guard($permission->guard_name)->allow(Warden::role($role->name))->to($permission->name);
             Log::channel($this->logChannel)->debug(sprintf("Granted permission '%s' to role: %s", $permission->name, $role->name));
         }
     }
@@ -220,23 +169,16 @@ final readonly class SpatieMigrator implements MigratorInterface
         return $modelType;
     }
 
-    private function findUser(int $userId): ?Model
+    private function findUser(mixed $userId): ?Model
     {
         $model = $this->userModel;
 
-        // @codeCoverageIgnoreStart
         if (in_array(SoftDeletes::class, class_uses_recursive($model), true)) {
             /** @phpstan-ignore-next-line method.nonObject (static call on class-string) */
-            $result = $model::withTrashed()->where('id', $userId)->first();
-            assert($result === null || $result instanceof Model);
-
-            return $result;
+            return $model::withTrashed()->find($userId);
         }
 
-        /** @codeCoverageIgnoreEnd */
-        $result = $model::where('id', $userId)->first();
-        assert($result === null || $result instanceof Model);
-
-        return $result;
+        /** @phpstan-ignore-next-line method.nonObject (static call on class-string) */
+        return $model::find($userId);
     }
 }

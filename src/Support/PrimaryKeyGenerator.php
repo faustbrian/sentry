@@ -37,8 +37,8 @@ final class PrimaryKeyGenerator
         $primaryKeyType = PrimaryKeyType::tryFrom(config('warden.primary_key_type', 'id')) ?? PrimaryKeyType::ID;
 
         $value = match ($primaryKeyType) {
-            PrimaryKeyType::ULID => (string) Str::ulid(),
-            PrimaryKeyType::UUID => (string) Str::uuid(),
+            PrimaryKeyType::ULID => Str::lower((string) Str::ulid()),
+            PrimaryKeyType::UUID => Str::lower((string) Str::uuid()),
             PrimaryKeyType::ID => null,
         };
 

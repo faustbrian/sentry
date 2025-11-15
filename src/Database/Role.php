@@ -42,6 +42,14 @@ final class Role extends Model
     use IsRole;
 
     /**
+     * Get the table associated with the model.
+     */
+    public function getTable(): string
+    {
+        return Models::table('roles');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * Allows 'name', 'title', and 'guard_name' to be set via create() or fill() methods.

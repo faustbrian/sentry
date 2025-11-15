@@ -45,8 +45,8 @@ final class Organization extends Model
 
             if (!$model->{$keyName}) {
                 $model->{$keyName} = match (config('warden.primary_key_type', 'id')) {
-                    'ulid' => (string) Str::ulid(),
-                    'uuid' => (string) Str::uuid(),
+                    'ulid' => Str::lower((string) Str::ulid()),
+                    'uuid' => Str::lower((string) Str::uuid()),
                     default => $model->id,
                 };
             }
