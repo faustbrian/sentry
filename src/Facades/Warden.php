@@ -19,7 +19,6 @@ use Cline\Warden\Contracts\ClipboardInterface;
 use Cline\Warden\Contracts\ScopeInterface;
 use Cline\Warden\Database\Ability;
 use Cline\Warden\Database\Role;
-use Cline\Warden\Warden;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Cache\Store;
@@ -92,6 +91,6 @@ final class Warden extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return self::class;
+        return \Cline\Warden\Warden::class;
     }
 }
