@@ -314,7 +314,7 @@ final class ModelRegistry
         } else {
             // Use actor morph relationship
             return $authority->getMorphClass() === $model->getAttribute('actor_type')
-                && $authority->getKey() === $model->getAttribute('actor_id');
+                && $authority->getAttribute($this->getModelKey($authority)) === $model->getAttribute('actor_id');
         }
 
         return $this->isOwnedVia($attribute, $authority, $model);

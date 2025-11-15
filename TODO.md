@@ -74,6 +74,9 @@ $authority = $query->where(Models::getModelKeyFromClass($authorityClass), $autho
 2. **src/Migrators/SpatieMigrator.php:175-187** - findUser() method
 3. **src/Migrators/BouncerMigrator.php:285-304** - findUser() method
 4. **src/Database/ModelRegistry.php:497-506** - New getModelKeyFromClass() helper
+5. **src/Database/ModelRegistry.php:317** - Ownership check now uses keymap value instead of getKey()
+6. **src/Support/Helpers.php:85,92** - extractModelAndKeys() now uses keymap values instead of getKey()
+   - Affects: Role::assignTo(), Role::retractFrom()
 
 ### Pattern
 **Wrong:**

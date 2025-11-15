@@ -82,14 +82,14 @@ final class Helpers
 
         if ($model instanceof Model) {
             /** @var array<int|string> $modelKeys */
-            $modelKeys = [$model->getKey()];
+            $modelKeys = [$model->getAttribute(Models::getModelKey($model))];
 
             return [$model, $modelKeys];
         }
 
         if ($model instanceof Collection) {
             /** @var Collection<int, mixed> $keys */
-            $keys = $model->map(fn ($model) => $model->getKey());
+            $keys = $model->map(fn ($model) => $model->getAttribute(Models::getModelKey($model)));
             $firstModel = $model->first();
 
             if (!$firstModel instanceof Model) {
