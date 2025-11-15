@@ -123,30 +123,26 @@ describe('Abilities Query', function (): void {
             // Arrange - Configure keymap
             Models::enforceMorphKeyMap([
                 User::class => 'id',
+                Role::class => 'id',
             ]);
 
             // Create users with specific IDs
             $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
             $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
 
-            // Create roles and assign to users
-            $adminRole = Role::query()->create(['name' => 'admin']);
-            $editorRole = Role::query()->create(['name' => 'editor']);
+            $warden = $this->bouncer($user1);
 
-            $user1->assign($adminRole);
-            $user2->assign($editorRole);
+            // Assign roles and grant abilities
+            $warden->assign('admin')->to($user1);
+            $warden->assign('editor')->to($user2);
 
-            // Create abilities granted to roles
-            $editAbility = Ability::query()->create(['name' => 'edit-posts']);
-            $deleteAbility = Ability::query()->create(['name' => 'delete-posts']);
+            $warden->allow('admin')->to('edit-posts');
+            $warden->allow('admin')->to('delete-posts');
+            $warden->allow('editor')->to('edit-posts');
 
-            $adminRole->allow($editAbility);
-            $adminRole->allow($deleteAbility);
-            $editorRole->allow($editAbility);
-
-            // Act - Query abilities through authority's roles using the fixed method
-            $user1Abilities = (new Abilities())->get($user1);
-            $user2Abilities = (new Abilities())->get($user2);
+            // Act - Query abilities through authority's roles
+            $user1Abilities = Abilities::forAuthority($user1)->get();
+            $user2Abilities = Abilities::forAuthority($user2)->get();
 
             // Assert - User 1 should have both abilities from admin role
             expect($user1Abilities)->toHaveCount(2);
@@ -169,18 +165,16 @@ describe('Abilities Query', function (): void {
             $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
             $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
 
-            // Create abilities
-            $editAbility = Ability::query()->create(['name' => 'edit-posts']);
-            $deleteAbility = Ability::query()->create(['name' => 'delete-posts']);
+            $warden = $this->bouncer($user1);
 
             // Grant abilities directly to users (not through roles)
-            $user1->allow($editAbility);
-            $user1->allow($deleteAbility);
-            $user2->allow($editAbility);
+            $warden->allow($user1)->to('edit-posts');
+            $warden->allow($user1)->to('delete-posts');
+            $warden->allow($user2)->to('edit-posts');
 
             // Act - Query abilities for each user
-            $user1Abilities = (new Abilities())->get($user1);
-            $user2Abilities = (new Abilities())->get($user2);
+            $user1Abilities = Abilities::forAuthority($user1)->get();
+            $user2Abilities = Abilities::forAuthority($user2)->get();
 
             // Assert - Verify each user gets ONLY their abilities (not other users')
             expect($user1Abilities)->toHaveCount(2);
@@ -202,15 +196,15 @@ describe('Abilities Query', function (): void {
             $bob = User::query()->create(['name' => 'Bob', 'id' => 2]);
             $charlie = User::query()->create(['name' => 'Charlie', 'id' => 3]);
 
-            $secretAbility = Ability::query()->create(['name' => 'view-secrets']);
+            $warden = $this->bouncer($alice);
 
             // Only Alice should have this ability
-            $alice->allow($secretAbility);
+            $warden->allow($alice)->to('view-secrets');
 
             // Act - Query abilities for all users
-            $aliceAbilities = (new Abilities())->get($alice);
-            $bobAbilities = (new Abilities())->get($bob);
-            $charlieAbilities = (new Abilities())->get($charlie);
+            $aliceAbilities = Abilities::forAuthority($alice)->get();
+            $bobAbilities = Abilities::forAuthority($bob)->get();
+            $charlieAbilities = Abilities::forAuthority($charlie)->get();
 
             // Assert - Without the fix, all users would incorrectly get Alice's ability
             expect($aliceAbilities->pluck('name')->toArray())->toContain('view-secrets');
