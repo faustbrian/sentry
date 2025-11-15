@@ -58,20 +58,4 @@ final class Role extends Model
      * @var list<string>
      */
     protected $fillable = ['name', 'title', 'guard_name'];
-
-    /**
-     * Create a new Role model instance.
-     *
-     * Dynamically sets the table name from the Models registry to support
-     * custom table name configuration. This allows the table name to be
-     * changed without modifying the model class.
-     *
-     * @param array<string, mixed> $attributes Initial attribute values
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->table = Models::table('roles');
-
-        parent::__construct($attributes);
-    }
 }

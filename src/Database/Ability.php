@@ -40,6 +40,14 @@ final class Ability extends Model
     use IsAbility;
 
     /**
+     * Get the table associated with the model.
+     */
+    public function getTable(): string
+    {
+        return Models::table('abilities');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * Includes the ability's unique identifier (name), human-readable
@@ -58,19 +66,4 @@ final class Ability extends Model
     protected $casts = [
         'only_owned' => 'boolean',
     ];
-
-    /**
-     * Create a new ability model instance.
-     *
-     * Dynamically sets the table name from configuration to support
-     * custom table naming conventions in different applications.
-     *
-     * @param array<string, mixed> $attributes Initial model attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->table = Models::table('abilities');
-
-        parent::__construct($attributes);
-    }
 }
