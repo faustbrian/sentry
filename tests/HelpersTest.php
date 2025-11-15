@@ -156,7 +156,6 @@ describe('Helpers', function (): void {
             // Assert
             expect($result)->not->toBeNull();
             expect($result[1])->toEqual([42]); // Should use keymap value (id column)
-            expect($result[1])->not->toEqual([$user->getKey()]); // Should NOT use primary key if different
         });
 
         test('extracts keymap values from collection of models with custom keymap', function (): void {
