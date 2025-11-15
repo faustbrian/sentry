@@ -494,6 +494,17 @@ final class ModelRegistry
         return $model->getKeyName();
     }
 
+    public function getModelKeyFromClass(string $class): string
+    {
+        if (array_key_exists($class, $this->keyMap)) {
+            return $this->keyMap[$class];
+        }
+
+        throw_if($this->enforceKeyMap, MorphKeyViolationException::class, $class);
+
+        return (new $class())->getKeyName();
+    }
+
     /**
      * Reset all registry settings to defaults.
      *
