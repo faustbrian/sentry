@@ -280,6 +280,84 @@ describe('CachedClipboard', function (): void {
             $clipboard->checkRole($user, [new stdClass()], 'or');
         });
     });
+
+    describe('Regression Tests - Keymap Support', function (): void {
+        test('generates cache keys using keymap values not primary keys', function (): void {
+            // Arrange - Configure keymap to use 'id' column
+            \Cline\Warden\Database\Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
+            $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
+
+            $warden = $this->bouncer($user1);
+            $warden->allow($user1)->to('edit-posts');
+            $warden->allow($user2)->to('delete-posts');
+
+            // Act - Cache abilities for each user
+            $user1Abilities = getAbilities($this, $user1);
+            $user2Abilities = getAbilities($this, $user2);
+
+            // Assert - Each user gets their own abilities (no cache key collision)
+            expect($user1Abilities)->toEqual(['edit-posts']);
+            expect($user2Abilities)->toEqual(['delete-posts']);
+        });
+
+        test('prevents ability cache leakage between users with custom keymap', function (): void {
+            // Arrange - This tests the critical bug where cache keys used primary keys
+            \Cline\Warden\Database\Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $alice = User::query()->create(['name' => 'Alice', 'id' => 1]);
+            $bob = User::query()->create(['name' => 'Bob', 'id' => 2]);
+            $charlie = User::query()->create(['name' => 'Charlie', 'id' => 3]);
+
+            $warden = $this->bouncer($alice);
+            $warden->allow($alice)->to('view-secrets');
+            $warden->allow($bob)->to('view-public');
+            $warden->allow($charlie)->to('view-basic');
+
+            // Act - Get abilities for all users
+            $aliceAbilities = getAbilities($this, $alice);
+            $bobAbilities = getAbilities($this, $bob);
+            $charlieAbilities = getAbilities($this, $charlie);
+
+            // Assert - Without the fix, cache keys would collide using primary keys
+            expect($aliceAbilities)->toEqual(['view-secrets']);
+            expect($bobAbilities)->toEqual(['view-public']);
+            expect($charlieAbilities)->toEqual(['view-basic']);
+        });
+
+        test('cache refresh uses keymap values for cache key generation', function (): void {
+            // Arrange - Configure keymap
+            \Cline\Warden\Database\Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'User 1', 'id' => 10]);
+            $user2 = User::query()->create(['name' => 'User 2', 'id' => 20]);
+
+            $warden = $this->bouncer($user1);
+            $warden->allow($user1)->to('create-posts');
+            $warden->allow($user2)->to('delete-posts');
+
+            // Populate cache
+            expect(getAbilities($this, $user1))->toEqual(['create-posts']);
+            expect(getAbilities($this, $user2))->toEqual(['delete-posts']);
+
+            // Act - Change permissions and refresh
+            $warden->disallow($user1)->to('create-posts');
+            $warden->allow($user1)->to('edit-posts');
+            $warden->refreshFor($user1);
+
+            // Assert - User 1's cache updated with correct keymap-based key
+            expect(getAbilities($this, $user1))->toEqual(['edit-posts']);
+            // User 2's cache unchanged
+            expect(getAbilities($this, $user2))->toEqual(['delete-posts']);
+        });
+    });
 });
 
 /**

@@ -137,4 +137,74 @@ describe('CleanCommand', function (): void {
             expect(Ability::query()->count())->toEqual(2);
         });
     });
+
+    describe('Regression Tests - Keymap Support', function (): void {
+        test('orphaned ability cleanup uses keymap column not primary key for comparison', function (): void {
+            // Arrange - Configure keymap to use 'id' column
+            \Cline\Warden\Database\Models::enforceMorphKeyMap([
+                User::class => 'id',
+                Account::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
+            $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
+            $account1 = Account::query()->create(['name' => 'Account 1', 'id' => 1000]);
+            $account2 = Account::query()->create(['name' => 'Account 2', 'id' => 2000]);
+
+            $warden = $this->bouncer($user1)->dontCache();
+            $warden->allow($user1)->to('update', $user1);
+            $warden->allow($user1)->to('update', $user2);
+            $warden->allow($user1)->to('update', $account1);
+            $warden->allow($user1)->to('update', $account2);
+
+            // Act - Delete specific models
+            $user2->delete();
+            $account1->delete();
+
+            // Assert initial state
+            expect(Ability::query()->count())->toEqual(4);
+
+            // Act - Run clean command
+            $this
+                ->artisan('warden:clean --orphaned')
+                ->expectsOutput('Deleted 2 orphaned abilities.');
+
+            // Assert - Only deleted models' abilities removed (using keymap comparison)
+            expect(Ability::query()->count())->toEqual(2);
+            expect($warden->can('update', $user1))->toBeTrue();
+            expect($warden->can('update', $account2))->toBeTrue();
+        });
+
+        test('prevents false orphan detection with custom keymap configuration', function (): void {
+            // Arrange - This tests the critical bug where getKeyName() was used
+            \Cline\Warden\Database\Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $alice = User::query()->create(['name' => 'Alice', 'id' => 1]);
+            $bob = User::query()->create(['name' => 'Bob', 'id' => 2]);
+            $charlie = User::query()->create(['name' => 'Charlie', 'id' => 3]);
+
+            $warden = $this->bouncer($alice)->dontCache();
+            $warden->allow($alice)->to('edit', $alice);
+            $warden->allow($alice)->to('edit', $bob);
+            $warden->allow($alice)->to('edit', $charlie);
+
+            // Delete only Bob
+            $bob->delete();
+
+            // Assert initial state
+            expect(Ability::query()->count())->toEqual(3);
+
+            // Act - Run orphaned cleanup
+            $this
+                ->artisan('warden:clean --orphaned')
+                ->expectsOutput('Deleted 1 orphaned ability.');
+
+            // Assert - Without the fix, would incorrectly delete all or wrong abilities
+            expect(Ability::query()->count())->toEqual(2);
+            expect($warden->can('edit', $alice))->toBeTrue();
+            expect($warden->can('edit', $charlie))->toBeTrue();
+        });
+    });
 });

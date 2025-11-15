@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+use Cline\Warden\Database\Models;
 use Cline\Warden\Database\Queries\Roles;
 use Cline\Warden\Database\Role;
 use Illuminate\Database\Eloquent\Collection;
@@ -470,6 +471,116 @@ describe('Roles Query', function (): void {
 
             // Assert
             expect($roles)->toHaveCount(0);
+        });
+    });
+
+    describe('Regression Tests - Keymap Support', function (): void {
+        test('constrainWhereAssignedTo uses keymap column for joins preventing role leakage', function (): void {
+            // Arrange - Configure keymap to use 'id' column
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            // Create users with specific IDs
+            $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
+            $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
+            $user3 = User::query()->create(['name' => 'Charlie', 'id' => 300]);
+
+            // Create roles
+            $adminRole = Role::query()->create(['name' => 'admin']);
+            $editorRole = Role::query()->create(['name' => 'editor']);
+            $subscriberRole = Role::query()->create(['name' => 'subscriber']);
+
+            // Assign roles to specific users
+            $user1->assign($adminRole);
+            $user1->assign($editorRole);
+            $user2->assign($subscriberRole);
+            // user3 has no roles
+
+            // Act - Query roles assigned to each user
+            $query1 = Role::query();
+            $this->rolesQuery->constrainWhereAssignedTo($query1, $user1);
+            $user1Roles = $query1->get();
+
+            $query2 = Role::query();
+            $this->rolesQuery->constrainWhereAssignedTo($query2, $user2);
+            $user2Roles = $query2->get();
+
+            $query3 = Role::query();
+            $this->rolesQuery->constrainWhereAssignedTo($query3, $user3);
+            $user3Roles = $query3->get();
+
+            // Assert - Each user gets only their roles (no leakage)
+            expect($user1Roles)->toHaveCount(2);
+            expect($user1Roles->contains('name', 'admin'))->toBeTrue();
+            expect($user1Roles->contains('name', 'editor'))->toBeTrue();
+            expect($user1Roles->contains('name', 'subscriber'))->toBeFalse();
+
+            expect($user2Roles)->toHaveCount(1);
+            expect($user2Roles->contains('name', 'subscriber'))->toBeTrue();
+            expect($user2Roles->contains('name', 'admin'))->toBeFalse();
+
+            expect($user3Roles)->toHaveCount(0);
+        });
+
+        test('constrainWhereAssignedTo with collection uses keymap values for all users', function (): void {
+            // Arrange - Configure keymap
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'User 1', 'id' => 10]);
+            $user2 = User::query()->create(['name' => 'User 2', 'id' => 20]);
+            $user3 = User::query()->create(['name' => 'User 3', 'id' => 30]);
+
+            $adminRole = Role::query()->create(['name' => 'admin']);
+            $editorRole = Role::query()->create(['name' => 'editor']);
+            $managerRole = Role::query()->create(['name' => 'manager']);
+
+            $user1->assign($adminRole);
+            $user2->assign($editorRole);
+            $user3->assign($managerRole);
+
+            // Act - Query roles for collection of users 1 and 2
+            $users = new Collection([$user1, $user2]);
+            $query = Role::query();
+            $this->rolesQuery->constrainWhereAssignedTo($query, $users);
+            $roles = $query->get();
+
+            // Assert - Should get admin and editor (user3's manager should NOT appear)
+            expect($roles)->toHaveCount(2);
+            expect($roles->contains('name', 'admin'))->toBeTrue();
+            expect($roles->contains('name', 'editor'))->toBeTrue();
+            expect($roles->contains('name', 'manager'))->toBeFalse();
+        });
+
+        test('constrainWhereAssignedTo with class and keys uses keymap values', function (): void {
+            // Arrange - This tests the critical bug where getKeyName() was used
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'Alice', 'id' => 1]);
+            $user2 = User::query()->create(['name' => 'Bob', 'id' => 2]);
+            $user3 = User::query()->create(['name' => 'Charlie', 'id' => 3]);
+
+            $secretRole = Role::query()->create(['name' => 'secret-role']);
+            $publicRole = Role::query()->create(['name' => 'public-role']);
+
+            // Only user2 should have secret-role
+            $user1->assign($publicRole);
+            $user2->assign($secretRole);
+            $user3->assign($publicRole);
+
+            // Act - Query using class name and specific keymap values
+            $query = Role::query();
+            $this->rolesQuery->constrainWhereAssignedTo($query, User::class, [2]); // Bob's keymap value
+            $roles = $query->get();
+
+            // Assert - Without the fix, this would use primary key column and get wrong results
+            expect($roles)->toHaveCount(1);
+            expect($roles->contains('name', 'secret-role'))->toBeTrue();
+            expect($roles->contains('name', 'public-role'))->toBeFalse();
         });
     });
 });

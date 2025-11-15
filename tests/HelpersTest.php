@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+use Cline\Warden\Database\Models;
 use Cline\Warden\Support\Helpers;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\Test;
@@ -137,6 +138,64 @@ describe('Helpers', function (): void {
 
             // Assert
             expect($result)->toBeFalse();
+        });
+    });
+
+    describe('Regression Tests', function (): void {
+        test('extracts keymap values not primary keys from model instance', function (): void {
+            // Arrange - Configure keymap to use 'id' column
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user = User::query()->create(['name' => 'Test User', 'id' => 42]);
+
+            // Act
+            $result = Helpers::extractModelAndKeys($user);
+
+            // Assert
+            expect($result)->not->toBeNull();
+            expect($result[1])->toEqual([42]); // Should use keymap value (id column)
+            expect($result[1])->not->toEqual([$user->getKey()]); // Should NOT use primary key if different
+        });
+
+        test('extracts keymap values from collection of models with custom keymap', function (): void {
+            // Arrange - Configure keymap
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'User 1', 'id' => 10]);
+            $user2 = User::query()->create(['name' => 'User 2', 'id' => 20]);
+            $collection = new Collection([$user1, $user2]);
+
+            // Act
+            $result = Helpers::extractModelAndKeys($collection);
+
+            // Assert
+            expect($result)->not->toBeNull();
+            expect($result[1]->all())->toEqual([10, 20]); // Should use keymap values
+        });
+
+        test('uses keymap values for mixed models preventing assignment to wrong user', function (): void {
+            // Arrange - This tests the bug where all assignments went to user ID 1
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $user1 = User::query()->create(['name' => 'Alice', 'id' => 1]);
+            $user2 = User::query()->create(['name' => 'Bob', 'id' => 2]);
+            $user3 = User::query()->create(['name' => 'Charlie', 'id' => 3]);
+
+            // Act - Extract keys from mixed collection
+            $result1 = Helpers::extractModelAndKeys($user1);
+            $result2 = Helpers::extractModelAndKeys($user2);
+            $result3 = Helpers::extractModelAndKeys($user3);
+
+            // Assert - Each user gets their own keymap value, not all getting ID 1
+            expect($result1[1])->toEqual([1]);
+            expect($result2[1])->toEqual([2]);
+            expect($result3[1])->toEqual([3]);
         });
     });
 

@@ -84,6 +84,7 @@ $authority = $query->where(Models::getModelKeyFromClass($authorityClass), $autho
 11. **src/Database/Queries/Roles.php:112-113,117,120** - constrainWhereAssignedTo() now uses keymap column
 12. **src/Clipboard/CachedClipboard.php:360** - compileModelAbilityIdentifiers() now uses keymap value for cache keys
 13. **src/Clipboard/CachedClipboard.php:426** - getCacheKey() now uses keymap value for cache keys
+14. **src/Console/CleanCommand.php:178** - scopeQueryToWhereModelIsMissing() now uses keymap column for subject_id comparison
 
 ### Pattern
 **Wrong:**
