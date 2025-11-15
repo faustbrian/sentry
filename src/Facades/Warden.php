@@ -89,6 +89,6 @@ final class Warden extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return self::class;
+        return \Cline\Warden\Warden::class;
     }
 }
