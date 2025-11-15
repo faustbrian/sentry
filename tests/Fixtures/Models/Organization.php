@@ -27,21 +27,10 @@ final class Organization extends Model
 
     protected $guarded = [];
 
-    public function __construct(array $attributes = [])
+    #[Override()]
+    public function getKeyName()
     {
-        parent::__construct($attributes);
-
-        $keyType = config('warden.primary_key_type', 'id');
-
-        if ($keyType === 'id') {
-            $this->incrementing = true;
-            $this->primaryKey = 'id';
-            $this->keyType = 'int';
-        } else {
-            $this->incrementing = false;
-            $this->primaryKey = $keyType;
-            $this->keyType = 'string';
-        }
+        return config('warden.primary_key_type', 'id');
     }
 
     #[Override()]
@@ -50,13 +39,14 @@ final class Organization extends Model
         parent::boot();
 
         self::creating(function ($model): void {
-            $keyType = config('warden.primary_key_type', 'id');
             $keyName = $model->getKeyName();
 
-            if ($keyType === 'ulid' && !$model->{$keyName}) {
-                $model->{$keyName} = (string) Str::ulid();
-            } elseif ($keyType === 'uuid' && !$model->{$keyName}) {
-                $model->{$keyName} = (string) Str::uuid();
+            if (!$model->{$keyName}) {
+                $model->{$keyName} = match (config('warden.primary_key_type', 'id')) {
+                    'ulid' => (string) Str::ulid(),
+                    'uuid' => (string) Str::uuid(),
+                    default => $model->id,
+                };
             }
         });
     }

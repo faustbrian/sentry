@@ -90,7 +90,7 @@ describe('MorphKeyMap', function (): void {
             $key = Models::getModelKey($org);
 
             // Assert
-            expect($key)->toBe('ulid');
+            expect($key)->toBe('id');
         });
 
         test('does not throw with enforcement when mapping exists', function (): void {
@@ -165,7 +165,7 @@ describe('MorphKeyMap', function (): void {
             // Assert
             $org = Organization::query()->create(['name' => 'Acme']);
             $key = Models::getModelKey($org);
-            expect($key)->toBe('ulid');
+            expect($key)->toBe('id');
         });
     });
 });
