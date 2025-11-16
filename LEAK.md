@@ -149,23 +149,50 @@ The Console commands that **call** the migrators are affecting the migrator **te
 
 4. **Restore `phpunit.ulid.xml`** after capturing the error
 
-### Phase 5: Propose Fix
+### Phase 5: Implement Fix
 
-Based on findings, propose one of:
+**Based on findings from Phases 1-4, implement the appropriate fix:**
 
-1. **Add proper cleanup** to Console tests
-   - Add missing `afterEach()` hooks
-   - Clear config state after each test
-   - Reset database state properly
+#### Option A: Add Proper Cleanup to Console Command Tests (MOST LIKELY)
 
-2. **Improve test isolation** in BouncerMigratorTest
-   - Add defensive checks for config state
-   - Add explicit database cleanup
-   - Add model boot state verification
+If Console tests are missing cleanup hooks:
 
-3. **Fix underlying issue** if there's a real bug
-   - If the leakage reveals an actual application bug
-   - If there's improper state management in the migrator itself
+1. **Add `afterEach()` hook to both Console command tests**:
+   ```php
+   afterEach(function () {
+       Model::clearBootedModels();
+       // Add other cleanup as needed
+   });
+   ```
+
+2. **Reset configuration state** if config is modified:
+   ```php
+   afterEach(function () {
+       Config::set('warden.migrators.bouncer', $originalConfig);
+       Config::set('warden.primary_key_type', $originalKeyType);
+       // etc.
+   });
+   ```
+
+3. **Clean up database schema** if migrations are run:
+   - Roll back migrations that were run during test
+   - Or use proper database refresh strategy
+
+#### Option B: Fix ULID-Specific Configuration Issue
+
+If the issue is specific to ULID morph types:
+
+1. **Ensure morph types are properly set/reset** in Console tests
+2. **Check if Console tests override morph type config** and don't restore it
+3. **Verify that ULID models are booted correctly** with proper morph types
+
+#### Option C: Fix Underlying Bug in Application Code
+
+If the investigation reveals an actual bug:
+
+1. **Document the bug** in the codebase
+2. **Fix the root cause** in the application code (not just tests)
+3. **Ensure tests properly validate** the fix
 
 ## Success Criteria
 
