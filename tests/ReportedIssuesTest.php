@@ -18,6 +18,7 @@ describe('Reported Issues (Regressions)', function (): void {
             // Arrange
             [$warden, $user1, $user2, $user3] = $provider(3);
             $user2->setAttribute($user2->getKeyName(), 0);
+            $user2->save();
 
             // Act
             $warden->allow($user1)->everything();

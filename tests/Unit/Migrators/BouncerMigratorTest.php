@@ -347,6 +347,7 @@ describe('BouncerMigrator', function (): void {
             // Arrange
             $user = BouncerUser::query()->create(['name' => 'Alice Johnson']);
 
+            DB::statement('SET CONSTRAINTS ALL DEFERRED');
             DB::table('bouncer_assigned_roles')->insert([
                 'role_id' => 99_999, // Non-existent role
                 'entity_type' => User::class,
@@ -355,6 +356,7 @@ describe('BouncerMigrator', function (): void {
                 'restricted_to_type' => null,
                 'scope' => null,
             ]);
+            DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
 
             $migrator = new BouncerMigrator(BouncerUser::class);
 
@@ -369,6 +371,7 @@ describe('BouncerMigrator', function (): void {
             // Arrange
             $user = BouncerUser::query()->create(['name' => 'Charlie Brown']);
 
+            DB::statement('SET CONSTRAINTS ALL DEFERRED');
             DB::table('bouncer_permissions')->insert([
                 'ability_id' => 99_999, // Non-existent ability
                 'entity_id' => $user->id,
@@ -376,6 +379,7 @@ describe('BouncerMigrator', function (): void {
                 'forbidden' => false,
                 'scope' => null,
             ]);
+            DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
 
             $migrator = new BouncerMigrator(BouncerUser::class);
 
