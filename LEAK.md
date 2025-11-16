@@ -24,14 +24,16 @@ Through systematic test isolation, we identified that **tests in `./tests/Unit/C
 
 ### Key Finding
 
-**Console tests are propagating state from root level tests to BouncerMigrator.**
+**Console command tests DIRECTLY leak state to ALL migrator tests.**
 
-The failure only occurs when:
-1. Root level tests run first (setting up some state)
-2. Console tests run second (picking up that state and transforming it somehow)
-3. BouncerMigrator runs third (failing due to the propagated/transformed state)
+Critical discovery: When ALL other tests were excluded and only Console + Migrator tests ran, the migrator tests STILL failed. This proves Console tests are the direct cause, NOT propagating state from other tests.
 
-This is NOT a simple case of Console tests leaking state directly - Console tests are acting as a **conduit** that propagates state from earlier tests.
+**Both Console command tests must be excluded for the full test suite to pass:**
+- Excluding only `MigrateFromBouncerCommandTest.php` is not sufficient
+- Excluding only `MigrateFromSpatieCommandTest.php` is not sufficient
+- BOTH must be excluded for tests to pass
+
+The pattern is clear: **Console commands that execute migrators leave behind state that breaks migrator unit tests.**
 
 ## Files Involved
 
@@ -49,55 +51,78 @@ The Console commands that **call** the migrators are affecting the migrator **te
 
 ## Investigation Tasks
 
-**Agent Instructions: Investigate why Console tests affect Migrator tests**
+**Agent Instructions: Debug state leakage from Console command tests to Migrator tests**
 
-### Phase 1: Identify the Specific Test
-1. Determine which specific test file in `tests/Unit/Console/` causes the leak
-   - Test `MigrateFromBouncerCommandTest.php` in isolation
-   - Test `MigrateFromSpatieCommandTest.php` in isolation
-2. If both cause issues, identify which specific test method is the culprit
+### Phase 1: Analyze Both Console Command Tests ✅ CONFIRMED CULPRITS
 
-### Phase 2: Analyze State Leakage
-Examine the leaking test(s) for:
+**Status**: Both `MigrateFromBouncerCommandTest.php` and `MigrateFromSpatieCommandTest.php` are confirmed to leak state.
 
-1. **Database State**
-   - Are tables being modified and not cleaned up?
-   - Are migrations being run that affect schema?
-   - Are records being inserted without proper cleanup?
+**Next Steps**:
+1. Read both test files to understand their structure and lifecycle hooks
+2. Identify which specific test method(s) in each file cause the leakage
+3. Focus on tests that actually execute the migration commands (not just test setup/validation)
 
-2. **Configuration State**
-   - Are config values being set via `Config::set()` and not restored?
-   - Check specifically for:
+### Phase 2: Identify Specific State Leakage Vectors
+
+**Priority Areas** (Console tests executing migration commands):
+
+1. **Database Schema State** 🔥 HIGHEST PRIORITY
+   - Console commands run actual migrations via `$this->artisan('migrate:from:bouncer')`
+   - These migrations modify the database schema
+   - Check if schema changes persist between tests
+   - Look for missing database rollbacks/cleanup in `afterEach()`
+   - **Key question**: Are Console tests running migrations that create/modify tables, and NOT cleaning them up?
+
+2. **Configuration State** 🔥 HIGH PRIORITY
+   - Console commands may set config values during migration
+   - Check for `Config::set()` calls without corresponding cleanup
+   - **Specific configs to examine**:
      - `warden.migrators.bouncer.*` config keys
      - `warden.primary_key_type`
-     - `warden.*_morph_type` settings
+     - `warden.*_morph_type` settings (ulidMorph specifically)
+   - Compare: Do Console tests restore config in `afterEach()`?
 
-3. **Model Boot State**
-   - Are Eloquent models being booted with specific configurations?
-   - Is `Model::clearBootedModels()` being called in teardown?
-   - Note: BouncerMigratorTest already calls this in `afterEach()`
+3. **Model Boot State** 🔥 HIGH PRIORITY
+   - Console commands boot Eloquent models with specific configurations
+   - Migration process may boot models differently than unit tests expect
+   - **Check**: Do Console tests call `Model::clearBootedModels()` in cleanup?
+   - **Note**: BouncerMigratorTest DOES clear booted models in `afterEach()`
 
-4. **Singleton/Static State**
-   - Are there any static properties or singletons being modified?
-   - Are facades being resolved and cached?
-   - Is there container state being leaked?
+4. **Database Records State**
+   - Console commands insert/modify records as part of migration
+   - Check if test data persists across test runs
+   - Look for missing `RefreshDatabase` or manual cleanup
 
-5. **ULID-Specific Issues**
-   - The failure only occurs with `make test:docker:postgres:ulid`
+5. **ULID-Specific State** 🔥 CRITICAL
+   - **Failure ONLY occurs with ULID primary keys** (`make test:docker:postgres:ulid`)
    - Check for primary key type conflicts
-   - Check for morph key type conflicts
-   - Examine how Console tests handle ULID vs standard IDs
+   - Check for morph key type conflicts (ulidMorph vs default)
+   - **Hypothesis**: Console tests may be setting/using different morph types or primary key configurations that persist
 
-### Phase 3: Compare Test Setup/Teardown
+6. **Singleton/Container State**
+   - Are facades being resolved and cached with wrong configurations?
+   - Is there container state being leaked?
+   - Check for service provider registrations that persist
 
-Compare the setup and teardown between:
-- `tests/Unit/Console/MigrateFromBouncerCommandTest.php`
-- `tests/Unit/Migrators/BouncerMigratorTest.php`
+### Phase 3: Compare Test Lifecycle Hooks
 
-Look for:
-- Missing `afterEach()` cleanup in Console tests
-- Different database refresh strategies
-- Different config handling approaches
+**Compare cleanup strategies** between Console command tests and Migrator tests:
+
+1. **Read and compare**:
+   - `tests/Unit/Console/MigrateFromBouncerCommandTest.php` - lifecycle hooks
+   - `tests/Unit/Console/MigrateFromSpatieCommandTest.php` - lifecycle hooks
+   - `tests/Unit/Migrators/BouncerMigratorTest.php` - lifecycle hooks (reference)
+
+2. **Specific comparison points**:
+   - Does Console test have `afterEach()` hook? If not, ADD IT.
+   - Does Console test call `Model::clearBootedModels()`? If not, ADD IT.
+   - Does Console test reset config values? If not, ADD IT.
+   - Does Console test clean up database schema changes? If not, ADD IT.
+   - What database refresh strategy is used? (`RefreshDatabase` trait, manual cleanup, etc.)
+
+3. **Look for asymmetry**:
+   - Migrator tests may assume clean state that Console tests don't provide
+   - Console tests may create state that Migrator tests don't expect
 
 ### Phase 4: Review Error Details
 
