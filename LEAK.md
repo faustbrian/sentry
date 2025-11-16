@@ -197,15 +197,28 @@ If the investigation reveals an actual bug:
 ## Success Criteria
 
 The investigation is complete when:
-1. ✅ We know exactly which Console test(s) cause the failure
-2. ✅ We understand what state is being leaked
-3. ✅ We have a clear fix that makes `make test:docker:postgres:ulid` pass with all tests enabled
+1. ✅ We know exactly which Console test(s) cause the failure (**COMPLETE**: Both Console command tests confirmed)
+2. ⏳ We understand what state is being leaked (**IN PROGRESS**: Follow Phases 1-5 above)
+3. ⏳ We have a clear fix that makes `make test:docker:postgres:ulid` pass with all tests enabled
+4. ⏳ Both Console command test exclusions can be removed from `phpunit.ulid.xml`
+5. ⏳ All 1000+ tests pass including Console and Migrator tests together
 
 ## Current Workaround
 
-Temporarily exclude Console tests in `phpunit.ulid.xml`:
+**Both Console command tests are currently excluded** in `phpunit.ulid.xml`:
 ```xml
-<exclude>./tests/Unit/Console</exclude>
+<exclude>./tests/Unit/Console/MigrateFromBouncerCommandTest.php</exclude>
+<exclude>./tests/Unit/Console/MigrateFromSpatieCommandTest.php</exclude>
 ```
 
-This workaround should be removed once the root cause is fixed.
+**These exclusions MUST be removed** once the root cause is fixed and proper cleanup is implemented.
+
+## Quick Start for Debugging Agent
+
+1. **Read this file completely** to understand the problem
+2. **Start with Phase 1**: Read both Console command test files
+3. **Follow Phase 2**: Examine priority areas (Database Schema State is HIGHEST priority)
+4. **Execute Phase 3**: Compare lifecycle hooks between Console and Migrator tests
+5. **Run Phase 4**: Reproduce the error to see exact failure details
+6. **Implement Phase 5**: Add proper cleanup hooks to Console command tests
+7. **Verify fix**: Remove exclusions from `phpunit.ulid.xml` and run `make test:docker:postgres:ulid`
