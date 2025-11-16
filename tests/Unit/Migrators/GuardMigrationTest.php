@@ -12,7 +12,7 @@ use Cline\Warden\Migrators\BouncerMigrator;
 use Cline\Warden\Migrators\SpatieMigrator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use Tests\Fixtures\Models\User;
+use Tests\Fixtures\Models\SpatieUser;
 use Tests\Fixtures\Models\UserWithSoftDeletes;
 
 require_once __DIR__.'/../../Helpers.php';
@@ -45,7 +45,7 @@ describe('Spatie migrator with guard_name', function (): void {
             ['name' => 'api-admin', 'guard_name' => 'api', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         $webAdmin = Models::role()->where('name', 'web-admin')->where('guard_name', 'web')->first();
@@ -75,7 +75,7 @@ describe('Spatie migrator with guard_name', function (): void {
             'model_id' => $this->user->id,
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         $webAbility = Models::ability()->where('name', 'web-permission')->where('guard_name', 'web')->first();
@@ -101,7 +101,7 @@ describe('Spatie migrator with guard_name', function (): void {
             'model_id' => $this->user->id,
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         $role = Models::role()->where('name', 'web-editor')->where('guard_name', 'web')->first();
@@ -131,7 +131,7 @@ describe('Spatie migrator with guard_name', function (): void {
             'role_id' => 1,
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         $role = Models::role()->where('name', 'api-manager')->where('guard_name', 'api')->first();
@@ -232,7 +232,7 @@ describe('Spatie migrator edge cases', function (): void {
             'model_id' => 99_999, // Non-existent user
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         // Role should be created but not assigned
@@ -247,7 +247,7 @@ describe('Spatie migrator edge cases', function (): void {
             'model_id' => $this->user->id,
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         // Should complete without error
@@ -267,7 +267,7 @@ describe('Spatie migrator edge cases', function (): void {
             'role_id' => 99_999, // Non-existent role
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         // Should complete without error - no ability created since role doesn't exist
@@ -287,7 +287,7 @@ describe('Spatie migrator edge cases', function (): void {
             'role_id' => 1,
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         $role = Models::role()->where('name', 'admin')->first();
@@ -504,7 +504,7 @@ describe('Bouncer migrator edge cases', function (): void {
             'model_id' => 99_999, // Non-existent user
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         // Nothing should be created when user doesn't exist
@@ -521,7 +521,7 @@ describe('Multi-guard migration scenarios', function (): void {
             ['name' => 'admin', 'guard_name' => 'rpc', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
-        $migrator = new SpatieMigrator(User::class);
+        $migrator = new SpatieMigrator(SpatieUser::class);
         $migrator->migrate();
 
         expect(Models::role()->where('name', 'admin')->count())->toBe(3);
@@ -541,7 +541,7 @@ describe('Multi-guard migration scenarios', function (): void {
             ['name' => 'editor', 'scope' => null, 'created_at' => now(), 'updated_at' => now()],
         ]);
 
-        $spatieMigrator = new SpatieMigrator(User::class);
+        $spatieMigrator = new SpatieMigrator(SpatieUser::class);
         $spatieMigrator->migrate();
 
         $bouncerMigrator = new BouncerMigrator(User::class, 'migration', 'api');

@@ -12,7 +12,7 @@ use Cline\Warden\Migrators\SpatieMigrator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Models\SoftDeletesUser;
-use Tests\Fixtures\Models\User;
+use Tests\Fixtures\Models\SpatieUser;
 
 require_once __DIR__.'/../../Helpers.php';
 
@@ -36,7 +36,7 @@ describe('SpatieMigrator', function (): void {
                 ['name' => 'editor', 'guard_name' => 'web', 'created_at' => now(), 'updated_at' => now()],
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -63,7 +63,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => $user->id,
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -97,7 +97,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => $user->id,
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -131,7 +131,7 @@ describe('SpatieMigrator', function (): void {
                 'permission_id' => $permissionId,
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -197,7 +197,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => $user->id,
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -254,7 +254,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => 99_999, // Non-existent user
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -276,7 +276,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => $user->id,
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -300,7 +300,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => 99_999, // Non-existent user
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -319,7 +319,7 @@ describe('SpatieMigrator', function (): void {
                 'model_id' => $user->id,
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -330,7 +330,7 @@ describe('SpatieMigrator', function (): void {
 
         test('handles empty Spatie tables gracefully', function (): void {
             // Arrange
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -363,7 +363,7 @@ describe('SpatieMigrator', function (): void {
                 ]);
             }
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -427,7 +427,7 @@ describe('SpatieMigrator', function (): void {
                 ]);
             }
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
@@ -537,7 +537,7 @@ describe('SpatieMigrator', function (): void {
                 ['role_id' => $managerRoleId, 'model_type' => 'user', 'model_id' => 300],
             ]);
 
-            $migrator = new SpatieMigrator(User::class);
+            $migrator = new SpatieMigrator(SpatieUser::class);
 
             // Act
             $migrator->migrate();
