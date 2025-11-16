@@ -20,7 +20,9 @@
     <testsuites>
         <testsuite name="default">
             <directory suffix=".php">./tests</directory>
-            <exclude>./tests/Unit/Console</exclude>
+            <exclude>./tests/AbilitiesForModelsTest.php</exclude>
+            <exclude>./tests/AbilityConstraintsTest.php</exclude>
+            <exclude>./tests/AuthorizableTest.php</exclude>
             <exclude>./tests/Unit/Conductors</exclude>
             <exclude>./tests/Unit/Constraints</exclude>
             <exclude>./tests/Unit/Database</exclude>
