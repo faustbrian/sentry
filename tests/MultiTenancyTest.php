@@ -196,7 +196,7 @@ describe('Multi-Tenancy Scoping', function (): void {
             $warden->allow($user)->to('delete', User::class);
 
             // Act
-            $abilities = $user->abilities()->orderBy('id')->get();
+            $abilities = $user->abilities()->orderBy('created_at')->get();
 
             // Assert
             expect($abilities)->toHaveCount(2);
