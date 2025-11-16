@@ -164,10 +164,11 @@ describe('Auto Titles', function (): void {
             $warden = $this->bouncer($user = User::query()->create());
 
             // Act
-            $warden->allow($user)->to('delete', User::query()->create());
+            $targetUser = User::query()->create();
+            $warden->allow($user)->to('delete', $targetUser);
 
             // Assert
-            expect($warden->ability()->first()->title)->toEqual('Delete user #2');
+            expect($warden->ability()->first()->title)->toEqual("Delete user #{$targetUser->id}");
         });
 
         test('generates "[Action] everything" title for global action ability', function (): void {

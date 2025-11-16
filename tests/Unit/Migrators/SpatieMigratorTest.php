@@ -48,7 +48,7 @@ describe('SpatieMigrator', function (): void {
 
         test('migrates user role assignments from Spatie to Warden', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'John Doe']);
+            $user = SpatieUser::query()->create(['name' => 'John Doe']);
 
             $adminRoleId = DB::table('spatie_roles')->insertGetId([
                 'name' => 'admin',
@@ -82,7 +82,7 @@ describe('SpatieMigrator', function (): void {
 
         test('migrates direct user permissions from Spatie to Warden', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Jane Doe']);
+            $user = SpatieUser::query()->create(['name' => 'Jane Doe']);
 
             $permissionId = DB::table('spatie_permissions')->insertGetId([
                 'name' => 'edit-articles',
@@ -154,7 +154,7 @@ describe('SpatieMigrator', function (): void {
 
         test('migrates user with both role and direct permission', function (): void {
             // Arrange - User has admin role AND a direct edit-articles permission
-            $user = User::query()->create(['name' => 'Bob Smith']);
+            $user = SpatieUser::query()->create(['name' => 'Bob Smith']);
 
             $adminRoleId = DB::table('spatie_roles')->insertGetId([
                 'name' => 'admin',
@@ -268,7 +268,7 @@ describe('SpatieMigrator', function (): void {
 
         test('skips migration for non-existent role', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Alice Johnson']);
+            $user = SpatieUser::query()->create(['name' => 'Alice Johnson']);
 
             insertWithoutForeignKeyChecks('spatie_model_has_roles', [
                 'role_id' => 99_999, // Non-existent role
@@ -311,7 +311,7 @@ describe('SpatieMigrator', function (): void {
 
         test('skips migration for non-existent permission', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Charlie Brown']);
+            $user = SpatieUser::query()->create(['name' => 'Charlie Brown']);
 
             insertWithoutForeignKeyChecks('spatie_model_has_permissions', [
                 'permission_id' => 99_999, // Non-existent permission
@@ -343,9 +343,9 @@ describe('SpatieMigrator', function (): void {
 
         test('migrates multiple users with same role', function (): void {
             // Arrange
-            $user1 = User::query()->create(['name' => 'Alice']);
-            $user2 = User::query()->create(['name' => 'Bob']);
-            $user3 = User::query()->create(['name' => 'Charlie']);
+            $user1 = SpatieUser::query()->create(['name' => 'Alice']);
+            $user2 = SpatieUser::query()->create(['name' => 'Bob']);
+            $user3 = SpatieUser::query()->create(['name' => 'Charlie']);
 
             $memberRoleId = DB::table('spatie_roles')->insertGetId([
                 'name' => 'member',
@@ -395,7 +395,7 @@ describe('SpatieMigrator', function (): void {
 
         test('migrates user with multiple roles', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Super User']);
+            $user = SpatieUser::query()->create(['name' => 'Super User']);
 
             $adminRoleId = DB::table('spatie_roles')->insertGetId([
                 'name' => 'admin',
@@ -464,7 +464,7 @@ describe('SpatieMigrator', function (): void {
 
         test('migrates soft-deleted user with role assignment', function (): void {
             // Arrange
-            $user = SoftDeletesUser::query()->create(['name' => 'Deleted User']);
+            $user = SoftDeletesSpatieUser::query()->create(['name' => 'Deleted User']);
             $user->delete(); // Soft delete the user
 
             $adminRoleId = DB::table('spatie_roles')->insertGetId([
@@ -500,13 +500,13 @@ describe('SpatieMigrator', function (): void {
         test('findUser uses keymap column not primary key preventing assignment to wrong user', function (): void {
             // Arrange - Configure keymap to use 'id' column
             Models::enforceMorphKeyMap([
-                User::class => 'id',
+                SpatieUser::class => 'id',
             ]);
 
             // Create users with specific IDs
-            $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
-            $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
-            $user3 = User::query()->create(['name' => 'Charlie', 'id' => 300]);
+            $user1 = SpatieUser::query()->create(['name' => 'Alice', 'id' => 100]);
+            $user2 = SpatieUser::query()->create(['name' => 'Bob', 'id' => 200]);
+            $user3 = SpatieUser::query()->create(['name' => 'Charlie', 'id' => 300]);
 
             // Create Spatie roles
             $adminRoleId = DB::table('spatie_roles')->insertGetId([

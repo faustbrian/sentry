@@ -356,7 +356,7 @@ trait IsRole
         $type = $model->getMorphClass();
 
         /** @var array<int, array<string, mixed>> */
-        return array_map(function (int $key) use ($type): array {
+        return array_map(function (int|string $key) use ($type): array {
             $record = Models::scope()->getAttachAttributes() + [
                 'role_id' => $this->getKey(),
                 'actor_type' => $type,

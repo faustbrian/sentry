@@ -12,7 +12,7 @@ use Cline\Warden\Migrators\BouncerMigrator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Models\SoftDeletesUser;
-use Tests\Fixtures\Models\User;
+use Tests\Fixtures\Models\BouncerUser;
 
 beforeEach(function (): void {
     Config::set('warden.migrators.bouncer.tables', [
@@ -33,7 +33,7 @@ describe('BouncerMigrator', function (): void {
                 ['name' => 'editor', 'title' => 'Editor', 'scope' => null, 'created_at' => now(), 'updated_at' => now()],
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -70,7 +70,7 @@ describe('BouncerMigrator', function (): void {
                 ],
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -97,7 +97,7 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates user role assignments from Bouncer to Warden', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'John Doe']);
+            $user = BouncerUser::query()->create(['name' => 'John Doe']);
 
             $adminRoleId = DB::table('bouncer_roles')->insertGetId([
                 'name' => 'admin',
@@ -116,7 +116,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -131,7 +131,7 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates direct user permissions from Bouncer to Warden', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Jane Doe']);
+            $user = BouncerUser::query()->create(['name' => 'Jane Doe']);
 
             $abilityId = DB::table('bouncer_abilities')->insertGetId([
                 'name' => 'edit-articles',
@@ -153,7 +153,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -169,7 +169,7 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates forbidden user permissions from Bouncer to Warden', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Evil User']);
+            $user = BouncerUser::query()->create(['name' => 'Evil User']);
 
             $abilityId = DB::table('bouncer_abilities')->insertGetId([
                 'name' => 'delete-users',
@@ -191,7 +191,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -207,7 +207,7 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates user with both role and direct permission', function (): void {
             // Arrange - User has admin role AND a direct edit-articles permission
-            $user = User::query()->create(['name' => 'Bob Smith']);
+            $user = BouncerUser::query()->create(['name' => 'Bob Smith']);
 
             $adminRoleId = DB::table('bouncer_roles')->insertGetId([
                 'name' => 'admin',
@@ -269,7 +269,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -332,7 +332,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
             $migrator->migrate();
 
             // Act
@@ -344,7 +344,7 @@ describe('BouncerMigrator', function (): void {
 
         test('skips migration for non-existent role', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Alice Johnson']);
+            $user = BouncerUser::query()->create(['name' => 'Alice Johnson']);
 
             DB::table('bouncer_assigned_roles')->insert([
                 'role_id' => 99_999, // Non-existent role
@@ -355,7 +355,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -366,7 +366,7 @@ describe('BouncerMigrator', function (): void {
 
         test('skips migration for non-existent ability', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Charlie Brown']);
+            $user = BouncerUser::query()->create(['name' => 'Charlie Brown']);
 
             DB::table('bouncer_permissions')->insert([
                 'ability_id' => 99_999, // Non-existent ability
@@ -376,7 +376,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -387,7 +387,7 @@ describe('BouncerMigrator', function (): void {
 
         test('handles empty Bouncer tables gracefully', function (): void {
             // Arrange
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -408,7 +408,7 @@ describe('BouncerMigrator', function (): void {
                 'updated_at' => now(),
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -448,7 +448,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -503,7 +503,7 @@ describe('BouncerMigrator', function (): void {
                 'scope' => null,
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -529,9 +529,9 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates multiple users with same role', function (): void {
             // Arrange
-            $user1 = User::query()->create(['name' => 'Alice']);
-            $user2 = User::query()->create(['name' => 'Bob']);
-            $user3 = User::query()->create(['name' => 'Charlie']);
+            $user1 = BouncerUser::query()->create(['name' => 'Alice']);
+            $user2 = BouncerUser::query()->create(['name' => 'Bob']);
+            $user3 = BouncerUser::query()->create(['name' => 'Charlie']);
 
             $memberRoleId = DB::table('bouncer_roles')->insertGetId([
                 'name' => 'member',
@@ -553,7 +553,7 @@ describe('BouncerMigrator', function (): void {
                 ]);
             }
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -585,7 +585,7 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates user with multiple roles', function (): void {
             // Arrange
-            $user = User::query()->create(['name' => 'Super User']);
+            $user = BouncerUser::query()->create(['name' => 'Super User']);
 
             $adminRoleId = DB::table('bouncer_roles')->insertGetId([
                 'name' => 'admin',
@@ -623,7 +623,7 @@ describe('BouncerMigrator', function (): void {
                 ]);
             }
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();
@@ -660,7 +660,7 @@ describe('BouncerMigrator', function (): void {
 
         test('migrates soft-deleted user with role assignment', function (): void {
             // Arrange
-            $user = SoftDeletesUser::query()->create(['name' => 'Deleted User']);
+            $user = SoftDeletesBouncerUser::query()->create(['name' => 'Deleted User']);
             $user->delete(); // Soft delete the user
 
             // Override config to use SoftDeletesUser class
@@ -707,9 +707,9 @@ describe('BouncerMigrator', function (): void {
             ]);
 
             // Create users with specific IDs
-            $user1 = User::query()->create(['name' => 'Alice', 'id' => 100]);
-            $user2 = User::query()->create(['name' => 'Bob', 'id' => 200]);
-            $user3 = User::query()->create(['name' => 'Charlie', 'id' => 300]);
+            $user1 = BouncerUser::query()->create(['name' => 'Alice', 'id' => 100]);
+            $user2 = BouncerUser::query()->create(['name' => 'Bob', 'id' => 200]);
+            $user3 = BouncerUser::query()->create(['name' => 'Charlie', 'id' => 300]);
 
             // Create Bouncer roles
             $adminRoleId = DB::table('bouncer_roles')->insertGetId([
@@ -743,7 +743,7 @@ describe('BouncerMigrator', function (): void {
                 ['role_id' => $managerRoleId, 'entity_type' => User::class, 'entity_id' => 300, 'restricted_to_type' => null, 'restricted_to_id' => null, 'scope' => null],
             ]);
 
-            $migrator = new BouncerMigrator(User::class);
+            $migrator = new BouncerMigrator(BouncerUser::class);
 
             // Act
             $migrator->migrate();

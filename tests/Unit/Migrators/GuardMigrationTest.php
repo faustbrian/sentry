@@ -35,7 +35,7 @@ beforeEach(function (): void {
     config(['warden.migrators.bouncer.tables.assigned_roles' => 'bouncer_assigned_roles']);
     config(['warden.migrators.bouncer.tables.permissions' => 'bouncer_permissions']);
 
-    $this->user = User::query()->create();
+    $this->user = SpatieUser::query()->create();
 });
 
 describe('Spatie migrator with guard_name', function (): void {
@@ -237,7 +237,7 @@ describe('Spatie migrator edge cases', function (): void {
 
         // Role should be created but not assigned
         expect(Models::role()->where('name', 'admin')->exists())->toBeTrue();
-        expect(User::query()->count())->toBe(1); // Only the beforeEach user
+        expect(SpatieUser::query()->count())->toBe(1); // Only the beforeEach user
     });
 
     test('skips assignments for non-existent permissions', function (): void {
