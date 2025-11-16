@@ -55,8 +55,8 @@ final class Clipboard extends AbstractClipboard
 
         $key = $abilityModel->getKey();
 
-        // The Ability model casts 'id' to int, so getKey() will return int
-        assert(is_int($key));
+        // The Ability model key can be int, string (ULID/UUID), or null
+        assert($key !== null);
 
         return $key;
     }

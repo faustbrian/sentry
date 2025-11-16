@@ -111,6 +111,10 @@ abstract class TestCase extends BaseTestCase
     protected function defineEnvironment($app): void
     {
         $app['config']->set('cache.default', 'array');
+        $app['config']->set('warden.primary_key_type', env('WARDEN_PRIMARY_KEY_TYPE', 'id'));
+        $app['config']->set('warden.actor_morph_type', env('WARDEN_ACTOR_MORPH_TYPE', 'morph'));
+        $app['config']->set('warden.context_morph_type', env('WARDEN_CONTEXT_MORPH_TYPE', 'morph'));
+        $app['config']->set('warden.subject_morph_type', env('WARDEN_SUBJECT_MORPH_TYPE', 'morph'));
     }
 
     /**
