@@ -21,11 +21,7 @@
         <testsuite name="default">
             <directory suffix=".php">./tests</directory>
             <exclude>./tests/Unit/Console/MigrateFromBouncerCommandTest.php</exclude>
-            <exclude>./tests/Unit/Migrators/GuardMigrationTest.php</exclude>
-            <exclude>./tests/Unit/Migrators/SpatieMigratorTest.php</exclude>
-            <exclude>./tests/Unit/Support</exclude>
-            <exclude>./tests/Unit/WardenTest.php</exclude>
-            <exclude>./tests/QueryScopes</exclude>
+            <exclude>./tests/Unit/Console/MigrateFromSpatieCommandTest.php</exclude>
             <exclude>./tests/HelpersTest.php</exclude>
         </testsuite>
     </testsuites>
