@@ -21,6 +21,20 @@
         <testsuite name="default">
             <directory suffix=".php">./tests</directory>
             <exclude>./tests/Unit/Console</exclude>
+            <exclude>./tests/Unit/Conductors</exclude>
+            <exclude>./tests/Unit/Constraints</exclude>
+            <exclude>./tests/Unit/Database</exclude>
+            <exclude>./tests/Unit/Enums</exclude>
+            <exclude>./tests/Unit/Facades</exclude>
+            <exclude>./tests/Unit/GuardScopingTest.php</exclude>
+            <exclude>./tests/Unit/GuardTest.php</exclude>
+            <exclude>./tests/Unit/Http</exclude>
+            <exclude>./tests/Unit/Migrators/GuardMigrationTest.php</exclude>
+            <exclude>./tests/Unit/Migrators/SpatieMigratorTest.php</exclude>
+            <exclude>./tests/Unit/Support</exclude>
+            <exclude>./tests/Unit/WardenTest.php</exclude>
+            <exclude>./tests/QueryScopes</exclude>
+            <exclude>./tests/HelpersTest.php</exclude>
         </testsuite>
     </testsuites>
 </phpunit>
