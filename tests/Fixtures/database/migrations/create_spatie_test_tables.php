@@ -22,7 +22,14 @@ return new class() extends Migration
         // Create shared tables if they don't exist (shared with Bouncer tests)
         if (!Schema::hasTable('users')) {
             Schema::create('users', function ($table): void {
-                $table->increments('id');
+                $keyType = config('warden.primary_key_type', 'id');
+
+                match ($keyType) {
+                    'ulid' => $table->ulid('id')->primary(),
+                    'uuid' => $table->uuid('id')->primary(),
+                    default => $table->increments('id'),
+                };
+
                 $table->string('name')->nullable();
                 $table->integer('age')->nullable();
                 $table->integer('account_id')->nullable();
