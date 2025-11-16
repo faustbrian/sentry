@@ -27,7 +27,7 @@ return new class() extends Migration
                 match ($keyType) {
                     'ulid' => $table->ulid('id')->primary(),
                     'uuid' => $table->uuid('id')->primary(),
-                    default => $table->increments('id'),
+                    default => $table->id(),
                 };
 
                 $table->string('name')->nullable();
@@ -41,7 +41,7 @@ return new class() extends Migration
         // Create spatie_users table with auto-increment IDs for Spatie migration tests
         if (!Schema::hasTable('spatie_users')) {
             Schema::create('spatie_users', function ($table): void {
-                $table->increments('id');
+                $table->id();
                 $table->string('name')->nullable();
                 $table->integer('age')->nullable();
                 $table->integer('account_id')->nullable();
@@ -53,7 +53,7 @@ return new class() extends Migration
         // Create bouncer_users table with auto-increment IDs for Bouncer migration tests
         if (!Schema::hasTable('bouncer_users')) {
             Schema::create('bouncer_users', function ($table): void {
-                $table->increments('id');
+                $table->id();
                 $table->string('name')->nullable();
                 $table->integer('age')->nullable();
                 $table->integer('account_id')->nullable();
@@ -64,7 +64,7 @@ return new class() extends Migration
 
         if (!Schema::hasTable('accounts')) {
             Schema::create('accounts', function ($table): void {
-                $table->increments('id');
+                $table->id();
                 $morphType = MorphType::tryFrom(config('warden.actor_morph_type', 'morph')) ?? MorphType::Morph;
                 match ($morphType) {
                     MorphType::ULID => $table->nullableUlidMorphs('actor'),
@@ -79,7 +79,7 @@ return new class() extends Migration
 
         if (!Schema::hasTable('teams')) {
             Schema::create('teams', function ($table): void {
-                $table->increments('id');
+                $table->id();
                 $table->string('name');
                 $table->timestamps();
             });

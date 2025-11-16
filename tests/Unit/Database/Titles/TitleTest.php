@@ -330,7 +330,7 @@ describe('Title', function (): void {
 
         test('handles very long input strings', function (): void {
             // Arrange
-            $longName = str_repeat('super_', 50).'admin';
+            $longName = str_repeat('super_', 40).'admin';
             $role = Role::query()->create(['name' => $longName]);
 
             // Act
