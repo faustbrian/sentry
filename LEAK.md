@@ -124,17 +124,30 @@ The Console commands that **call** the migrators are affecting the migrator **te
    - Migrator tests may assume clean state that Console tests don't provide
    - Console tests may create state that Migrator tests don't expect
 
-### Phase 4: Review Error Details
+### Phase 4: Capture and Analyze Error Details
 
-Run the failing test suite and capture the full ErrorException details:
-```bash
-make test:docker:postgres:ulid 2>&1 | grep -A 20 "BouncerMigratorTest"
-```
+**To reproduce the failure**, temporarily re-enable ONE Console command test:
 
-Examine:
-- What is the exact error message?
-- What line is failing in BouncerMigratorTest?
-- Is it a database error, type error, or configuration error?
+1. **Edit `phpunit.ulid.xml`** - remove ONE exclude line:
+   ```bash
+   # Remove this line temporarily:
+   # <exclude>./tests/Unit/Console/MigrateFromBouncerCommandTest.php</exclude>
+   ```
+
+2. **Run tests and capture full error output**:
+   ```bash
+   make test:docker:postgres:ulid 2>&1 | tee test_failure_output.txt
+   ```
+
+3. **Analyze the error**:
+   - What is the exact ErrorException message?
+   - What line number is failing in which Migrator test?
+   - Is it a database error (schema/constraint)?
+   - Is it a type error (ULID vs integer)?
+   - Is it a configuration error (missing config)?
+   - Is it a model state error (unexpected boot state)?
+
+4. **Restore `phpunit.ulid.xml`** after capturing the error
 
 ### Phase 5: Propose Fix
 
