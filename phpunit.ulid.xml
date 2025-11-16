@@ -20,11 +20,6 @@
     <testsuites>
         <testsuite name="default">
             <directory suffix=".php">./tests</directory>
-            <exclude>./tests/MorphKeyIntegrationTest.php</exclude>
-            <exclude>./tests/MorphKeyMapTest.php</exclude>
-            <exclude>./tests/MultipleAbilitiesTest.php</exclude>
-            <exclude>./tests/MultiTenancyTest.php</exclude>
-            <exclude>./tests/OwnershipTest.php</exclude>
             <exclude>./tests/ReportedIssuesTest.php</exclude>
             <exclude>./tests/SyncTest.php</exclude>
             <exclude>./tests/TablePrefixTest.php</exclude>
