@@ -154,28 +154,21 @@ describe('MigrateFromSpatieCommand', function (): void {
 
     describe('Happy Paths', function (): void {
         test('successfully migrates when all configuration is valid', function (): void {
-            // Arrange
-            $config = Mockery::mock(Repository::class);
-            $config->shouldReceive('get')
-                ->with('auth.defaults.guard')
-                ->once()
-                ->andReturn('web');
-            $config->shouldReceive('get')
-                ->with('auth.guards.web.provider')
-                ->once()
-                ->andReturn('users');
-            $config->shouldReceive('get')
-                ->with('auth.providers.users.model')
-                ->once()
-                ->andReturn('App\Models\User');
+            // Arrange - Set up real config
+            config([
+                'auth.defaults.guard' => 'web',
+                'auth.guards.web.provider' => 'users',
+                'auth.providers.users.model' => \Tests\Fixtures\Models\User::class,
+                'warden.migrators.spatie.tables' => [
+                    'permissions' => 'permissions',
+                    'roles' => 'roles',
+                    'model_has_permissions' => 'model_has_permissions',
+                    'model_has_roles' => 'model_has_roles',
+                    'role_has_permissions' => 'role_has_permissions',
+                ],
+            ]);
 
-            $this->app->instance(Repository::class, $config);
-
-            // Mock the migrator using overload
-            $migrator = Mockery::mock('overload:Cline\Warden\Migrators\SpatieMigrator');
-            $migrator->shouldReceive('migrate')->once();
-
-            // Act & Assert
+            // Act & Assert - Migrator runs against empty database (won't migrate anything)
             $this
                 ->artisan('warden:spatie')
                 ->expectsOutput('Starting migration from Spatie Laravel Permission to Warden...')
@@ -184,28 +177,21 @@ describe('MigrateFromSpatieCommand', function (): void {
         })->group('happy-path');
 
         test('successfully migrates with custom log channel', function (): void {
-            // Arrange
-            $config = Mockery::mock(Repository::class);
-            $config->shouldReceive('get')
-                ->with('auth.defaults.guard')
-                ->once()
-                ->andReturn('web');
-            $config->shouldReceive('get')
-                ->with('auth.guards.web.provider')
-                ->once()
-                ->andReturn('users');
-            $config->shouldReceive('get')
-                ->with('auth.providers.users.model')
-                ->once()
-                ->andReturn('App\Models\User');
+            // Arrange - Set up real config
+            config([
+                'auth.defaults.guard' => 'web',
+                'auth.guards.web.provider' => 'users',
+                'auth.providers.users.model' => \Tests\Fixtures\Models\User::class,
+                'warden.migrators.spatie.tables' => [
+                    'permissions' => 'permissions',
+                    'roles' => 'roles',
+                    'model_has_permissions' => 'model_has_permissions',
+                    'model_has_roles' => 'model_has_roles',
+                    'role_has_permissions' => 'role_has_permissions',
+                ],
+            ]);
 
-            $this->app->instance(Repository::class, $config);
-
-            // Mock the migrator using overload
-            $migrator = Mockery::mock('overload:Cline\Warden\Migrators\SpatieMigrator');
-            $migrator->shouldReceive('migrate')->once();
-
-            // Act & Assert
+            // Act & Assert - Migrator runs against empty database (won't migrate anything)
             $this
                 ->artisan('warden:spatie', ['--log-channel' => 'custom'])
                 ->expectsOutput('Starting migration from Spatie Laravel Permission to Warden...')

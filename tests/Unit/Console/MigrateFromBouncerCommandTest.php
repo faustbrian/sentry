@@ -154,28 +154,20 @@ describe('MigrateFromBouncerCommand', function (): void {
 
     describe('Happy Paths', function (): void {
         test('successfully migrates when all configuration is valid', function (): void {
-            // Arrange
-            $config = Mockery::mock(Repository::class);
-            $config->shouldReceive('get')
-                ->with('auth.defaults.guard')
-                ->once()
-                ->andReturn('web');
-            $config->shouldReceive('get')
-                ->with('auth.guards.web.provider')
-                ->once()
-                ->andReturn('users');
-            $config->shouldReceive('get')
-                ->with('auth.providers.users.model')
-                ->once()
-                ->andReturn('App\Models\User');
+            // Arrange - Set up real config
+            config([
+                'auth.defaults.guard' => 'web',
+                'auth.guards.web.provider' => 'users',
+                'auth.providers.users.model' => \Tests\Fixtures\Models\User::class,
+                'warden.migrators.bouncer.tables' => [
+                    'abilities' => 'bouncer_abilities',
+                    'roles' => 'bouncer_roles',
+                    'assigned_roles' => 'bouncer_assigned_roles',
+                    'permissions' => 'bouncer_permissions',
+                ],
+            ]);
 
-            $this->app->instance(Repository::class, $config);
-
-            // Mock the migrator using overload
-            $migrator = Mockery::mock('overload:Cline\Warden\Migrators\BouncerMigrator');
-            $migrator->shouldReceive('migrate')->once();
-
-            // Act & Assert
+            // Act & Assert - Migrator runs against empty database (won't migrate anything)
             $this
                 ->artisan('warden:bouncer')
                 ->expectsOutput('Starting migration from Bouncer to Warden...')
@@ -184,28 +176,20 @@ describe('MigrateFromBouncerCommand', function (): void {
         })->group('happy-path');
 
         test('successfully migrates with custom log channel', function (): void {
-            // Arrange
-            $config = Mockery::mock(Repository::class);
-            $config->shouldReceive('get')
-                ->with('auth.defaults.guard')
-                ->once()
-                ->andReturn('web');
-            $config->shouldReceive('get')
-                ->with('auth.guards.web.provider')
-                ->once()
-                ->andReturn('users');
-            $config->shouldReceive('get')
-                ->with('auth.providers.users.model')
-                ->once()
-                ->andReturn('App\Models\User');
+            // Arrange - Set up real config
+            config([
+                'auth.defaults.guard' => 'web',
+                'auth.guards.web.provider' => 'users',
+                'auth.providers.users.model' => \Tests\Fixtures\Models\User::class,
+                'warden.migrators.bouncer.tables' => [
+                    'abilities' => 'bouncer_abilities',
+                    'roles' => 'bouncer_roles',
+                    'assigned_roles' => 'bouncer_assigned_roles',
+                    'permissions' => 'bouncer_permissions',
+                ],
+            ]);
 
-            $this->app->instance(Repository::class, $config);
-
-            // Mock the migrator using overload
-            $migrator = Mockery::mock('overload:Cline\Warden\Migrators\BouncerMigrator');
-            $migrator->shouldReceive('migrate')->once();
-
-            // Act & Assert
+            // Act & Assert - Migrator runs against empty database (won't migrate anything)
             $this
                 ->artisan('warden:bouncer', ['--log-channel' => 'custom'])
                 ->expectsOutput('Starting migration from Bouncer to Warden...')
@@ -214,28 +198,20 @@ describe('MigrateFromBouncerCommand', function (): void {
         })->group('happy-path');
 
         test('successfully migrates with custom guard name', function (): void {
-            // Arrange
-            $config = Mockery::mock(Repository::class);
-            $config->shouldReceive('get')
-                ->with('auth.defaults.guard')
-                ->once()
-                ->andReturn('web');
-            $config->shouldReceive('get')
-                ->with('auth.guards.web.provider')
-                ->once()
-                ->andReturn('users');
-            $config->shouldReceive('get')
-                ->with('auth.providers.users.model')
-                ->once()
-                ->andReturn('App\Models\User');
+            // Arrange - Set up real config
+            config([
+                'auth.defaults.guard' => 'web',
+                'auth.guards.web.provider' => 'users',
+                'auth.providers.users.model' => \Tests\Fixtures\Models\User::class,
+                'warden.migrators.bouncer.tables' => [
+                    'abilities' => 'bouncer_abilities',
+                    'roles' => 'bouncer_roles',
+                    'assigned_roles' => 'bouncer_assigned_roles',
+                    'permissions' => 'bouncer_permissions',
+                ],
+            ]);
 
-            $this->app->instance(Repository::class, $config);
-
-            // Mock the migrator using overload
-            $migrator = Mockery::mock('overload:Cline\Warden\Migrators\BouncerMigrator');
-            $migrator->shouldReceive('migrate')->once();
-
-            // Act & Assert
+            // Act & Assert - Migrator runs against empty database (won't migrate anything)
             $this
                 ->artisan('warden:bouncer', ['--guard' => 'api'])
                 ->expectsOutput('Starting migration from Bouncer to Warden...')
