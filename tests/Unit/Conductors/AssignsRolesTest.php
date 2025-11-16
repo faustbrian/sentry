@@ -224,5 +224,46 @@ describe('AssignsRoles Conductor', function (): void {
             expect($result)->toBeTrue();
             expect($user->fresh()->roles)->toHaveCount(0);
         });
+
+        test('skips assignment when authority does not exist', function (): void {
+            // Arrange
+            $existingUser = User::query()->create(['name' => 'David']);
+            $nonExistentUserId = 99_999; // ID that doesn't exist
+            $role = Role::query()->create(['name' => 'admin']);
+
+            // Configure keymap to use 'id' column
+            Models::enforceMorphKeyMap([
+                User::class => 'id',
+            ]);
+
+            $conductor = new AssignsRoles('admin');
+
+            // Act - Try to assign role to both existing and non-existent user
+            $result = $conductor->to([$existingUser->id, $nonExistentUserId]);
+
+            // Assert - Operation completes successfully
+            expect($result)->toBeTrue();
+
+            // Existing user should have the role
+            expect($existingUser->fresh()->roles)->toHaveCount(1);
+            expect($existingUser->fresh()->roles->first()->name)->toBe('admin');
+
+            // Verify no assignment was created for the non-existent user
+            $assignmentCount = $this->db()
+                ->table('assigned_roles')
+                ->where('role_id', $role->id)
+                ->where('actor_id', $nonExistentUserId)
+                ->count();
+
+            expect($assignmentCount)->toBe(0);
+
+            // Verify only one assignment exists total (for the existing user)
+            $totalAssignments = $this->db()
+                ->table('assigned_roles')
+                ->where('role_id', $role->id)
+                ->count();
+
+            expect($totalAssignments)->toBe(1);
+        });
     });
 });

@@ -11,6 +11,8 @@ use Cline\Warden\Database\Role;
 use Cline\Warden\Enums\PrimaryKeyType;
 use Cline\Warden\Support\PrimaryKeyGenerator;
 use Illuminate\Support\Str;
+use Tests\Fixtures\Models\Organization;
+use Tests\Fixtures\Models\TestModelWithWardenKey;
 
 describe('HasWardenPrimaryKey Trait', function (): void {
     describe('Happy Path - Model Configuration', function (): void {
@@ -317,5 +319,6 @@ describe('HasWardenPrimaryKey Trait', function (): void {
             expect($role->getIncrementing())->toBeFalse()
                 ->and($role->getKeyType())->toBe('string');
         })->group('edge-case');
+
     });
 });

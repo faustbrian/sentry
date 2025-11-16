@@ -220,6 +220,17 @@ describe('Models', function (): void {
             $this->expectExceptionMessage(User::class);
             Models::getModelKey($user);
         });
+
+        test('throws exception when user model not configured', function (): void {
+            // Arrange
+            // Models::reset() already called in beforeEach, so user model is not set
+
+            // Act & Assert
+            expect(fn (): mixed => Models::user())->toThrow(
+                RuntimeException::class,
+                'User model not configured',
+            );
+        });
     });
 
     describe('Edge Cases', function (): void {
@@ -253,7 +264,7 @@ describe('Models', function (): void {
 
             // Assert
             expect($result)->toBe(
-                new User()->getKeyName()
+                new User()->getKeyName(),
             );
         });
 
