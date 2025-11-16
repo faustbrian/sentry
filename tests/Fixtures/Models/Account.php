@@ -10,6 +10,7 @@
 namespace Tests\Fixtures\Models;
 
 use Cline\Warden\Database\Concerns\Authorizable;
+use Cline\Warden\Database\Concerns\HasWardenPrimaryKey;
 use Cline\Warden\Database\HasRolesAndAbilities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,7 @@ final class Account extends Model
     use HasFactory;
     use Authorizable;
     use HasRolesAndAbilities;
+    use HasWardenPrimaryKey;
 
     protected $guarded = [];
 

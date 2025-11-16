@@ -9,6 +9,7 @@
 
 namespace Tests\Fixtures\Models;
 
+use Cline\Warden\Database\Concerns\HasWardenPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 final class Team extends Model
 {
     use HasFactory;
+    use HasWardenPrimaryKey;
 
     protected $guarded = [];
 }
