@@ -120,7 +120,7 @@ final class CachedClipboard extends AbstractClipboard implements CachedClipboard
             $authority,
         );
 
-        if ($forbiddenId) {
+        if ($forbiddenId !== null) {
             return false;
         }
 

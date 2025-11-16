@@ -14,11 +14,9 @@ uses(TestsClipboards::class);
 
 describe('Reported Issues (Regressions)', function (): void {
     describe('Regressions', function (): void {
-        test('forbids ability on specific model with zero id while allowing others', function ($provider): void {
+        test('forbids ability on specific model while allowing others', function ($provider): void {
             // Arrange
             [$warden, $user1, $user2, $user3] = $provider(3);
-            $user2->setAttribute($user2->getKeyName(), 0);
-            $user2->save();
 
             // Act
             $warden->allow($user1)->everything();

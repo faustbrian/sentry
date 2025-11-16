@@ -39,6 +39,11 @@ beforeEach(function (): void {
     $this->user = SpatieUser::query()->create();
 });
 
+afterEach(function (): void {
+    // Clear model boot state after each test to prevent cross-contamination
+    \Illuminate\Database\Eloquent\Model::clearBootedModels();
+});
+
 describe('Spatie migrator with guard_name', function (): void {
     test('migrates roles with guard_name from Spatie tables', function (): void {
         DB::table('spatie_roles')->insert([
@@ -229,7 +234,7 @@ describe('Spatie migrator edge cases', function (): void {
             'updated_at' => now(),
         ]);
 
-        DB::table('spatie_model_has_roles')->insert([
+        insertWithoutForeignKeyChecks('spatie_model_has_roles', [
             'role_id' => 1,
             'model_type' => 'user',
             'model_id' => 99_999, // Non-existent user
@@ -244,7 +249,7 @@ describe('Spatie migrator edge cases', function (): void {
     });
 
     test('skips assignments for non-existent permissions', function (): void {
-        DB::table('spatie_model_has_permissions')->insert([
+        insertWithoutForeignKeyChecks('spatie_model_has_permissions', [
             'permission_id' => 99_999, // Non-existent permission
             'model_type' => 'user',
             'model_id' => $this->user->id,
@@ -265,7 +270,7 @@ describe('Spatie migrator edge cases', function (): void {
             'updated_at' => now(),
         ]);
 
-        DB::table('spatie_role_has_permissions')->insert([
+        insertWithoutForeignKeyChecks('spatie_role_has_permissions', [
             'permission_id' => 1,
             'role_id' => 99_999, // Non-existent role
         ]);
@@ -285,7 +290,7 @@ describe('Spatie migrator edge cases', function (): void {
             'updated_at' => now(),
         ]);
 
-        DB::table('spatie_role_has_permissions')->insert([
+        insertWithoutForeignKeyChecks('spatie_role_has_permissions', [
             'permission_id' => 99_999, // Non-existent permission
             'role_id' => 1,
         ]);
@@ -312,7 +317,7 @@ describe('Bouncer migrator edge cases', function (): void {
             'updated_at' => now(),
         ]);
 
-        DB::table('bouncer_permissions')->insert([
+        insertWithoutForeignKeyChecks('bouncer_permissions', [
             'ability_id' => 1,
             'entity_type' => BouncerUser::class,
             'entity_id' => 99_999, // Non-existent user
@@ -376,7 +381,7 @@ describe('Bouncer migrator edge cases', function (): void {
             'updated_at' => now(),
         ]);
 
-        DB::table('bouncer_permissions')->insert([
+        insertWithoutForeignKeyChecks('bouncer_permissions', [
             'ability_id' => 1,
             'entity_type' => Models::role()::class,
             'entity_id' => 99_999, // Non-existent role
@@ -501,7 +506,7 @@ describe('Bouncer migrator edge cases', function (): void {
             'updated_at' => now(),
         ]);
 
-        DB::table('spatie_model_has_permissions')->insert([
+        insertWithoutForeignKeyChecks('spatie_model_has_permissions', [
             'permission_id' => 1,
             'model_type' => User::class,
             'model_id' => 99_999, // Non-existent user

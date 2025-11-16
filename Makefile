@@ -46,43 +46,43 @@ test\:docker\:all: test\:docker\:sqlite\:id test\:docker\:sqlite\:ulid test\:doc
 test\:docker\:sqlite: test\:docker\:sqlite\:id test\:docker\:sqlite\:ulid test\:docker\:sqlite\:uuid
 
 test\:docker\:sqlite\:id: build
-	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest $(ARGS)
 
 test\:docker\:sqlite\:ulid: build
-	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest $(ARGS)
 
 test\:docker\:sqlite\:uuid: build
-	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_CONTEXT_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_CONTEXT_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest $(ARGS)
 
 # MySQL tests (all key types)
 test\:docker\:mysql: test\:docker\:mysql\:id test\:docker\:mysql\:ulid test\:docker\:mysql\:uuid
 
 test\:docker\:mysql\:id: build
 	docker-compose up -d mysql
-	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest $(ARGS)
 
 test\:docker\:mysql\:ulid: build
 	docker-compose up -d mysql
-	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest $(ARGS)
 
 test\:docker\:mysql\:uuid: build
 	docker-compose up -d mysql
-	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_CONTEXT_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_CONTEXT_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest $(ARGS)
 
 # PostgreSQL tests (all key types)
 test\:docker\:postgres: test\:docker\:postgres\:id test\:docker\:postgres\:ulid test\:docker\:postgres\:uuid
 
 test\:docker\:postgres\:id: build
 	docker-compose up -d postgres
-	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest $(ARGS)
 
 test\:docker\:postgres\:ulid: build
 	docker-compose up -d postgres
-	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest $(ARGS)
 
 test\:docker\:postgres\:uuid: build
 	docker-compose up -d postgres
-	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_CONTEXT_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest
+	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_CONTEXT_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest $(ARGS)
 
 # Local tests (without Docker) for different primary key types
 test\:local: build

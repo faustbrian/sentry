@@ -47,6 +47,11 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        Mockery::close();
+
+        // Clear booted models to prevent stale event listeners
+        Model::clearBootedModels();
+
         Models::setUsersModel(User::class);
 
         $keyName = new User()->getKeyName();
@@ -64,6 +69,8 @@ abstract class TestCase extends BaseTestCase
     #[Override()]
     protected function tearDown(): void
     {
+        // Clear booted models after test to prevent contamination
+        Model::clearBootedModels();
         Mockery::close();
         parent::tearDown();
     }

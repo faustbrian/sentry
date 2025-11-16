@@ -27,6 +27,11 @@ beforeEach(function (): void {
     Config::set('warden.migrators.spatie.model_type', 'user');
 });
 
+afterEach(function (): void {
+    // Clear model boot state after each test to prevent cross-contamination
+    \Illuminate\Database\Eloquent\Model::clearBootedModels();
+});
+
 describe('SpatieMigrator', function (): void {
     describe('Happy Paths', function (): void {
         test('migrates roles from Spatie to Warden', function (): void {

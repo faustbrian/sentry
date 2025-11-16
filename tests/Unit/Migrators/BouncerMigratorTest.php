@@ -24,6 +24,11 @@ beforeEach(function (): void {
     Config::set('warden.migrators.bouncer.entity_type', User::class);
 });
 
+afterEach(function (): void {
+    // Clear model boot state after each test to prevent cross-contamination
+    \Illuminate\Database\Eloquent\Model::clearBootedModels();
+});
+
 describe('BouncerMigrator', function (): void {
     describe('Happy Paths', function (): void {
         test('migrates roles from Bouncer to Warden', function (): void {
@@ -89,10 +94,14 @@ describe('BouncerMigrator', function (): void {
                 'name' => 'delete-own-posts',
                 'title' => 'Delete Own Posts',
                 'only_owned' => true,
-                'options' => json_encode(['limit' => 10]),
                 'subject_id' => null,
                 'subject_type' => null,
             ]);
+
+            // Verify JSON options separately (PostgreSQL doesn't support = on JSON)
+            $ability = Models::ability()->where('name', 'delete-own-posts')->first();
+            expect($ability)->not->toBeNull();
+            expect($ability->options)->toBe(['limit' => 10]);
         });
 
         test('migrates user role assignments from Bouncer to Warden', function (): void {
@@ -346,13 +355,7 @@ describe('BouncerMigrator', function (): void {
             // Arrange
             $user = BouncerUser::query()->create(['name' => 'Alice Johnson']);
 
-            if (DB::getDriverName() === 'pgsql') {
-                DB::statement('SET CONSTRAINTS ALL DEFERRED');
-            } elseif (DB::getDriverName() === 'mysql') {
-                DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            }
-
-            DB::table('bouncer_assigned_roles')->insert([
+            insertWithoutForeignKeyChecks('bouncer_assigned_roles', [
                 'role_id' => 99_999, // Non-existent role
                 'entity_type' => User::class,
                 'entity_id' => $user->id,
@@ -360,12 +363,6 @@ describe('BouncerMigrator', function (): void {
                 'restricted_to_type' => null,
                 'scope' => null,
             ]);
-
-            if (DB::getDriverName() === 'pgsql') {
-                DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
-            } elseif (DB::getDriverName() === 'mysql') {
-                DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            }
 
             $migrator = new BouncerMigrator(BouncerUser::class);
 
@@ -380,25 +377,13 @@ describe('BouncerMigrator', function (): void {
             // Arrange
             $user = BouncerUser::query()->create(['name' => 'Charlie Brown']);
 
-            if (DB::getDriverName() === 'pgsql') {
-                DB::statement('SET CONSTRAINTS ALL DEFERRED');
-            } elseif (DB::getDriverName() === 'mysql') {
-                DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            }
-
-            DB::table('bouncer_permissions')->insert([
+            insertWithoutForeignKeyChecks('bouncer_permissions', [
                 'ability_id' => 99_999, // Non-existent ability
                 'entity_id' => $user->id,
                 'entity_type' => User::class,
                 'forbidden' => false,
                 'scope' => null,
             ]);
-
-            if (DB::getDriverName() === 'pgsql') {
-                DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
-            } elseif (DB::getDriverName() === 'mysql') {
-                DB::statement('SET FOREIGN_KEY_CHECKS=1');
-            }
 
             $migrator = new BouncerMigrator(BouncerUser::class);
 
