@@ -16,7 +16,7 @@ use Cline\Warden\Support\Helpers;
 use Cline\Warden\Support\PrimaryKeyGenerator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 use function array_map;
 use function assert;
@@ -163,9 +163,9 @@ final class AssignsRoles
 
             Log::channel('migration')->debug('AssignsRoles debug', [
                 'authority' => $authority->getKey(),
-                'roleIds' => $roleIds->toArray(),
+                'roleIds' => $roleIds->all(),
                 'existing' => $existing,
-                'toAttach' => $toAttach->toArray(),
+                'toAttach' => $toAttach->all(),
             ]);
 
             if ($toAttach->isNotEmpty()) {

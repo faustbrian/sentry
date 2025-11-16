@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-use Cline\Warden\Database\Ability;
 use Cline\Warden\Database\Models;
 use Cline\Warden\Database\Queries\Abilities;
 use Cline\Warden\Database\Role;

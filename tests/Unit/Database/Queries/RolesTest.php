@@ -494,6 +494,7 @@ describe('Roles Query', function (): void {
             // Assign roles to specific users
             $user1->assign($adminRole);
             $user1->assign($editorRole);
+
             $user2->assign($subscriberRole);
             // user3 has no roles
 
