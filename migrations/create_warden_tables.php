@@ -39,13 +39,13 @@ return new class() extends Migration
             match ($subjectMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('subject'),
                 MorphType::UUID => $table->nullableUuidMorphs('subject'),
-                default => $table->nullableMorphs('subject'),
+                default => $table->nullableNumericMorphs('subject'),
             };
 
             match ($contextMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('context'),
                 MorphType::UUID => $table->nullableUuidMorphs('context'),
-                default => $table->nullableMorphs('context'),
+                default => $table->nullableNumericMorphs('context'),
             };
 
             $table->boolean('only_owned')->default(false);
@@ -88,19 +88,19 @@ return new class() extends Migration
             match ($actorMorphType) {
                 MorphType::ULID => $table->ulidMorphs('actor'),
                 MorphType::UUID => $table->uuidMorphs('actor'),
-                default => $table->morphs('actor'),
+                default => $table->numericMorphs('actor'),
             };
 
             match ($contextMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('context'),
                 MorphType::UUID => $table->nullableUuidMorphs('context'),
-                default => $table->nullableMorphs('context'),
+                default => $table->nullableNumericMorphs('context'),
             };
 
             match ($actorMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('restricted_to'),
                 MorphType::UUID => $table->nullableUuidMorphs('restricted_to'),
-                default => $table->nullableMorphs('restricted_to'),
+                default => $table->nullableNumericMorphs('restricted_to'),
             };
 
             $table->integer('scope')->nullable()->index();
@@ -127,13 +127,13 @@ return new class() extends Migration
             match ($actorMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('actor'),
                 MorphType::UUID => $table->nullableUuidMorphs('actor'),
-                default => $table->nullableMorphs('actor'),
+                default => $table->nullableNumericMorphs('actor'),
             };
 
             match ($contextMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('context'),
                 MorphType::UUID => $table->nullableUuidMorphs('context'),
-                default => $table->nullableMorphs('context'),
+                default => $table->nullableNumericMorphs('context'),
             };
 
             $table->boolean('forbidden')->default(false);

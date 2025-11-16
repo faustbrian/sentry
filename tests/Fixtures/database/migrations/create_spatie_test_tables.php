@@ -69,7 +69,7 @@ return new class() extends Migration
                 match ($morphType) {
                     MorphType::ULID => $table->nullableUlidMorphs('actor'),
                     MorphType::UUID => $table->nullableUuidMorphs('actor'),
-                    default => $table->nullableMorphs('actor'),
+                    default => $table->nullableNumericMorphs('actor'),
                 };
                 $table->string('name')->nullable();
                 $table->boolean('active')->default(true);
