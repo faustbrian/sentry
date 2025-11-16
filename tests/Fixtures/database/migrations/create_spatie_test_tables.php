@@ -64,7 +64,14 @@ return new class() extends Migration
 
         if (!Schema::hasTable('accounts')) {
             Schema::create('accounts', function ($table): void {
-                $table->id();
+                $keyType = config('warden.primary_key_type', 'id');
+
+                match ($keyType) {
+                    'ulid' => $table->ulid('id')->primary(),
+                    'uuid' => $table->uuid('id')->primary(),
+                    default => $table->id(),
+                };
+
                 $morphType = MorphType::tryFrom(config('warden.actor_morph_type', 'morph')) ?? MorphType::Morph;
                 match ($morphType) {
                     MorphType::ULID => $table->nullableUlidMorphs('actor'),
@@ -79,7 +86,14 @@ return new class() extends Migration
 
         if (!Schema::hasTable('teams')) {
             Schema::create('teams', function ($table): void {
-                $table->id();
+                $keyType = config('warden.primary_key_type', 'id');
+
+                match ($keyType) {
+                    'ulid' => $table->ulid('id')->primary(),
+                    'uuid' => $table->uuid('id')->primary(),
+                    default => $table->id(),
+                };
+
                 $table->string('name');
                 $table->timestamps();
             });
