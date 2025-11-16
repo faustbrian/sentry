@@ -109,7 +109,7 @@ return [
 
     'morphKeyMap' => [
         // App\Models\User::class => 'id',
-        // App\Models\Organization::class => 'ulid',
+        // App\Models\Organization::class => 'id',
     ],
 
     /*
@@ -134,7 +134,7 @@ return [
 
     'enforceMorphKeyMap' => [
         // App\Models\User::class => 'id',
-        // App\Models\Organization::class => 'ulid',
+        // App\Models\Organization::class => 'id',
     ],
 
     /*
