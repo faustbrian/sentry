@@ -14,6 +14,7 @@ use Cline\Warden\Support\PrimaryKeyGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 use function config;
+use function in_array;
 
 /**
  * Configures primary key type based on Warden configuration.
@@ -31,7 +32,7 @@ trait HasWardenPrimaryKey
      */
     public function getIncrementing(): bool
     {
-        if (\in_array($this->getKeyName(), $this->uniqueIds(), true)) {
+        if (in_array($this->getKeyName(), $this->uniqueIds(), true)) {
             return false;
         }
 
@@ -43,7 +44,7 @@ trait HasWardenPrimaryKey
      */
     public function getKeyType(): string
     {
-        if (\in_array($this->getKeyName(), $this->uniqueIds(), true)) {
+        if (in_array($this->getKeyName(), $this->uniqueIds(), true)) {
             return 'string';
         }
 

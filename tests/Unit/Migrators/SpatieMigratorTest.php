@@ -11,7 +11,6 @@ use Cline\Warden\Database\Models;
 use Cline\Warden\Migrators\SpatieMigrator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Tests\Fixtures\Models\SoftDeletesUser;
 use Tests\Fixtures\Models\SoftDeletesSpatieUser;
 use Tests\Fixtures\Models\SpatieUser;
 

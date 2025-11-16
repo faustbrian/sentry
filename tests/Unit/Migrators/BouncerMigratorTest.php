@@ -11,9 +11,8 @@ use Cline\Warden\Database\Models;
 use Cline\Warden\Migrators\BouncerMigrator;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Tests\Fixtures\Models\SoftDeletesUser;
-use Tests\Fixtures\Models\SoftDeletesBouncerUser;
 use Tests\Fixtures\Models\BouncerUser;
+use Tests\Fixtures\Models\SoftDeletesBouncerUser;
 
 beforeEach(function (): void {
     Config::set('warden.migrators.bouncer.tables', [
@@ -352,6 +351,7 @@ describe('BouncerMigrator', function (): void {
             } elseif (DB::getDriverName() === 'mysql') {
                 DB::statement('SET FOREIGN_KEY_CHECKS=0');
             }
+
             DB::table('bouncer_assigned_roles')->insert([
                 'role_id' => 99_999, // Non-existent role
                 'entity_type' => User::class,
@@ -360,6 +360,7 @@ describe('BouncerMigrator', function (): void {
                 'restricted_to_type' => null,
                 'scope' => null,
             ]);
+
             if (DB::getDriverName() === 'pgsql') {
                 DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
             } elseif (DB::getDriverName() === 'mysql') {
@@ -384,6 +385,7 @@ describe('BouncerMigrator', function (): void {
             } elseif (DB::getDriverName() === 'mysql') {
                 DB::statement('SET FOREIGN_KEY_CHECKS=0');
             }
+
             DB::table('bouncer_permissions')->insert([
                 'ability_id' => 99_999, // Non-existent ability
                 'entity_id' => $user->id,
@@ -391,6 +393,7 @@ describe('BouncerMigrator', function (): void {
                 'forbidden' => false,
                 'scope' => null,
             ]);
+
             if (DB::getDriverName() === 'pgsql') {
                 DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
             } elseif (DB::getDriverName() === 'mysql') {

@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * User model for Bouncer migration tests.
  * Always uses bigint ID to match Bouncer's legacy table structure.
- * 
+ *
  * @author Brian Faust <brian@cline.sh>
  */
 final class BouncerUser extends Model
@@ -27,5 +27,6 @@ final class BouncerUser extends Model
     use HasRolesAndAbilities;
 
     protected $table = 'bouncer_users';
+
     protected $guarded = [];
 }

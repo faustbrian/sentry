@@ -12,8 +12,8 @@ use Cline\Warden\Migrators\BouncerMigrator;
 use Cline\Warden\Migrators\SpatieMigrator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use Tests\Fixtures\Models\SpatieUser;
 use Tests\Fixtures\Models\BouncerUser;
+use Tests\Fixtures\Models\SpatieUser;
 use Tests\Fixtures\Models\UserWithSoftDeletes;
 
 require_once __DIR__.'/../../Helpers.php';

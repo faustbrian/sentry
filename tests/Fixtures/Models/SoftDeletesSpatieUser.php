@@ -29,5 +29,6 @@ final class SoftDeletesSpatieUser extends Model
     use SoftDeletes;
 
     protected $table = 'spatie_users';
+
     protected $guarded = [];
 }

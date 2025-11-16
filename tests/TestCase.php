@@ -20,6 +20,7 @@ use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Override;
 use Tests\Fixtures\Models\Account;
@@ -63,7 +64,7 @@ abstract class TestCase extends BaseTestCase
     #[Override()]
     protected function tearDown(): void
     {
-        \Mockery::close();
+        Mockery::close();
         parent::tearDown();
     }
 

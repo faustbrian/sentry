@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Legacy user model for Spatie migration tests.
  * Always uses bigint ID to match Spatie's legacy table structure.
- * 
+ *
  * @author Brian Faust <brian@cline.sh>
  */
 final class SpatieUser extends Model
@@ -27,5 +27,6 @@ final class SpatieUser extends Model
     use HasRolesAndAbilities;
 
     protected $table = 'spatie_users';
+
     protected $guarded = [];
 }

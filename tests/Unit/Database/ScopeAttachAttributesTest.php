@@ -11,6 +11,7 @@ use Cline\Warden\Database\Models;
 use Cline\Warden\Database\Role;
 use Cline\Warden\Database\Scope\Scope;
 use Cline\Warden\Enums\PrimaryKeyType;
+use Illuminate\Support\Facades\Schema;
 use Tests\Fixtures\Models\User;
 
 describe('Scope getAttachAttributes with Primary Key Generation', function (): void {
@@ -81,8 +82,8 @@ describe('Scope getAttachAttributes with Primary Key Generation', function (): v
             config(['warden.primary_key_type' => PrimaryKeyType::ULID->value]);
 
             // Recreate users table with correct column type
-            \Illuminate\Support\Facades\Schema::dropIfExists('users');
-            \Illuminate\Support\Facades\Schema::create('users', function ($table): void {
+            Schema::dropIfExists('users');
+            Schema::create('users', function ($table): void {
                 $table->ulid('id')->primary();
                 $table->string('name')->nullable();
                 $table->integer('age')->nullable();
@@ -108,8 +109,8 @@ describe('Scope getAttachAttributes with Primary Key Generation', function (): v
             config(['warden.primary_key_type' => PrimaryKeyType::UUID->value]);
 
             // Recreate users table with correct column type
-            \Illuminate\Support\Facades\Schema::dropIfExists('users');
-            \Illuminate\Support\Facades\Schema::create('users', function ($table): void {
+            Schema::dropIfExists('users');
+            Schema::create('users', function ($table): void {
                 $table->uuid('id')->primary();
                 $table->string('name')->nullable();
                 $table->integer('age')->nullable();

@@ -29,5 +29,6 @@ final class SoftDeletesBouncerUser extends Model
     use SoftDeletes;
 
     protected $table = 'bouncer_users';
+
     protected $guarded = [];
 }

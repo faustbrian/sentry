@@ -168,7 +168,7 @@ describe('Auto Titles', function (): void {
             $warden->allow($user)->to('delete', $targetUser);
 
             // Assert
-            expect($warden->ability()->first()->title)->toEqual("Delete user #{$targetUser->id}");
+            expect($warden->ability()->first()->title)->toEqual('Delete user #'.$targetUser->id);
         });
 
         test('generates "[Action] everything" title for global action ability', function (): void {
