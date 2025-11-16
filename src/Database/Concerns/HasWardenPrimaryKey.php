@@ -27,22 +27,41 @@ use function config;
 trait HasWardenPrimaryKey
 {
     /**
-     * Initialize the HasWardenPrimaryKey trait.
-     *
-     * Configures the model's primary key behavior based on the configured type.
-     * For ULID and UUID types, this sets incrementing to false and applies the
-     * appropriate key type.
+     * Get the casts array with dynamic primary key casting.
      */
-    public function initializeHasWardenPrimaryKey(): void
+    public function getCasts(): array
     {
-        /** @var int|string $configValue */
-        $configValue = config('warden.primary_key_type', 'id');
-        $primaryKeyType = PrimaryKeyType::tryFrom($configValue) ?? PrimaryKeyType::ID;
+        $casts = parent::getCasts();
 
-        match ($primaryKeyType) {
-            PrimaryKeyType::ULID, PrimaryKeyType::UUID => $this->configureStringKey(),
-            PrimaryKeyType::ID => null,
-        };
+        if (\in_array($this->getKeyName(), $this->uniqueIds(), true)) {
+            $casts[$this->getKeyName()] = 'string';
+        }
+
+        return $casts;
+    }
+
+    /**
+     * Get the value indicating whether the IDs are incrementing.
+     */
+    public function getIncrementing(): bool
+    {
+        if (\in_array($this->getKeyName(), $this->uniqueIds(), true)) {
+            return false;
+        }
+
+        return $this->incrementing;
+    }
+
+    /**
+     * Get the data type of the primary key.
+     */
+    public function getKeyType(): string
+    {
+        if (\in_array($this->getKeyName(), $this->uniqueIds(), true)) {
+            return 'string';
+        }
+
+        return $this->keyType;
     }
 
     /**
@@ -52,7 +71,14 @@ trait HasWardenPrimaryKey
      */
     public function uniqueIds(): array
     {
-        return [$this->getKeyName()];
+        /** @var int|string $configValue */
+        $configValue = config('warden.primary_key_type', 'id');
+        $primaryKeyType = PrimaryKeyType::tryFrom($configValue) ?? PrimaryKeyType::ID;
+
+        return match ($primaryKeyType) {
+            PrimaryKeyType::ULID, PrimaryKeyType::UUID => [$this->getKeyName()],
+            PrimaryKeyType::ID => [],
+        };
     }
 
     /**
@@ -76,14 +102,5 @@ trait HasWardenPrimaryKey
                 $model->setAttribute($keyName, $primaryKey->value);
             }
         });
-    }
-
-    /**
-     * Configure the model to use string-based primary keys (ULID/UUID).
-     */
-    protected function configureStringKey(): void
-    {
-        $this->incrementing = false;
-        $this->keyType = 'string';
     }
 }

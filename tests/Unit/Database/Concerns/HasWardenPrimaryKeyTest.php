@@ -62,8 +62,9 @@ describe('HasWardenPrimaryKey Trait', function (): void {
                 ->and($role->id)->toBeGreaterThan(0);
         })->skip(fn (): bool => config('warden.primary_key_type') !== 'id', 'Test requires ID primary key type')->group('happy-path');
 
-        test('uniqueIds returns array with primary key name', function (): void {
+        test('uniqueIds returns empty array for auto-increment keys', function (): void {
             // Arrange
+            config(['warden.primary_key_type' => PrimaryKeyType::ID->value]);
             $role = new Role();
 
             // Act
@@ -71,9 +72,7 @@ describe('HasWardenPrimaryKey Trait', function (): void {
 
             // Assert
             expect($uniqueIds)->toBeArray()
-                ->and($uniqueIds)->toHaveCount(1)
-                ->and($uniqueIds[0])->toBe('id')
-                ->and($uniqueIds[0])->toBe($role->getKeyName());
+                ->and($uniqueIds)->toBeEmpty();
         })->group('happy-path');
     });
 
@@ -136,8 +135,9 @@ describe('HasWardenPrimaryKey Trait', function (): void {
     });
 
     describe('Edge Cases - Configuration Edge Cases', function (): void {
-        test('uniqueIds returns array containing default primary key name', function (): void {
+        test('uniqueIds returns array containing default primary key name for ULID', function (): void {
             // Arrange
+            config(['warden.primary_key_type' => PrimaryKeyType::ULID->value]);
             $role = new Role();
 
             // Act

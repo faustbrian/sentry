@@ -79,6 +79,18 @@ describe('Scope getAttachAttributes with Primary Key Generation', function (): v
         test('getAttachAttributes with authority parameter works with ULID', function (): void {
             // Arrange
             config(['warden.primary_key_type' => PrimaryKeyType::ULID->value]);
+
+            // Recreate users table with correct column type
+            \Illuminate\Support\Facades\Schema::dropIfExists('users');
+            \Illuminate\Support\Facades\Schema::create('users', function ($table): void {
+                $table->ulid('id')->primary();
+                $table->string('name')->nullable();
+                $table->integer('age')->nullable();
+                $table->integer('account_id')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+
             $scope = new Scope();
             $scope->to('tenant-1');
 
@@ -94,6 +106,18 @@ describe('Scope getAttachAttributes with Primary Key Generation', function (): v
         test('getAttachAttributes with authority parameter works with UUID', function (): void {
             // Arrange
             config(['warden.primary_key_type' => PrimaryKeyType::UUID->value]);
+
+            // Recreate users table with correct column type
+            \Illuminate\Support\Facades\Schema::dropIfExists('users');
+            \Illuminate\Support\Facades\Schema::create('users', function ($table): void {
+                $table->uuid('id')->primary();
+                $table->string('name')->nullable();
+                $table->integer('age')->nullable();
+                $table->integer('account_id')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+
             $scope = new Scope();
             $scope->to('tenant-1');
 
