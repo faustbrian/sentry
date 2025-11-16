@@ -21,7 +21,6 @@
         <testsuite name="default">
             <directory suffix=".php">./tests</directory>
             <exclude>./tests/Unit/Console</exclude>
-            <exclude>./tests/Unit/WardenTest.php</exclude>
         </testsuite>
     </testsuites>
 </phpunit>
