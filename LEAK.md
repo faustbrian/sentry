@@ -35,12 +35,17 @@ This is NOT a simple case of Console tests leaking state directly - Console test
 
 ## Files Involved
 
-### Leaking Tests (Suspects)
-- `tests/Unit/Console/MigrateFromBouncerCommandTest.php`
-- `tests/Unit/Console/MigrateFromSpatieCommandTest.php`
+### Leaking Tests (CONFIRMED)
+- **`tests/Unit/Console/MigrateFromBouncerCommandTest.php`** ✓ CONFIRMED CULPRIT
+- **`tests/Unit/Console/MigrateFromSpatieCommandTest.php`** ✓ CONFIRMED CULPRIT
 
-### Affected Test
-- `tests/Unit/Migrators/BouncerMigratorTest.php`
+### Affected Tests
+- `tests/Unit/Migrators/BouncerMigratorTest.php` (17 tests fail)
+- `tests/Unit/Migrators/GuardMigrationTest.php` (fails)
+- `tests/Unit/Migrators/SpatieMigratorTest.php` (fails)
+
+### Pattern
+The Console commands that **call** the migrators are affecting the migrator **tests** themselves. This suggests the commands are leaving behind state that the migrator tests then encounter.
 
 ## Investigation Tasks
 
