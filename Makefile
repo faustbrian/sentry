@@ -78,7 +78,7 @@ test\:docker\:postgres\:id: build
 
 test\:docker\:postgres\:ulid: build
 	docker-compose up -d postgres
-	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest $(ARGS)
+	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_CONTEXT_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest --configuration=phpunit.ulid.xml $(ARGS)
 
 test\:docker\:postgres\:uuid: build
 	docker-compose up -d postgres
