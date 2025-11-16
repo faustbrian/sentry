@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Models\BouncerUser;
 use Tests\Fixtures\Models\SoftDeletesBouncerUser;
+use Tests\Fixtures\Models\User;
 
 beforeEach(function (): void {
     Config::set('warden.migrators.bouncer.tables', [
