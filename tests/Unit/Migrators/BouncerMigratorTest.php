@@ -347,7 +347,11 @@ describe('BouncerMigrator', function (): void {
             // Arrange
             $user = BouncerUser::query()->create(['name' => 'Alice Johnson']);
 
-            DB::statement('SET CONSTRAINTS ALL DEFERRED');
+            if (DB::getDriverName() === 'pgsql') {
+                DB::statement('SET CONSTRAINTS ALL DEFERRED');
+            } elseif (DB::getDriverName() === 'mysql') {
+                DB::statement('SET FOREIGN_KEY_CHECKS=0');
+            }
             DB::table('bouncer_assigned_roles')->insert([
                 'role_id' => 99_999, // Non-existent role
                 'entity_type' => User::class,
@@ -356,7 +360,11 @@ describe('BouncerMigrator', function (): void {
                 'restricted_to_type' => null,
                 'scope' => null,
             ]);
-            DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
+            if (DB::getDriverName() === 'pgsql') {
+                DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
+            } elseif (DB::getDriverName() === 'mysql') {
+                DB::statement('SET FOREIGN_KEY_CHECKS=1');
+            }
 
             $migrator = new BouncerMigrator(BouncerUser::class);
 
@@ -371,7 +379,11 @@ describe('BouncerMigrator', function (): void {
             // Arrange
             $user = BouncerUser::query()->create(['name' => 'Charlie Brown']);
 
-            DB::statement('SET CONSTRAINTS ALL DEFERRED');
+            if (DB::getDriverName() === 'pgsql') {
+                DB::statement('SET CONSTRAINTS ALL DEFERRED');
+            } elseif (DB::getDriverName() === 'mysql') {
+                DB::statement('SET FOREIGN_KEY_CHECKS=0');
+            }
             DB::table('bouncer_permissions')->insert([
                 'ability_id' => 99_999, // Non-existent ability
                 'entity_id' => $user->id,
@@ -379,7 +391,11 @@ describe('BouncerMigrator', function (): void {
                 'forbidden' => false,
                 'scope' => null,
             ]);
-            DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
+            if (DB::getDriverName() === 'pgsql') {
+                DB::statement('SET CONSTRAINTS ALL IMMEDIATE');
+            } elseif (DB::getDriverName() === 'mysql') {
+                DB::statement('SET FOREIGN_KEY_CHECKS=1');
+            }
 
             $migrator = new BouncerMigrator(BouncerUser::class);
 

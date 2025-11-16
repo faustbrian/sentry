@@ -58,6 +58,16 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * Clean up after each test.
+     */
+    #[Override()]
+    protected function tearDown(): void
+    {
+        \Mockery::close();
+        parent::tearDown();
+    }
+
+    /**
      * Get a bouncer instance.
      */
     public static function bouncer(?Model $authority = null): WardenClass
