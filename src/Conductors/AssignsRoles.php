@@ -83,7 +83,7 @@ final class AssignsRoles
     }
 
     /**
-     * Set the context for boundary-scoped role assignments.
+     * Set the boundary for boundary-scoped role assignments.
      *
      * @param  Model $boundary The boundary model instance
      * @return self  Fluent interface for method chaining

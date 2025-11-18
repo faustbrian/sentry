@@ -330,12 +330,12 @@ test('returns polymorphic boundary relationship', function (): void {
     $ability->refresh();
 
     $relation = $ability->boundary();
-    $context = $ability->boundary;
+    $boundary = $ability->boundary;
 
     // Assert
     expect($relation)->toBeInstanceOf(MorphTo::class);
-    expect($context)->toBeInstanceOf(Account::class);
-    expect($context->id)->toEqual($account->id);
+    expect($boundary)->toBeInstanceOf(Account::class);
+    expect($boundary->id)->toEqual($account->id);
 })->group('happy-path');
 test('decodes json options to array', function (): void {
     // Arrange
@@ -632,10 +632,10 @@ test('boundary relationship returns null when boundary id is null', function ():
     $ability = Ability::query()->create(['name' => 'test']);
 
     // Act
-    $context = $ability->boundary;
+    $boundary = $ability->boundary;
 
     // Assert
-    expect($context)->toBeNull();
+    expect($boundary)->toBeNull();
 })->group('edge-case');
 test('returns empty array when options is empty string', function (): void {
     // Arrange

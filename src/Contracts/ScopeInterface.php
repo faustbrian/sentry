@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * Defines the contract for multi-tenancy scoping in authorization.
  *
  * Enables authorization data (abilities, roles, permissions) to be scoped
- * to specific tenants or contexts. All queries and relationships are
+ * to specific tenants or boundaries. All queries and relationships are
  * automatically filtered to the current scope, ensuring data isolation
  * between tenants in multi-tenant applications.
  *

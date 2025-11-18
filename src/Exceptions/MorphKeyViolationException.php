@@ -17,7 +17,7 @@ use function sprintf;
  * Exception thrown when a polymorphic relationship lacks required key mapping.
  *
  * Signals that a model class is being used in a polymorphic relationship (typically
- * as an entity or context type) but no key mapping has been configured. This occurs
+ * as an entity or boundary type) but no key mapping has been configured. This occurs
  * when enforceMorphKeyMap is enabled and a model type is encountered that isn't in
  * the mapping. The exception ensures database consistency by preventing unmapped
  * class names from being stored in morph type columns.
@@ -30,7 +30,7 @@ final class MorphKeyViolationException extends RuntimeException
      * Create an exception for a missing polymorphic key mapping.
      *
      * @param string $class The fully-qualified class name that lacks a polymorphic key mapping.
-     *                      This is typically a model class used as an entity or context type
+     *                      This is typically a model class used as an entity or boundary type
      *                      in Warden's permission system that hasn't been registered in the
      *                      enforceMorphKeyMap configuration.
      */

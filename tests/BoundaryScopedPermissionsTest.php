@@ -46,7 +46,7 @@ describe('Boundary-Scoped Permissions', function (): void {
             expect($roles->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
-        test('forbids boundary-scoped ability within specific team context', function (): void {
+        test('forbids boundary-scoped ability within specific team boundary', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();

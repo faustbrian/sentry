@@ -77,7 +77,7 @@ final class GivesAbilities
     }
 
     /**
-     * Set the context for boundary-scoped permissions.
+     * Set the boundary for boundary-scoped permissions.
      *
      * Enables permissions that are only valid within a specific organizational
      * context (e.g., team, workspace, organization). Returns the conductor

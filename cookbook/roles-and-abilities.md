@@ -149,7 +149,7 @@ Warden::forbid($user)->within($organization)->to('edit', $post);
 
 ### Independence from Global Permissions
 
-Context-aware permissions are completely independent from global permissions. A user can have different abilities in different boundaries:
+Boundary-scoped permissions are completely independent from global permissions. A user can have different abilities in different boundaries:
 
 ```php
 // Global permission - can view all invoices

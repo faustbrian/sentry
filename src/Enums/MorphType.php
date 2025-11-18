@@ -13,7 +13,7 @@ namespace Cline\Warden\Enums;
  * Defines supported morph types for polymorphic relationships.
  *
  * This enum represents the available polymorphic relationship types that can
- * be used for actor, subject, and context relationships. Each type corresponds
+ * be used for actor, subject, and boundary relationships. Each type corresponds
  * to a different identifier format with specific characteristics.
  *
  * @author Brian Faust <brian@cline.sh>

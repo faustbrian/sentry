@@ -94,7 +94,7 @@ final class ModelRegistry
      * Registry mapping model classes to their polymorphic key column names.
      *
      * Allows specifying which column should be used as the foreign key when a model
-     * is referenced in polymorphic relationships (actor, context, subject, restricted_to).
+     * is referenced in polymorphic relationships (actor, boundary, subject, restricted_to).
      * Keys are model class names. Values are column names (e.g., 'id', 'ulid', 'uuid').
      *
      * @var array<class-string, string>

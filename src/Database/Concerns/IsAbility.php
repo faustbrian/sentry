@@ -245,7 +245,7 @@ trait IsAbility
     }
 
     /**
-     * Define the polymorphic relationship to the context model.
+     * Define the polymorphic relationship to the boundary model.
      *
      * Returns the boundary model instance (e.g., Team, Organization) that this
      * ability is scoped to. Enables boundary-scoped permissions where abilities

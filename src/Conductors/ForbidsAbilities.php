@@ -75,7 +75,7 @@ final class ForbidsAbilities
     }
 
     /**
-     * Set the context for boundary-scoped forbidden permissions.
+     * Set the boundary for boundary-scoped forbidden permissions.
      *
      * @param  Model $boundary The boundary model instance
      * @return self  Fluent interface for method chaining
