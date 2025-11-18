@@ -70,7 +70,7 @@ return [
     | shorter, more readable identifiers in your polymorphic type columns.
     |
     | Actors represent the entities performing actions (typically users).
-    | Contexts represent the scope in which permissions apply (organizations).
+    | Boundaries represent the limiting layer within which permissions apply (teams, organizations).
     | Subjects represent the resources being acted upon (posts, comments).
     |
     | Each relationship type may be configured independently to suit your
@@ -81,7 +81,7 @@ return [
 
     'actor_morph_type' => env('WARDEN_ACTOR_MORPH_TYPE', 'morph'),
 
-    'context_morph_type' => env('WARDEN_CONTEXT_MORPH_TYPE', 'morph'),
+    'boundary_morph_type' => env('WARDEN_BOUNDARY_MORPH_TYPE', 'morph'),
 
     'subject_morph_type' => env('WARDEN_SUBJECT_MORPH_TYPE', 'morph'),
 

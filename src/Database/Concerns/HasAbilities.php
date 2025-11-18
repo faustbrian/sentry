@@ -77,7 +77,7 @@ trait HasAbilities
             relatedPivotKey: null,
             parentKey: Models::getModelKey($this),
         )->using(Permission::class)
-            ->withPivot('forbidden', 'scope', 'context_id', 'context_type');
+            ->withPivot('forbidden', 'scope', 'boundary_id', 'boundary_type');
 
         /** @phpstan-ignore-next-line Laravel's MorphToMany extends BelongsToMany with compatible generics */
         return Models::scope()->applyToRelation($relation);

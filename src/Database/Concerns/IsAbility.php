@@ -195,7 +195,7 @@ trait IsAbility
             'actor',
             Models::table('permissions'),
         )->using(Permission::class)
-            ->withPivot('forbidden', 'scope', 'context_id', 'context_type');
+            ->withPivot('forbidden', 'scope', 'boundary_id', 'boundary_type');
 
         // @phpstan-ignore-next-line - applyToRelation handles BelongsToMany/MorphToMany
         return Models::scope()->applyToRelation($relation);
@@ -224,7 +224,7 @@ trait IsAbility
             'actor',
             Models::table('permissions'),
         )->using(Permission::class)
-            ->withPivot('forbidden', 'scope', 'context_id', 'context_type');
+            ->withPivot('forbidden', 'scope', 'boundary_id', 'boundary_type');
 
         // @phpstan-ignore-next-line - applyToRelation handles BelongsToMany/MorphToMany
         return Models::scope()->applyToRelation($relation);
@@ -247,15 +247,15 @@ trait IsAbility
     /**
      * Define the polymorphic relationship to the context model.
      *
-     * Returns the context model instance (e.g., Team, Organization) that this
-     * ability is scoped to. Enables context-aware permissions where abilities
-     * are only valid within a specific organizational context.
+     * Returns the boundary model instance (e.g., Team, Organization) that this
+     * ability is scoped to. Enables boundary-scoped permissions where abilities
+     * are only valid within a specific organizational boundary.
      *
      * @return MorphTo<Model, $this>
      */
-    public function context(): MorphTo
+    public function boundary(): MorphTo
     {
-        return $this->morphTo('context');
+        return $this->morphTo('boundary');
     }
 
     /**

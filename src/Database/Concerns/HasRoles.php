@@ -70,7 +70,7 @@ trait HasRoles
             relatedPivotKey: null,
             parentKey: Models::getModelKey($this),
         )->using(AssignedRole::class)
-            ->withPivot('scope', 'context_id', 'context_type');
+            ->withPivot('scope', 'boundary_id', 'boundary_type');
 
         return Models::scope()->applyToRelation($relation);
     }

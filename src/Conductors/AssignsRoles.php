@@ -156,8 +156,8 @@ final class AssignsRoles
             $pivotData = Models::scope()->getAttachAttributes();
 
             if ($this->context instanceof Model) {
-                $pivotData['context_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-                $pivotData['context_type'] = $this->context->getMorphClass();
+                $pivotData['boundary_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
+                $pivotData['boundary_type'] = $this->context->getMorphClass();
             }
 
             // Get existing role IDs to avoid duplicates (accounting for scope)

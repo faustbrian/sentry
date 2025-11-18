@@ -272,8 +272,8 @@ test('roles relationship includes forbidden and scope pivot columns', function (
     // Assert
     expect($pivotColumns)->toContain('forbidden');
     expect($pivotColumns)->toContain('scope');
-    expect($pivotColumns)->toContain('context_id');
-    expect($pivotColumns)->toContain('context_type');
+    expect($pivotColumns)->toContain('boundary_id');
+    expect($pivotColumns)->toContain('boundary_type');
 })->group('happy-path');
 test('returns polymorphic many to many users relationship', function (): void {
     // Arrange
@@ -299,8 +299,8 @@ test('users relationship includes forbidden and scope pivot columns', function (
     // Assert
     expect($pivotColumns)->toContain('forbidden');
     expect($pivotColumns)->toContain('scope');
-    expect($pivotColumns)->toContain('context_id');
-    expect($pivotColumns)->toContain('context_type');
+    expect($pivotColumns)->toContain('boundary_id');
+    expect($pivotColumns)->toContain('boundary_type');
 })->group('happy-path');
 test('returns polymorphic subject relationship', function (): void {
     // Arrange
@@ -318,19 +318,19 @@ test('returns polymorphic subject relationship', function (): void {
 })->group('happy-path');
 test('returns polymorphic context relationship', function (): void {
     // Arrange
-    $account = Account::query()->create(['name' => 'Context Account']);
+    $account = Account::query()->create(['name' => 'Boundary Account']);
     $ability = new Ability([
         'name' => 'edit',
     ]);
-    $ability->context_type = Account::class;
-    $ability->context_id = $account->id;
+    $ability->boundary_type = Account::class;
+    $ability->boundary_id = $account->id;
     $ability->save();
 
     // Act
     $ability->refresh();
 
-    $relation = $ability->context();
-    $context = $ability->context;
+    $relation = $ability->boundary();
+    $context = $ability->boundary;
 
     // Assert
     expect($relation)->toBeInstanceOf(MorphTo::class);
@@ -632,7 +632,7 @@ test('context relationship returns null when context id is null', function (): v
     $ability = Ability::query()->create(['name' => 'test']);
 
     // Act
-    $context = $ability->context;
+    $context = $ability->boundary;
 
     // Assert
     expect($context)->toBeNull();

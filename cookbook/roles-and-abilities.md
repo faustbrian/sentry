@@ -104,28 +104,28 @@ Warden::allow($user)->toManage(Post::class);
 Warden::allow($user)->toManage($post);
 ```
 
-## Context-Aware Permissions
+## Boundary-Scoped Permissions
 
-Sometimes you need permissions that are only valid within a specific context, such as a team, organization, or workspace. Warden supports context-aware permissions through the `within()` method:
+Sometimes you need permissions that are only valid within a specific boundary, such as a team, organization, or workspace. Warden supports boundary-scoped permissions through the `within()` method:
 
-### Basic Context-Aware Abilities
+### Basic Boundary-Scoped Abilities
 
-Grant an ability that only applies within a specific context:
+Grant an ability that only applies within a specific boundary:
 
 ```php
-// Simple ability within a team context
+// Simple ability within a team boundary
 Warden::allow($user)->within($team)->to('view-invoices');
 
-// Model class ability within an organization context
+// Model class ability within an organization boundary
 Warden::allow($user)->within($organization)->to('edit', Post::class);
 
-// Specific model instance ability within a workspace context
+// Specific model instance ability within a workspace boundary
 Warden::allow($user)->within($workspace)->to('delete', $invoice);
 ```
 
-### Context-Aware Roles
+### Boundary-Scoped Roles
 
-You can also assign roles within a specific context:
+You can also assign roles within a specific boundary:
 
 ```php
 // User is an admin, but only within this team
@@ -135,9 +135,9 @@ Warden::assign('admin')->within($team)->to($user);
 Warden::assign('editor')->within($organization)->to($user);
 ```
 
-### Context-Aware Forbidden Abilities
+### Boundary-Scoped Forbidden Abilities
 
-Forbid abilities within a specific context:
+Forbid abilities within a specific boundary:
 
 ```php
 // User cannot delete invoices within this team
@@ -149,7 +149,7 @@ Warden::forbid($user)->within($organization)->to('edit', $post);
 
 ### Independence from Global Permissions
 
-Context-aware permissions are completely independent from global permissions. A user can have different abilities in different contexts:
+Context-aware permissions are completely independent from global permissions. A user can have different abilities in different boundaries:
 
 ```php
 // Global permission - can view all invoices
@@ -169,10 +169,10 @@ In the example above:
 
 ### Configuration
 
-Context morphs use the same polymorphic relationship types as actors. You can configure the morph type in your `config/warden.php`:
+Boundary morphs use the same polymorphic relationship types as actors. You can configure the morph type in your `config/warden.php`:
 
 ```php
-'context_morph_type' => env('WARDEN_CONTEXT_MORPH_TYPE', 'morph'),
+'boundary_morph_type' => env('WARDEN_BOUNDARY_MORPH_TYPE', 'morph'),
 ```
 
 Supported values:

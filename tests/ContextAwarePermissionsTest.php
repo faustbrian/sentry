@@ -26,8 +26,8 @@ describe('Context-Aware Permissions', function (): void {
             $abilities = $user->abilities()->get();
             expect($abilities)->toHaveCount(1);
             expect($abilities->first()->name)->toEqual('view-invoices');
-            expect($abilities->first()->pivot->context_id)->toEqual($team->getKey());
-            expect($abilities->first()->pivot->context_type)->toEqual($team->getMorphClass());
+            expect($abilities->first()->pivot->boundary_id)->toEqual($team->getKey());
+            expect($abilities->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
         test('grants context-aware role scoped to specific team', function (): void {
@@ -42,8 +42,8 @@ describe('Context-Aware Permissions', function (): void {
             // Assert
             $roles = $user->roles()->get();
             expect($roles)->toHaveCount(1);
-            expect($roles->first()->pivot->context_id)->toEqual($team->getKey());
-            expect($roles->first()->pivot->context_type)->toEqual($team->getMorphClass());
+            expect($roles->first()->pivot->boundary_id)->toEqual($team->getKey());
+            expect($roles->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
         test('forbids context-aware ability within specific team context', function (): void {
@@ -59,8 +59,8 @@ describe('Context-Aware Permissions', function (): void {
             $abilities = $user->abilities()->wherePivot('forbidden', true)->get();
             expect($abilities)->toHaveCount(1);
             expect($abilities->first()->name)->toEqual('delete-invoices');
-            expect($abilities->first()->pivot->context_id)->toEqual($team->getKey());
-            expect($abilities->first()->pivot->context_type)->toEqual($team->getMorphClass());
+            expect($abilities->first()->pivot->boundary_id)->toEqual($team->getKey());
+            expect($abilities->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
         test('maintains independence between global and context-aware permissions', function (): void {
@@ -79,9 +79,9 @@ describe('Context-Aware Permissions', function (): void {
             $abilities = $user->abilities()->get();
             expect($abilities)->toHaveCount(3);
 
-            $globalAbility = $abilities->firstWhere('pivot.context_id', null);
-            $team1Ability = $abilities->firstWhere('pivot.context_id', $team1->getKey());
-            $team2Ability = $abilities->firstWhere('pivot.context_id', $team2->getKey());
+            $globalAbility = $abilities->firstWhere('pivot.boundary_id', null);
+            $team1Ability = $abilities->firstWhere('pivot.boundary_id', $team1->getKey());
+            $team2Ability = $abilities->firstWhere('pivot.boundary_id', $team2->getKey());
 
             expect($globalAbility)->toBeInstanceOf(Model::class);
             expect($team1Ability)->toBeInstanceOf(Model::class);
@@ -104,8 +104,8 @@ describe('Context-Aware Permissions', function (): void {
             // Assert
             $abilities = $user->abilities()->get();
             expect($abilities)->toHaveCount(1);
-            expect($abilities->first()->pivot->context_id)->toEqual($team->getKey());
-            expect($abilities->first()->pivot->context_type)->toEqual($team->getMorphClass());
+            expect($abilities->first()->pivot->boundary_id)->toEqual($team->getKey());
+            expect($abilities->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
             expect($abilities->first()->name)->toEqual('edit');
             expect($abilities->first()->subject_type)->toEqual(User::class);
             expect($abilities->first()->subject_id)->toBeNull();
@@ -124,8 +124,8 @@ describe('Context-Aware Permissions', function (): void {
             // Assert
             $abilities = $user->abilities()->get();
             expect($abilities)->toHaveCount(1);
-            expect($abilities->first()->pivot->context_id)->toEqual($team->getKey());
-            expect($abilities->first()->pivot->context_type)->toEqual($team->getMorphClass());
+            expect($abilities->first()->pivot->boundary_id)->toEqual($team->getKey());
+            expect($abilities->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
             expect($abilities->first()->subject_id)->toEqual($invoice->getKey());
         });
     });

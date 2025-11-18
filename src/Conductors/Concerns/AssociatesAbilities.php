@@ -177,8 +177,8 @@ trait AssociatesAbilities
 
         /** @phpstan-ignore-next-line instanceof.alwaysTrue - Property lacks native type hint */
         if (isset($this->context) && $this->context instanceof Model) {
-            $attributes['context_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-            $attributes['context_type'] = $this->context->getMorphClass();
+            $attributes['boundary_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
+            $attributes['boundary_type'] = $this->context->getMorphClass();
         }
 
         /** @phpstan-ignore-next-line Dynamic abilities() relationship */
@@ -206,8 +206,8 @@ trait AssociatesAbilities
 
         /** @phpstan-ignore-next-line instanceof.alwaysTrue - Property lacks native type hint */
         if (isset($this->context) && $this->context instanceof Model) {
-            $attributes['context_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-            $attributes['context_type'] = $this->context->getMorphClass();
+            $attributes['boundary_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
+            $attributes['boundary_type'] = $this->context->getMorphClass();
         }
 
         foreach ($ids as $id) {

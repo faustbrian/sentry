@@ -52,12 +52,12 @@ Supported values:
 - `'ulidMorph'` - ULID primary keys
 - `'uuidMorph'` - UUID primary keys
 
-### Context Morph Type
+### Boundary Morph Type
 
-Configure the polymorphic relationship type for context-aware permissions:
+Configure the polymorphic relationship type for boundary-scoped permissions:
 
 ```php
-'context_morph_type' => env('WARDEN_CONTEXT_MORPH_TYPE', 'morph'),
+'boundary_morph_type' => env('WARDEN_BOUNDARY_MORPH_TYPE', 'morph'),
 ```
 
 Supported values:

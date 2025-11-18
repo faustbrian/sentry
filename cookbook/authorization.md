@@ -130,7 +130,7 @@ Alternatively, you can refresh the cache only for a specific user:
 Warden::refreshFor($user);
 ```
 
-**Note:** When using multi-tenancy scopes, this will only refresh the cache for the user in the current scope's context. To clear cached data for the same user in a different scope context, it must be called from within that scope.
+**Note:** When using multi-tenancy scopes, this will only refresh the cache for the user in the current scope's boundary. To clear cached data for the same user in a different scope boundary, it must be called from within that scope.
 
 ## Examples
 

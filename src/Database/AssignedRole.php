@@ -20,11 +20,13 @@ use Illuminate\Database\Eloquent\Relations\MorphPivot;
  * Represents the many-to-many relationship between actors (users, etc.) and roles.
  * Includes support for ULID/UUID primary keys based on configuration.
  *
- * @property int|string      $actor_id   Polymorphic ID of the assigned entity
- * @property string          $actor_type Polymorphic type of the assigned entity
- * @property int|string      $id         Primary key (int, ULID, or UUID based on config)
- * @property int|string      $role_id    Foreign key to roles table
- * @property null|int|string $scope      Tenant scope identifier
+ * @property int|string      $actor_id      Polymorphic ID of the assigned entity
+ * @property string          $actor_type    Polymorphic type of the assigned entity
+ * @property null|int|string $boundary_id   Polymorphic ID of the boundary entity
+ * @property null|string     $boundary_type Polymorphic type of the boundary entity
+ * @property int|string      $id            Primary key (int, ULID, or UUID based on config)
+ * @property int|string      $role_id       Foreign key to roles table
+ * @property null|int|string $scope         Tenant scope identifier
  *
  * @author Brian Faust <brian@cline.sh>
  */

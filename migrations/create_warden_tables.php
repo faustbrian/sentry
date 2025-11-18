@@ -23,10 +23,10 @@ return new class() extends Migration
     {
         $primaryKeyType = PrimaryKeyType::tryFrom(config('warden.primary_key_type', 'id')) ?? PrimaryKeyType::ID;
         $actorMorphType = MorphType::tryFrom(config('warden.actor_morph_type', 'morph')) ?? MorphType::Morph;
-        $contextMorphType = MorphType::tryFrom(config('warden.context_morph_type', 'morph')) ?? MorphType::Morph;
+        $boundaryMorphType = MorphType::tryFrom(config('warden.boundary_morph_type', 'morph')) ?? MorphType::Morph;
         $subjectMorphType = MorphType::tryFrom(config('warden.subject_morph_type', 'morph')) ?? MorphType::Morph;
 
-        Schema::create(Models::table('abilities'), function (Blueprint $table) use ($primaryKeyType, $subjectMorphType, $contextMorphType): void {
+        Schema::create(Models::table('abilities'), function (Blueprint $table) use ($primaryKeyType, $subjectMorphType, $boundaryMorphType): void {
             match ($primaryKeyType) {
                 PrimaryKeyType::ULID => $table->ulid('id')->primary(),
                 PrimaryKeyType::UUID => $table->uuid('id')->primary(),
@@ -42,10 +42,10 @@ return new class() extends Migration
                 default => $table->nullableNumericMorphs('subject'),
             };
 
-            match ($contextMorphType) {
-                MorphType::ULID => $table->nullableUlidMorphs('context'),
-                MorphType::UUID => $table->nullableUuidMorphs('context'),
-                default => $table->nullableNumericMorphs('context'),
+            match ($boundaryMorphType) {
+                MorphType::ULID => $table->nullableUlidMorphs('boundary'),
+                MorphType::UUID => $table->nullableUuidMorphs('boundary'),
+                default => $table->nullableNumericMorphs('boundary'),
             };
 
             $table->boolean('only_owned')->default(false);
@@ -72,7 +72,7 @@ return new class() extends Migration
             );
         });
 
-        Schema::create(Models::table('assigned_roles'), function (Blueprint $table) use ($primaryKeyType, $actorMorphType, $contextMorphType): void {
+        Schema::create(Models::table('assigned_roles'), function (Blueprint $table) use ($primaryKeyType, $actorMorphType, $boundaryMorphType): void {
             match ($primaryKeyType) {
                 PrimaryKeyType::ULID => $table->ulid('id')->primary(),
                 PrimaryKeyType::UUID => $table->uuid('id')->primary(),
@@ -91,10 +91,10 @@ return new class() extends Migration
                 default => $table->numericMorphs('actor'),
             };
 
-            match ($contextMorphType) {
-                MorphType::ULID => $table->nullableUlidMorphs('context'),
-                MorphType::UUID => $table->nullableUuidMorphs('context'),
-                default => $table->nullableNumericMorphs('context'),
+            match ($boundaryMorphType) {
+                MorphType::ULID => $table->nullableUlidMorphs('boundary'),
+                MorphType::UUID => $table->nullableUuidMorphs('boundary'),
+                default => $table->nullableNumericMorphs('boundary'),
             };
 
             match ($actorMorphType) {
@@ -111,7 +111,7 @@ return new class() extends Migration
             );
         });
 
-        Schema::create(Models::table('permissions'), function (Blueprint $table) use ($primaryKeyType, $actorMorphType, $contextMorphType): void {
+        Schema::create(Models::table('permissions'), function (Blueprint $table) use ($primaryKeyType, $actorMorphType, $boundaryMorphType): void {
             match ($primaryKeyType) {
                 PrimaryKeyType::ULID => $table->ulid('id')->primary(),
                 PrimaryKeyType::UUID => $table->uuid('id')->primary(),
@@ -130,10 +130,10 @@ return new class() extends Migration
                 default => $table->nullableNumericMorphs('actor'),
             };
 
-            match ($contextMorphType) {
-                MorphType::ULID => $table->nullableUlidMorphs('context'),
-                MorphType::UUID => $table->nullableUuidMorphs('context'),
-                default => $table->nullableNumericMorphs('context'),
+            match ($boundaryMorphType) {
+                MorphType::ULID => $table->nullableUlidMorphs('boundary'),
+                MorphType::UUID => $table->nullableUuidMorphs('boundary'),
+                default => $table->nullableNumericMorphs('boundary'),
             };
 
             $table->boolean('forbidden')->default(false);

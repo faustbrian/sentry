@@ -117,11 +117,11 @@ describe('MorphKeyIntegration', function (): void {
                 ->table('permissions')
                 ->where('ability_id', $ability->id)
                 ->where('actor_id', $user->id)
-                ->where('context_type', $org->getMorphClass())
+                ->where('boundary_type', $org->getMorphClass())
                 ->first();
 
             expect($permission)->not->toBeNull();
-            expect($permission->context_id)->toEqual($org->getKey());
+            expect($permission->boundary_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for context id when assigning roles', function (): void {
@@ -139,11 +139,11 @@ describe('MorphKeyIntegration', function (): void {
                 ->table('assigned_roles')
                 ->where('role_id', $role->id)
                 ->where('actor_id', $user->id)
-                ->where('context_type', $org->getMorphClass())
+                ->where('boundary_type', $org->getMorphClass())
                 ->first();
 
             expect($assignment)->not->toBeNull();
-            expect($assignment->context_id)->toEqual($org->getKey());
+            expect($assignment->boundary_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for context id when allowing everyone', function (): void {
@@ -161,11 +161,11 @@ describe('MorphKeyIntegration', function (): void {
                 ->table('permissions')
                 ->where('ability_id', $ability->id)
                 ->whereNull('actor_id')
-                ->where('context_type', $org->getMorphClass())
+                ->where('boundary_type', $org->getMorphClass())
                 ->first();
 
             expect($permission)->not->toBeNull();
-            expect($permission->context_id)->toEqual($org->getKey());
+            expect($permission->boundary_id)->toEqual($org->getKey());
         });
 
         test('uses correct key for subject id when creating abilities', function (): void {
