@@ -24,7 +24,7 @@ services:
             DB_PASSWORD: ${DB_PASSWORD:-}
             WARDEN_PRIMARY_KEY_TYPE: ${WARDEN_PRIMARY_KEY_TYPE:-id}
             WARDEN_ACTOR_MORPH_TYPE: ${WARDEN_ACTOR_MORPH_TYPE:-morph}
-            WARDEN_CONTEXT_MORPH_TYPE: ${WARDEN_CONTEXT_MORPH_TYPE:-morph}
+            WARDEN_BOUNDARY_MORPH_TYPE: ${WARDEN_BOUNDARY_MORPH_TYPE:-morph}
             WARDEN_SUBJECT_MORPH_TYPE: ${WARDEN_SUBJECT_MORPH_TYPE:-morph}
     profile:
         build: ./docker/php/84

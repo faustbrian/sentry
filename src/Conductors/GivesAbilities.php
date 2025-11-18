@@ -39,13 +39,13 @@ final class GivesAbilities
     protected bool $forbidding = false;
 
     /**
-     * The context model within which permissions are granted.
+     * The boundary modelwithin which permissions are granted.
      *
-     * When set, abilities are scoped to a specific organizational context
+     * When set, abilities are scoped to a specific organizational boundary
      * and only valid within that boundary (e.g., a Team, Organization, or
      * Project). This enables multi-tenancy and compartmentalized permissions.
      */
-    protected ?Model $context = null;
+    protected ?Model $boundary = null;
 
     /**
      * The guard name for the abilities.
@@ -77,7 +77,7 @@ final class GivesAbilities
     }
 
     /**
-     * Set the context for context-aware permissions.
+     * Set the context for boundary-scoped permissions.
      *
      * Enables permissions that are only valid within a specific organizational
      * context (e.g., team, workspace, organization). Returns the conductor
@@ -87,12 +87,12 @@ final class GivesAbilities
      * Bouncer::allow($user)->within($team)->to('view', 'invoices');
      * ```
      *
-     * @param  Model $context The context model instance (e.g., Team, Organization)
+     * @param  Model $boundary The boundary model instance (e.g., Team, Organization)
      * @return $this
      */
-    public function within(Model $context): self
+    public function within(Model $boundary): self
     {
-        $this->context = $context;
+        $this->boundary = $boundary;
 
         return $this;
     }

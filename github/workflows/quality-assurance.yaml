@@ -63,7 +63,7 @@ jobs:
                   DB_PASSWORD: ${{ matrix.db == 'mysql' && 'root' || 'password' }}
                   WARDEN_PRIMARY_KEY_TYPE: ${{ matrix.primary_key_type }}
                   WARDEN_ACTOR_MORPH_TYPE: ${{ matrix.primary_key_type == 'ulid' && 'ulidMorph' || (matrix.primary_key_type == 'uuid' && 'uuidMorph' || 'morph') }}
-                  WARDEN_CONTEXT_MORPH_TYPE: ${{ matrix.primary_key_type == 'ulid' && 'ulidMorph' || (matrix.primary_key_type == 'uuid' && 'uuidMorph' || 'morph') }}
+                  WARDEN_BOUNDARY_MORPH_TYPE: ${{ matrix.primary_key_type == 'ulid' && 'ulidMorph' || (matrix.primary_key_type == 'uuid' && 'uuidMorph' || 'morph') }}
                   WARDEN_SUBJECT_MORPH_TYPE: ${{ matrix.primary_key_type == 'ulid' && 'ulidMorph' || (matrix.primary_key_type == 'uuid' && 'uuidMorph' || 'morph') }}
 
     phpstan:

@@ -44,11 +44,11 @@ final class ForbidsAbilities
     protected $forbidding = true;
 
     /**
-     * The context model within which permissions are forbidden.
+     * The boundary modelwithin which permissions are forbidden.
      *
      * @var null|Model
      */
-    protected $context;
+    protected $boundary;
 
     /**
      * The guard name for the abilities.
@@ -75,14 +75,14 @@ final class ForbidsAbilities
     }
 
     /**
-     * Set the context for context-aware forbidden permissions.
+     * Set the context for boundary-scoped forbidden permissions.
      *
-     * @param  Model $context The context model instance
+     * @param  Model $boundary The boundary model instance
      * @return self  Fluent interface for method chaining
      */
-    public function within(Model $context): self
+    public function within(Model $boundary): self
     {
-        $this->context = $context;
+        $this->boundary = $boundary;
 
         return $this;
     }

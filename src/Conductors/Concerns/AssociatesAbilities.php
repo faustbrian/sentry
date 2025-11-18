@@ -176,9 +176,9 @@ trait AssociatesAbilities
         $attributes = Models::scope()->getAttachAttributes($authority::class);
 
         /** @phpstan-ignore-next-line instanceof.alwaysTrue - Property lacks native type hint */
-        if (isset($this->context) && $this->context instanceof Model) {
-            $attributes['boundary_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-            $attributes['boundary_type'] = $this->context->getMorphClass();
+        if (isset($this->boundary) && $this->boundary instanceof Model) {
+            $attributes['boundary_id'] = $this->boundary->getAttribute(Models::getModelKey($this->boundary));
+            $attributes['boundary_type'] = $this->boundary->getMorphClass();
         }
 
         /** @phpstan-ignore-next-line Dynamic abilities() relationship */
@@ -205,9 +205,9 @@ trait AssociatesAbilities
         $attributes += Models::scope()->getAttachAttributes();
 
         /** @phpstan-ignore-next-line instanceof.alwaysTrue - Property lacks native type hint */
-        if (isset($this->context) && $this->context instanceof Model) {
-            $attributes['boundary_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-            $attributes['boundary_type'] = $this->context->getMorphClass();
+        if (isset($this->boundary) && $this->boundary instanceof Model) {
+            $attributes['boundary_id'] = $this->boundary->getAttribute(Models::getModelKey($this->boundary));
+            $attributes['boundary_type'] = $this->boundary->getMorphClass();
         }
 
         foreach ($ids as $id) {

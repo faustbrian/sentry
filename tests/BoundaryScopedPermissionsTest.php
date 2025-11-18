@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 use Tests\Fixtures\Models\Team;
 use Tests\Fixtures\Models\User;
 
-describe('Context-Aware Permissions', function (): void {
+describe('Boundary-Scoped Permissions', function (): void {
     describe('Happy Paths', function (): void {
-        test('grants context-aware ability scoped to specific team', function (): void {
+        test('grants boundary-scoped ability scoped to specific team', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();
@@ -30,7 +30,7 @@ describe('Context-Aware Permissions', function (): void {
             expect($abilities->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
-        test('grants context-aware role scoped to specific team', function (): void {
+        test('grants boundary-scoped role scoped to specific team', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();
@@ -46,7 +46,7 @@ describe('Context-Aware Permissions', function (): void {
             expect($roles->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
-        test('forbids context-aware ability within specific team context', function (): void {
+        test('forbids boundary-scoped ability within specific team context', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();
@@ -63,7 +63,7 @@ describe('Context-Aware Permissions', function (): void {
             expect($abilities->first()->pivot->boundary_type)->toEqual($team->getMorphClass());
         });
 
-        test('maintains independence between global and context-aware permissions', function (): void {
+        test('maintains independence between global and boundary-scoped permissions', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();
@@ -92,7 +92,7 @@ describe('Context-Aware Permissions', function (): void {
             expect($team2Ability->name)->toEqual('delete-invoices');
         });
 
-        test('grants context-aware ability with model class constraint', function (): void {
+        test('grants boundary-scoped ability with model class constraint', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();
@@ -111,7 +111,7 @@ describe('Context-Aware Permissions', function (): void {
             expect($abilities->first()->subject_id)->toBeNull();
         });
 
-        test('grants context-aware ability with specific model instance constraint', function (): void {
+        test('grants boundary-scoped ability with specific model instance constraint', function (): void {
             // Arrange
             $warden = $this->bouncer();
             $user = User::query()->create();

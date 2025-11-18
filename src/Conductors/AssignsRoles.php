@@ -43,9 +43,9 @@ use function method_exists;
 final class AssignsRoles
 {
     /**
-     * The context model within which roles are assigned.
+     * The boundary modelwithin which roles are assigned.
      */
-    private ?Model $context = null;
+    private ?Model $boundary = null;
 
     /**
      * The roles to be assigned to authorities.
@@ -83,14 +83,14 @@ final class AssignsRoles
     }
 
     /**
-     * Set the context for context-aware role assignments.
+     * Set the context for boundary-scoped role assignments.
      *
-     * @param  Model $context The context model instance
+     * @param  Model $boundary The boundary model instance
      * @return self  Fluent interface for method chaining
      */
-    public function within(Model $context): self
+    public function within(Model $boundary): self
     {
-        $this->context = $context;
+        $this->boundary = $boundary;
 
         return $this;
     }
@@ -155,9 +155,9 @@ final class AssignsRoles
 
             $pivotData = Models::scope()->getAttachAttributes();
 
-            if ($this->context instanceof Model) {
-                $pivotData['boundary_id'] = $this->context->getAttribute(Models::getModelKey($this->context));
-                $pivotData['boundary_type'] = $this->context->getMorphClass();
+            if ($this->boundary instanceof Model) {
+                $pivotData['boundary_id'] = $this->boundary->getAttribute(Models::getModelKey($this->boundary));
+                $pivotData['boundary_type'] = $this->boundary->getMorphClass();
             }
 
             // Get existing role IDs to avoid duplicates (accounting for scope)

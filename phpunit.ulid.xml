@@ -8,7 +8,7 @@
     <php>
         <env name="WARDEN_PRIMARY_KEY_TYPE" value="ulid" />
         <env name="WARDEN_ACTOR_MORPH_TYPE" value="ulidMorph" />
-        <env name="WARDEN_CONTEXT_MORPH_TYPE" value="ulidMorph" />
+        <env name="WARDEN_BOUNDARY_MORPH_TYPE" value="ulidMorph" />
         <env name="WARDEN_SUBJECT_MORPH_TYPE" value="ulidMorph" />
     </php>
     <source>

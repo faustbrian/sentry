@@ -19,7 +19,7 @@ return RectorConfig::configure()
     ->withSkip([
         RemoveUnreachableStatementRector::class => [__DIR__.'/tests'],
         BoolReturnTypeFromBooleanStrictReturnsRector::class => [__DIR__.'/tests/BeforePoliciesTest.php'],
-        RemoveNullArgOnNullDefaultParamRector::class => [__DIR__.'/tests/ContextAwarePermissionsTest.php'],
+        RemoveNullArgOnNullDefaultParamRector::class => [__DIR__.'/tests/BoundaryScopedPermissionsTest.php'],
     ])
     ->withPhpSets(php84: true)
     ->withParallel(maxNumberOfProcess: 8)

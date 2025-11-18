@@ -316,7 +316,7 @@ test('returns polymorphic subject relationship', function (): void {
     expect($subject)->toBeInstanceOf(Account::class);
     expect($subject->id)->toEqual($account->id);
 })->group('happy-path');
-test('returns polymorphic context relationship', function (): void {
+test('returns polymorphic boundary relationship', function (): void {
     // Arrange
     $account = Account::query()->create(['name' => 'Boundary Account']);
     $ability = new Ability([
@@ -627,7 +627,7 @@ test('subject relationship returns null when subject id is null', function (): v
     // Assert
     expect($subject)->toBeNull();
 })->group('edge-case');
-test('context relationship returns null when context id is null', function (): void {
+test('boundary relationship returns null when boundary id is null', function (): void {
     // Arrange
     $ability = Ability::query()->create(['name' => 'test']);
 

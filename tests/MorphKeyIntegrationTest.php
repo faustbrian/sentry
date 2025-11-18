@@ -102,7 +102,7 @@ describe('MorphKeyIntegration', function (): void {
             expect($orgAssignment->actor_id)->toEqual($org->getKey());
         });
 
-        test('uses correct key for context id when assigning abilities', function (): void {
+        test('uses correct key for boundary id when assigning abilities', function (): void {
             // Arrange
             $user = User::query()->create(['name' => 'John']);
             $org = Organization::query()->create(['name' => 'Acme']);
@@ -124,7 +124,7 @@ describe('MorphKeyIntegration', function (): void {
             expect($permission->boundary_id)->toEqual($org->getKey());
         });
 
-        test('uses correct key for context id when assigning roles', function (): void {
+        test('uses correct key for boundary id when assigning roles', function (): void {
             // Arrange
             $user = User::query()->create(['name' => 'John']);
             $org = Organization::query()->create(['name' => 'Acme']);
@@ -146,7 +146,7 @@ describe('MorphKeyIntegration', function (): void {
             expect($assignment->boundary_id)->toEqual($org->getKey());
         });
 
-        test('uses correct key for context id when allowing everyone', function (): void {
+        test('uses correct key for boundary id when allowing everyone', function (): void {
             // Arrange
             $org = Organization::query()->create(['name' => 'Acme']);
             $ability = Ability::query()->create(['name' => 'edit-posts']);
