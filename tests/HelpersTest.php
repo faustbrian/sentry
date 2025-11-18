@@ -309,5 +309,22 @@ describe('Helpers', function (): void {
             // Assert
             expect($result)->toBeTrue();
         });
+
+        test('groups UUID strings as integers instead of strings', function (): void {
+            // Arrange
+            $uuid = '550e8400-e29b-41d4-a716-446655440000';
+            $ulid = '01ARZ3NDEKTSV4RRFFQ69G5FAV';
+            $regularString = 'admin';
+
+            // Act
+            $result = Helpers::groupModelsAndIdentifiersByType([$uuid, $ulid, $regularString]);
+
+            // Assert
+            expect($result['integers'])->toContain($uuid);
+            expect($result['integers'])->toContain($ulid);
+            expect($result['strings'])->toContain($regularString);
+            expect($result['strings'])->not->toContain($uuid);
+            expect($result['strings'])->not->toContain($ulid);
+        });
     });
 });

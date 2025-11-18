@@ -280,6 +280,30 @@ describe('HasWardenPrimaryKey Trait', function (): void {
         })->group('sad-path');
     });
 
+    describe('Sad Path - Type Validation', function (): void {
+        test('throws InvalidArgumentException when UUID key receives non-string value', function (): void {
+            // Arrange
+            config(['warden.primary_key_type' => PrimaryKeyType::UUID->value]);
+            $role = new Role(['name' => 'admin', 'title' => 'Administrator']);
+            $role->setAttribute('id', 12_345); // Integer instead of string
+
+            // Act & Assert
+            expect(fn () => $role->save())
+                ->toThrow(InvalidArgumentException::class, 'Cannot assign non-string value to UUID primary key. Got: integer');
+        })->group('sad-path');
+
+        test('throws InvalidArgumentException when ULID key receives non-string value', function (): void {
+            // Arrange
+            config(['warden.primary_key_type' => PrimaryKeyType::ULID->value]);
+            $role = new Role(['name' => 'admin', 'title' => 'Administrator']);
+            $role->setAttribute('id', 12_345); // Integer instead of string
+
+            // Act & Assert
+            expect(fn () => $role->save())
+                ->toThrow(InvalidArgumentException::class, 'Cannot assign non-string value to ULID primary key. Got: integer');
+        })->group('sad-path');
+    });
+
     describe('Edge Cases - bootHasWardenPrimaryKey Behavior', function (): void {
         test('bootHasWardenPrimaryKey skips setting key when already set for ID type', function (): void {
             // Arrange

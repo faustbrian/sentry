@@ -265,5 +265,47 @@ describe('AssignsRoles Conductor', function (): void {
 
             expect($totalAssignments)->toBe(1);
         });
+
+        test('assigns role by UUID string when role exists with UUID primary key', function (): void {
+            // Arrange
+            $user = User::query()->create(['name' => 'Eve']);
+
+            // Create a role with a UUID string as ID
+            $roleUuid = '550e8400-e29b-41d4-a716-446655440000';
+            $role = new Role(['name' => 'uuid-role']);
+            $role->id = $roleUuid;
+            $role->save();
+
+            // Act - Assign role using UUID string
+            $conductor = new AssignsRoles($roleUuid);
+            $result = $conductor->to($user);
+
+            // Assert
+            expect($result)->toBeTrue();
+            expect($user->fresh()->roles)->toHaveCount(1);
+            expect($user->fresh()->roles->first()->id)->toBe($roleUuid);
+            expect($user->fresh()->roles->first()->name)->toBe('uuid-role');
+        })->skip(fn (): bool => config('warden.primary_key_type') === 'id', 'Test requires UUID/ULID primary keys');
+
+        test('assigns role by ULID string when role exists with ULID primary key', function (): void {
+            // Arrange
+            $user = User::query()->create(['name' => 'Frank']);
+
+            // Create a role with a ULID string as ID
+            $roleUlid = '01ARZ3NDEKTSV4RRFFQ69G5FAV';
+            $role = new Role(['name' => 'ulid-role']);
+            $role->id = $roleUlid;
+            $role->save();
+
+            // Act - Assign role using ULID string
+            $conductor = new AssignsRoles($roleUlid);
+            $result = $conductor->to($user);
+
+            // Assert
+            expect($result)->toBeTrue();
+            expect($user->fresh()->roles)->toHaveCount(1);
+            expect($user->fresh()->roles->first()->id)->toBe($roleUlid);
+            expect($user->fresh()->roles->first()->name)->toBe('ulid-role');
+        })->skip(fn (): bool => config('warden.primary_key_type') === 'id', 'Test requires UUID/ULID primary keys');
     });
 });

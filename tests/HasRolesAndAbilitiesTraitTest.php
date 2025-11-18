@@ -8,6 +8,7 @@
  */
 
 use Cline\Warden\Database\Models;
+use Cline\Warden\Database\Role;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Concerns\TestsClipboards;
 use Tests\Fixtures\Models\User;
@@ -292,5 +293,41 @@ describe('HasRolesAndAbilitiesTrait', function (): void {
             // Assert - After soft delete
             expect($this->db()->table('assigned_roles')->count())->toEqual(2);
         });
+    });
+
+    describe('Edge Cases', function (): void {
+        test('checks role using UUID string identifier', function ($provider): void {
+            // Arrange
+            [$warden, $user] = $provider();
+
+            // Create role with UUID string as ID
+            $roleUuid = '550e8400-e29b-41d4-a716-446655440000';
+            $role = new Role(['name' => 'uuid-admin']);
+            $role->id = $roleUuid;
+            $role->save();
+
+            $warden->assign($role)->to($user);
+
+            // Act & Assert - Check using UUID string
+            expect($user->isA($roleUuid))->toBeTrue();
+            expect($user->isNotA('550e8400-e29b-41d4-a716-446655440099'))->toBeTrue();
+        })->with('bouncerProvider')->skip(fn (): bool => config('warden.primary_key_type') === 'id', 'Test requires UUID/ULID primary keys');
+
+        test('checks role using ULID string identifier', function ($provider): void {
+            // Arrange
+            [$warden, $user] = $provider();
+
+            // Create role with ULID string as ID
+            $roleUlid = '01ARZ3NDEKTSV4RRFFQ69G5FAV';
+            $role = new Role(['name' => 'ulid-moderator']);
+            $role->id = $roleUlid;
+            $role->save();
+
+            $warden->assign($role)->to($user);
+
+            // Act & Assert - Check using ULID string
+            expect($user->isA($roleUlid))->toBeTrue();
+            expect($user->isNotA('01ARZ3NDEKTSV4RRFFQ69G5FAW'))->toBeTrue();
+        })->with('bouncerProvider')->skip(fn (): bool => config('warden.primary_key_type') === 'id', 'Test requires UUID/ULID primary keys');
     });
 });

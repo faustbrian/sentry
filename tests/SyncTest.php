@@ -314,6 +314,60 @@ describe('Syncing Roles and Abilities', function (): void {
 
             Models::reset();
         });
+
+        test('syncs roles using UUID string when role has UUID primary key', function ($provider): void {
+            // Arrange
+            [$warden, $user] = $provider();
+
+            // Create roles with UUID strings as IDs
+            $uuidRole1 = '550e8400-e29b-41d4-a716-446655440000';
+            $role1 = new Role(['name' => 'uuid-admin']);
+            $role1->id = $uuidRole1;
+            $role1->save();
+
+            $uuidRole2 = '550e8400-e29b-41d4-a716-446655440001';
+            $role2 = new Role(['name' => 'uuid-editor']);
+            $role2->id = $uuidRole2;
+            $role2->save();
+
+            // Assign first role
+            $user->assign($role1);
+            expect($warden->is($user)->a($role1))->toBeTrue();
+
+            // Act - Sync using UUID string
+            $warden->sync($user)->roles([$uuidRole2]);
+
+            // Assert
+            expect($warden->is($user)->a($role2))->toBeTrue();
+            expect($warden->is($user)->notA($role1))->toBeTrue();
+        })->with('bouncerProvider')->skip(fn (): bool => config('warden.primary_key_type') === 'id', 'Test requires UUID/ULID primary keys');
+
+        test('syncs roles using ULID string when role has ULID primary key', function ($provider): void {
+            // Arrange
+            [$warden, $user] = $provider();
+
+            // Create roles with ULID strings as IDs
+            $ulidRole1 = '01ARZ3NDEKTSV4RRFFQ69G5FAV';
+            $role1 = new Role(['name' => 'ulid-moderator']);
+            $role1->id = $ulidRole1;
+            $role1->save();
+
+            $ulidRole2 = '01ARZ3NDEKTSV4RRFFQ69G5FAW';
+            $role2 = new Role(['name' => 'ulid-reviewer']);
+            $role2->id = $ulidRole2;
+            $role2->save();
+
+            // Assign first role
+            $user->assign($role1);
+            expect($warden->is($user)->a($role1))->toBeTrue();
+
+            // Act - Sync using ULID string
+            $warden->sync($user)->roles([$ulidRole2]);
+
+            // Assert
+            expect($warden->is($user)->a($role2))->toBeTrue();
+            expect($warden->is($user)->notA($role1))->toBeTrue();
+        })->with('bouncerProvider')->skip(fn (): bool => config('warden.primary_key_type') === 'id', 'Test requires UUID/ULID primary keys');
     });
 });
 
