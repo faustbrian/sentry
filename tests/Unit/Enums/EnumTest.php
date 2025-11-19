@@ -14,20 +14,23 @@ describe('MorphType', function (): void {
     test('has correct case names', function (): void {
         $cases = MorphType::cases();
 
-        expect($cases)->toHaveCount(3)
+        expect($cases)->toHaveCount(4)
             ->and($cases[0]->name)->toBe('Morph')
-            ->and($cases[1]->name)->toBe('UUID')
-            ->and($cases[2]->name)->toBe('ULID');
+            ->and($cases[1]->name)->toBe('Numeric')
+            ->and($cases[2]->name)->toBe('UUID')
+            ->and($cases[3]->name)->toBe('ULID');
     });
 
     test('has correct string values for each case', function (): void {
         expect(MorphType::Morph->value)->toBe('morph')
+            ->and(MorphType::Numeric->value)->toBe('numericMorph')
             ->and(MorphType::UUID->value)->toBe('uuidMorph')
             ->and(MorphType::ULID->value)->toBe('ulidMorph');
     });
 
     test('can retrieve case by value using tryFrom', function (): void {
         expect(MorphType::tryFrom('morph'))->toBe(MorphType::Morph)
+            ->and(MorphType::tryFrom('numericMorph'))->toBe(MorphType::Numeric)
             ->and(MorphType::tryFrom('uuidMorph'))->toBe(MorphType::UUID)
             ->and(MorphType::tryFrom('ulidMorph'))->toBe(MorphType::ULID);
     });
@@ -36,11 +39,12 @@ describe('MorphType', function (): void {
         expect(MorphType::tryFrom('invalid'))->toBeNull()
             ->and(MorphType::tryFrom(''))->toBeNull()
             ->and(MorphType::tryFrom('Morph'))->toBeNull()
-            ->and(MorphType::tryFrom('MORPH'))->toBeNull();
+            ->and(MorphType::tryFrom('Morph'))->toBeNull();
     });
 
     test('can retrieve case by value using from', function (): void {
         expect(MorphType::from('morph'))->toBe(MorphType::Morph)
+            ->and(MorphType::from('numericMorph'))->toBe(MorphType::Numeric)
             ->and(MorphType::from('uuidMorph'))->toBe(MorphType::UUID)
             ->and(MorphType::from('ulidMorph'))->toBe(MorphType::ULID);
     });
@@ -51,19 +55,21 @@ describe('MorphType', function (): void {
 
     test('can be compared using strict equality', function (): void {
         expect(MorphType::Morph === MorphType::Morph)->toBeTrue()
-            ->and(MorphType::Morph === MorphType::UUID)->toBeFalse()
+            ->and(MorphType::Morph === MorphType::Numeric)->toBeFalse()
+            ->and(MorphType::Numeric === MorphType::Numeric)->toBeTrue()
             ->and(MorphType::UUID === MorphType::UUID)->toBeTrue()
             ->and(MorphType::ULID === MorphType::ULID)->toBeTrue();
     });
 
     test('can be used in match expressions', function (): void {
         $result = match (MorphType::Morph) {
-            MorphType::Morph => 'integer',
+            MorphType::Morph => 'auto-detect',
+            MorphType::Numeric => 'integer',
             MorphType::UUID => 'uuid',
             MorphType::ULID => 'ulid',
         };
 
-        expect($result)->toBe('integer');
+        expect($result)->toBe('auto-detect');
     });
 
     test('returns all cases in expected order', function (): void {
@@ -71,8 +77,8 @@ describe('MorphType', function (): void {
         $names = array_map(fn (MorphType $case) => $case->name, $cases);
         $values = array_map(fn (MorphType $case) => $case->value, $cases);
 
-        expect($names)->toBe(['Morph', 'UUID', 'ULID'])
-            ->and($values)->toBe(['morph', 'uuidMorph', 'ulidMorph']);
+        expect($names)->toBe(['Morph', 'Numeric', 'UUID', 'ULID'])
+            ->and($values)->toBe(['morph', 'numericMorph', 'uuidMorph', 'ulidMorph']);
     });
 
     test('is backed by string type', function (): void {
@@ -91,7 +97,7 @@ describe('MorphType', function (): void {
     test('handles case sensitivity correctly', function (): void {
         // Case names are case-sensitive
         expect(MorphType::tryFrom('morph'))->toBe(MorphType::Morph)
-            ->and(MorphType::tryFrom('MORPH'))->toBeNull()
+            ->and(MorphType::tryFrom('Morph'))->toBeNull()
             ->and(MorphType::tryFrom('Morph'))->toBeNull();
     });
 });
@@ -193,7 +199,7 @@ describe('PrimaryKeyType', function (): void {
 describe('Enum interoperability', function (): void {
     test('MorphType and PrimaryKeyType are separate enums', function (): void {
         expect(MorphType::class)->not->toBe(PrimaryKeyType::class)
-            ->and(MorphType::cases())->toHaveCount(3)
+            ->and(MorphType::cases())->toHaveCount(4)
             ->and(PrimaryKeyType::cases())->toHaveCount(3);
     });
 
@@ -240,6 +246,7 @@ describe('Enum edge cases', function (): void {
 
         expect($morphTypes)->toBe([
             'Morph' => 'morph',
+            'Numeric' => 'numericMorph',
             'UUID' => 'uuidMorph',
             'ULID' => 'ulidMorph',
         ]);

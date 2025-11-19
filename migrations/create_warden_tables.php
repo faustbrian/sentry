@@ -39,13 +39,15 @@ return new class() extends Migration
             match ($subjectMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('subject'),
                 MorphType::UUID => $table->nullableUuidMorphs('subject'),
-                default => $table->nullableNumericMorphs('subject'),
+                MorphType::Numeric => $table->nullableNumericMorphs('subject'),
+                MorphType::Morph => $table->nullableMorphs('subject'),
             };
 
             match ($boundaryMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('boundary'),
                 MorphType::UUID => $table->nullableUuidMorphs('boundary'),
-                default => $table->nullableNumericMorphs('boundary'),
+                MorphType::Numeric => $table->nullableNumericMorphs('boundary'),
+                MorphType::Morph => $table->nullableMorphs('boundary'),
             };
 
             $table->boolean('only_owned')->default(false);
@@ -88,19 +90,22 @@ return new class() extends Migration
             match ($actorMorphType) {
                 MorphType::ULID => $table->ulidMorphs('actor'),
                 MorphType::UUID => $table->uuidMorphs('actor'),
-                default => $table->numericMorphs('actor'),
+                MorphType::Numeric => $table->numericMorphs('actor'),
+                MorphType::Morph => $table->morphs('actor'),
             };
 
             match ($boundaryMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('boundary'),
                 MorphType::UUID => $table->nullableUuidMorphs('boundary'),
-                default => $table->nullableNumericMorphs('boundary'),
+                MorphType::Numeric => $table->nullableNumericMorphs('boundary'),
+                MorphType::Morph => $table->nullableMorphs('boundary'),
             };
 
             match ($actorMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('restricted_to'),
                 MorphType::UUID => $table->nullableUuidMorphs('restricted_to'),
-                default => $table->nullableNumericMorphs('restricted_to'),
+                MorphType::Numeric => $table->nullableNumericMorphs('restricted_to'),
+                MorphType::Morph => $table->nullableMorphs('restricted_to'),
             };
 
             $table->integer('scope')->nullable()->index();
@@ -127,13 +132,15 @@ return new class() extends Migration
             match ($actorMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('actor'),
                 MorphType::UUID => $table->nullableUuidMorphs('actor'),
-                default => $table->nullableNumericMorphs('actor'),
+                MorphType::Numeric => $table->nullableNumericMorphs('actor'),
+                MorphType::Morph => $table->nullableMorphs('actor'),
             };
 
             match ($boundaryMorphType) {
                 MorphType::ULID => $table->nullableUlidMorphs('boundary'),
                 MorphType::UUID => $table->nullableUuidMorphs('boundary'),
-                default => $table->nullableNumericMorphs('boundary'),
+                MorphType::Numeric => $table->nullableNumericMorphs('boundary'),
+                MorphType::Morph => $table->nullableMorphs('boundary'),
             };
 
             $table->boolean('forbidden')->default(false);

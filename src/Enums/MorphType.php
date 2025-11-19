@@ -21,12 +21,20 @@ namespace Cline\Warden\Enums;
 enum MorphType: string
 {
     /**
-     * Standard polymorphic relationship with integer IDs.
+     * Standard polymorphic relationship with auto-detected IDs.
      *
-     * Uses traditional auto-incrementing integer foreign keys for the morph
-     * relationship. Suitable when models use standard integer primary keys.
+     * Uses Laravel's default morphs() method which automatically detects
+     * the appropriate column type. Suitable for flexible polymorphic relationships.
      */
     case Morph = 'morph';
+
+    /**
+     * Polymorphic relationship with numeric (integer) IDs.
+     *
+     * Explicitly uses integer foreign keys for the morph relationship.
+     * Suitable when models use standard auto-incrementing integer primary keys.
+     */
+    case Numeric = 'numericMorph';
 
     /**
      * Polymorphic relationship with UUID identifiers.

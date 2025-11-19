@@ -40,13 +40,16 @@ test\:unit: build
 test\:docker: test\:docker\:sqlite test\:docker\:mysql test\:docker\:postgres
 
 # Run all key type variations for all databases
-test\:docker\:all: test\:docker\:sqlite\:id test\:docker\:sqlite\:ulid test\:docker\:sqlite\:uuid test\:docker\:mysql\:id test\:docker\:mysql\:ulid test\:docker\:mysql\:uuid test\:docker\:postgres\:id test\:docker\:postgres\:ulid test\:docker\:postgres\:uuid
+test\:docker\:all: test\:docker\:sqlite\:id test\:docker\:sqlite\:numeric test\:docker\:sqlite\:ulid test\:docker\:sqlite\:uuid test\:docker\:mysql\:id test\:docker\:mysql\:numeric test\:docker\:mysql\:ulid test\:docker\:mysql\:uuid test\:docker\:postgres\:id test\:docker\:postgres\:numeric test\:docker\:postgres\:ulid test\:docker\:postgres\:uuid
 
 # SQLite tests (all key types)
-test\:docker\:sqlite: test\:docker\:sqlite\:id test\:docker\:sqlite\:ulid test\:docker\:sqlite\:uuid
+test\:docker\:sqlite: test\:docker\:sqlite\:id test\:docker\:sqlite\:numeric test\:docker\:sqlite\:ulid test\:docker\:sqlite\:uuid
 
 test\:docker\:sqlite\:id: build
 	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest $(ARGS)
+
+test\:docker\:sqlite\:numeric: build
+	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=id -e WARDEN_ACTOR_MORPH_TYPE=numericMorph -e WARDEN_BOUNDARY_MORPH_TYPE=numericMorph -e WARDEN_SUBJECT_MORPH_TYPE=numericMorph php84 vendor/bin/pest --configuration=phpunit.numeric.xml $(ARGS)
 
 test\:docker\:sqlite\:ulid: build
 	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=ulid -e WARDEN_ACTOR_MORPH_TYPE=ulidMorph -e WARDEN_BOUNDARY_MORPH_TYPE=ulidMorph -e WARDEN_SUBJECT_MORPH_TYPE=ulidMorph php84 vendor/bin/pest --configuration=phpunit.ulid.xml $(ARGS)
@@ -55,11 +58,15 @@ test\:docker\:sqlite\:uuid: build
 	docker-compose run --rm -e DB_CONNECTION=sqlite -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_BOUNDARY_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest --configuration=phpunit.uuid.xml $(ARGS)
 
 # MySQL tests (all key types)
-test\:docker\:mysql: test\:docker\:mysql\:id test\:docker\:mysql\:ulid test\:docker\:mysql\:uuid
+test\:docker\:mysql: test\:docker\:mysql\:id test\:docker\:mysql\:numeric test\:docker\:mysql\:ulid test\:docker\:mysql\:uuid
 
 test\:docker\:mysql\:id: build
 	docker-compose up -d mysql
 	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest $(ARGS)
+
+test\:docker\:mysql\:numeric: build
+	docker-compose up -d mysql
+	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id -e WARDEN_ACTOR_MORPH_TYPE=numericMorph -e WARDEN_BOUNDARY_MORPH_TYPE=numericMorph -e WARDEN_SUBJECT_MORPH_TYPE=numericMorph php84 vendor/bin/pest --configuration=phpunit.numeric.xml $(ARGS)
 
 test\:docker\:mysql\:ulid: build
 	docker-compose up -d mysql
@@ -70,11 +77,15 @@ test\:docker\:mysql\:uuid: build
 	docker-compose run --rm -e DB_CONNECTION=mysql -e DB_HOST=mysql -e DB_PORT=3306 -e DB_DATABASE=warden_test -e DB_USERNAME=root -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=uuid -e WARDEN_ACTOR_MORPH_TYPE=uuidMorph -e WARDEN_BOUNDARY_MORPH_TYPE=uuidMorph -e WARDEN_SUBJECT_MORPH_TYPE=uuidMorph php84 vendor/bin/pest --configuration=phpunit.uuid.xml $(ARGS)
 
 # PostgreSQL tests (all key types)
-test\:docker\:postgres: test\:docker\:postgres\:id test\:docker\:postgres\:ulid test\:docker\:postgres\:uuid
+test\:docker\:postgres: test\:docker\:postgres\:id test\:docker\:postgres\:numeric test\:docker\:postgres\:ulid test\:docker\:postgres\:uuid
 
 test\:docker\:postgres\:id: build
 	docker-compose up -d postgres
 	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id php84 vendor/bin/pest $(ARGS)
+
+test\:docker\:postgres\:numeric: build
+	docker-compose up -d postgres
+	docker-compose run --rm -e DB_CONNECTION=pgsql -e DB_HOST=postgres -e DB_PORT=5432 -e DB_DATABASE=warden_test -e DB_USERNAME=postgres -e DB_PASSWORD=password -e WARDEN_PRIMARY_KEY_TYPE=id -e WARDEN_ACTOR_MORPH_TYPE=numericMorph -e WARDEN_BOUNDARY_MORPH_TYPE=numericMorph -e WARDEN_SUBJECT_MORPH_TYPE=numericMorph php84 vendor/bin/pest --configuration=phpunit.numeric.xml $(ARGS)
 
 test\:docker\:postgres\:ulid: build
 	docker-compose up -d postgres
@@ -91,10 +102,13 @@ test\:local: build
 test\:local\:id: build
 	vendor/bin/pest --parallel
 
+test\:local\:numeric: build
+	vendor/bin/pest --parallel --configuration=phpunit.numeric.xml
+
 test\:local\:ulid: build
 	vendor/bin/pest --parallel --configuration=phpunit.ulid.xml
 
 test\:local\:uuid: build
 	vendor/bin/pest --parallel --configuration=phpunit.uuid.xml
 
-test\:local\:all: test\:local\:id test\:local\:ulid test\:local\:uuid
+test\:local\:all: test\:local\:id test\:local\:numeric test\:local\:ulid test\:local\:uuid
